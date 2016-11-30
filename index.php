@@ -4,8 +4,8 @@
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
 <?php include_once('layouts/header.php'); ?>
-<div class="login-page col-md-4 col-md-offset-4">
-  <center><img src="uploads/logo.jpg" alt=""></center>
+<div class="login-page col-sm-12 col-md-6 col-md-offset-3 form-box" style="margin-top:20px;">
+  <center><img src="uploads/logo.jpg" alt="" class="col-sm-12"></center>
     <div class="text-center">
        <p>Sign in to start your session</p>
      </div>

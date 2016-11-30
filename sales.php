@@ -5,7 +5,8 @@
    page_require_level(3);
 ?>
 <?php
-$sales = find_all_sale();
+$admin_id =  $_SESSION['admin_id'] ;
+$sales = find_by_sql("SELECT * FROM sales WHERE admin_id = {$admin_id}");
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">

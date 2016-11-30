@@ -406,4 +406,23 @@ function  monthlySales($year,$admin_id){
   return find_by_sql($sql);
 }
 
+/* Function for returning expired products */
+function getExpiringProducts($admin_id)
+{
+
+    $sql  = "SELECT  * FROM  products  WHERE  products.expiry_date >= DATE(now())";
+    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' ORDER BY date ASC";
+    return find_by_sql($sql);
+                        
+}
+
+
+function getTotalNotifications($admin_id)
+{
+
+    $sql  = "SELECT COUNT(id) AS count FROM  products  WHERE  products.expiry_date >= DATE(now())";
+    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' ORDER BY date ASC"; 
+    return find_by_sql($sql);
+}
+
 ?>

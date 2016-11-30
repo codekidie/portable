@@ -9,6 +9,7 @@
            echo ucfirst($user['name']);
             else echo "Portable Inventory System";?>
     </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/> -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
     <!-- <link rel="stylesheet" href="libs/css/main.css" /> -->
@@ -59,14 +60,58 @@
               <!-- admin menu -->
             <?php include_once('admin_menu.php');?>
 
-            <?php elseif($user['user_level'] === '2'): ?>
-              <!-- Special user -->
-            <?php include_once('special_menu.php');?>
+            <?php else: ?>
+              <?php $admin_id =  $_SESSION['admin_id'] ;
+                    $user_id  =  $_SESSION['user_id'] ;
+                    $all_privilege = find_by_sql("SELECT * FROM privilege p LEFT JOIN users u  ON p.user_id=u.id WHERE p.admin_id = '{$admin_id}' AND p.user_id='{$user_id}' ORDER BY p.user_id"); ?>
+                   <ul class="nav">
+                        <li>
+                          <a href="home.php">
+                            <i class="pe-7s-home"></i>
+                            <span>Dashboard</span>
+                          </a>
+                        </li>  
+                        <?php foreach ($all_privilege as $a): ?>
+                          <?php 
+                             $access = $a['access'];
+                             if ($access == 'Manage_Product') {
+                                $icon = 'pe-7s-server'; 
+                                $link = 'product.php';
+                             } elseif ($access == 'Category') {
+                                $icon = 'pe-7s-keypad'; 
+                                $link = 'categorie.php';
+                             }elseif ($access == 'Add_Product') {
+                                $icon = 'pe-7s-network'; 
+                                $link = 'product.php';
+                             }elseif ($access == 'Manage_Sales') {
+                                $icon = 'pe-7s-repeat'; 
+                                $link = 'sales.php';
+                             }elseif ($access == 'Add_Sales') {
+                                $icon = 'pe-7s-graph1'; 
+                                $link = 'add_sale.php';
+                             }elseif ($access == 'Sales_by_dates') {
+                                $icon = 'pe-7s-date'; 
+                                $link = 'sales_report.php';
+                             }elseif ($access == 'Monthly_Sales') {
+                               $icon = 'pe-7s-date'; 
+                                $link = 'monthly_sale.php';
+                             }elseif ($access == 'Daily_Sales') {
+                               $icon = 'pe-7s-date'; 
+                                $link = 'daily_sales.php';
+                             }elseif ($access == 'Media') {
+                               $icon = 'pe-7s-photo'; 
+                                $link = 'media.php';
+                             }
 
-            <?php elseif($user['user_level'] === '3'): ?>
-              <!-- User menu -->
-            <?php include_once('user_menu.php');?>
-
+                           ?>
+                               <li>
+                                <a href="<?php echo $link; ?>">
+                                  <i class="<?php echo $icon; ?>"></i>
+                                  <span><?php echo str_replace('_', ' ',$a['access']); ?></span>
+                                </a>
+                              </li>    
+                         <?php endforeach ?> 
+                   </ul> 
             <?php endif;?>
       </div>
     </div>
@@ -90,18 +135,23 @@
                                 <i class="fa fa-dashboard"></i>
                             </a>
                         </li>
+                      <?php 
+                      $admin_id =  $_SESSION['admin_id'];
+                      $expire_products = getExpiringProducts($admin_id);
+                      $total_notifications = getTotalNotifications($admin_id);
+                      ?>
+                       
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-globe"></i>
                                     <b class="caret"></b>
-                                    <span class="notification">5</span>
+                                    <span class="notification"><?php  echo  $total_notifications[0]['count']; ?></span>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
+                              <?php foreach ($expire_products as $ex): ?>
+                                    <li><a href="expiry.php?id=<?php echo $ex['id']; ?>">Product <?php echo $ex['name']; ?> Expiring at <?php echo $ex['expiry_date']; ?></a></li>
+                                  
+                              <?php endforeach ?>
                               </ul>
                         </li>
                        

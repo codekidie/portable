@@ -1,3 +1,8 @@
+/*Code Added For REsponsive Edyl*/
+.panel-body{overflow: auto !important;}
+/*Code Added For REsponsive Edyl*/
+
+
 /*      light colors         */
 @keyframes spin {
   from {
@@ -475,7 +480,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 .main-panel {
   overflow: auto;
   max-height: 150%;
-height: 137%;
+  height: 137%;
   -webkit-transition-property: top,bottom;
   transition-property: top,bottom;
   -webkit-transition-duration: .2s,.2s;

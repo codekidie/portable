@@ -13,12 +13,14 @@
     </a>
   </li>
 
-   <li>
-    <a href="group.php">
-      <i class="pe-7s-user-female"></i>
-      <span>Manage Groups</span>
-    </a>
-  </li>
+   <!-- 
+        <li>
+          <a href="group.php">
+            <i class="pe-7s-user-female"></i>
+            <span>Manage Groups</span>
+          </a>
+        </li> 
+    -->
 
   <li>
     <a href="categorie.php" >

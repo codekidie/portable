@@ -3,8 +3,9 @@
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    $admin_id =  $_SESSION['admin_id'] ;
+   $id = $_GET['id'];
   
-   $products = find_by_sql("SELECT p.id,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.admin_id,p.date,p.expiry_date,c.name AS categorie,m.file_name AS image  FROM products p LEFT JOIN categories c ON c.id = p.categorie_id  LEFT JOIN media m ON m.id = p.media_id WHERE p.admin_id = '{$admin_id}' ORDER BY p.id ASC");
+   $products = find_by_sql("SELECT p.id,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.admin_id,p.date,p.expiry_date,c.name AS categorie,m.file_name AS image  FROM products p LEFT JOIN categories c ON c.id = p.categorie_id  LEFT JOIN media m ON m.id = p.media_id WHERE  p.expiry_date >= DATE(now()) AND  p.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND p.admin_id = '{$admin_id}' AND p.id='{$id}' ORDER BY p.id ASC");
 
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -15,11 +16,9 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
-         <div class="pull-right">
-           <a href="add_product.php" class="btn btn-primary">Add New</a>
-         </div>
+  
         </div>
-        <div class="panel-body" style="overflow: auto;">
+        <div class="panel-body">
           <table class="table table-bordered">
             <thead>
               <tr>
