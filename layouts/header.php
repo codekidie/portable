@@ -101,7 +101,12 @@
                              }elseif ($access == 'Media') {
                                $icon = 'pe-7s-photo'; 
                                 $link = 'media.php';
+                             }elseif ($access == 'Return_Product') {
+                               $icon = 'pe-7s-server'; 
+                                $link = 'add_return_product.php';
                              }
+
+                           
 
                            ?>
                                <li>
@@ -139,6 +144,10 @@
                       $admin_id =  $_SESSION['admin_id'];
                       $expire_products = getExpiringProducts($admin_id);
                       $total_notifications = getTotalNotifications($admin_id);
+
+                      
+
+                   
                       ?>
                        
                         <li class="dropdown">
@@ -149,6 +158,27 @@
                               </a>
                               <ul class="dropdown-menu">
                               <?php foreach ($expire_products as $ex): ?>
+                                <?php  $mergeuserstoproducts = find_by_sql("SELECT * FROM users WHERE admin_id = '{$ex['admin_id']}'"); 
+                                       foreach ($mergeuserstoproducts as $mu) {
+                                          $phone =  $mu['phone'];
+
+                                          if (!isset($_SESSION['send_sms'])) {
+                                                $ch = curl_init();
+                                                curl_setopt($ch, CURLOPT_URL,"http://api.semaphore.co/api/sms");
+                                                curl_setopt($ch, CURLOPT_POST, 1);
+                                                curl_setopt($ch, CURLOPT_POSTFIELDS,"api=PFpGxb3vGHhL1zYxVXKp&number=".$phone."&message=Product ".$ex['name']." is expiring on ".$ex['expiry_date']);
+                                                // receive server response ...
+                                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                                $server_output = curl_exec ($ch);
+                                                curl_close ($ch);
+                                          } 
+
+                                       }
+                                          $_SESSION['send_sms'] = 1;
+
+
+                                ?>
+
                                     <li><a href="expiry.php?id=<?php echo $ex['id']; ?>">Product <?php echo $ex['name']; ?> Expiring at <?php echo $ex['expiry_date']; ?></a></li>
                                   
                               <?php endforeach ?>

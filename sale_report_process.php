@@ -3,7 +3,6 @@ $page_title = 'Sales Report';
 $results = '';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
-   page_require_level(3);
    $admin_id =  $_SESSION['admin_id'] ;
 
 ?>

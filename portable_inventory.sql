@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2016 at 11:05 AM
+-- Generation Time: Dec 02, 2016 at 05:19 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -38,7 +38,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `admin_id`, `name`) VALUES
 (1, 809361, 'test'),
-(2, 809361, 'test');
+(2, 809361, 'test'),
+(3, 168739, 'beverage');
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,8 @@ CREATE TABLE `media` (
 
 INSERT INTO `media` (`id`, `admin_id`, `file_name`, `file_type`) VALUES
 (1, 0, 'd0mr49l3.jpg', 'image/jpeg'),
-(2, 809361, 'AMA_University_logo.png', 'image/png');
+(2, 809361, 'AMA_University_logo.png', 'image/png'),
+(3, 168739, 'Roger_in_His_Youth.png', '');
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,6 @@ CREATE TABLE `privilege` (
 
 INSERT INTO `privilege` (`id`, `user_id`, `access`, `admin_id`) VALUES
 (1, 2, 'Manage_Product', 334511),
-(2, 3, 'Category', 334511),
 (4, 3, 'Monthly_Sales', 334511),
 (5, 2, 'Manage_Sales', 334511),
 (6, 13, 'Manage_Product', 168739),
@@ -104,6 +105,7 @@ CREATE TABLE `products` (
   `categorie_id` int(11) NOT NULL,
   `media_id` int(11) NOT NULL,
   `expiry_date` date NOT NULL,
+  `sms_sent` int(1) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -111,11 +113,39 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `admin_id`, `name`, `quantity`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `expiry_date`, `date`) VALUES
-(4, 809361, 'Laptop', '-2', '2.00', '4.00', 1, 2, '0000-00-00', '2016-11-28 01:59:27'),
-(5, 168739, 'Nokia Power Ranger', '1', '2.00', '4.00', 3, 0, '2016-12-31', '2016-11-30 08:17:28'),
-(6, 168739, 'Laptop', '1', '1.00', '3.00', 3, 0, '2016-11-30', '2016-11-30 08:31:06'),
-(7, 168739, 'macbook pro', '1', '2.00', '3.00', 3, 0, '2016-11-30', '2016-11-30 08:35:24');
+INSERT INTO `products` (`id`, `admin_id`, `name`, `quantity`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `expiry_date`, `sms_sent`, `date`) VALUES
+(4, 809361, 'Laptop', '-2', '2.00', '4.00', 1, 2, '0000-00-00', 0, '2016-11-28 01:59:27'),
+(5, 168739, 'Nokia Power Ranger', '1', '2.00', '4.00', 1, 1, '2016-12-07', 0, '2016-11-30 08:17:28'),
+(6, 168739, 'Laptop', '1', '1.00', '3.00', 3, 0, '2016-11-30', 0, '2016-11-30 08:31:06'),
+(7, 168739, 'macbook pro', '-1', '2.00', '3.00', 3, 0, '2016-11-30', 0, '2016-11-30 08:35:24'),
+(8, 168739, 'blueberry yakult', '3', '10.00', '11.00', 3, 3, '2016-12-31', 0, '2016-12-01 10:57:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `return_product`
+--
+
+CREATE TABLE `return_product` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `phone` text NOT NULL,
+  `comment` text NOT NULL,
+  `replace_product` text NOT NULL,
+  `reason` text NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `return_product`
+--
+
+INSERT INTO `return_product` (`id`, `product_id`, `name`, `email`, `phone`, `comment`, `replace_product`, `reason`, `quantity`, `admin_id`) VALUES
+(1, 7, 'Claire Logan', 'randycph@gmail.com', '639436089485', 'fak the coder', 'Yes', 'Broke', 1, 168739),
+(2, 8, 'Donald Trump', 'randycph@gmail.com', '639436089485', 'Ilisdan kai wa na lamian.', 'Yes', 'Wai lami', 1, 168739);
 
 -- --------------------------------------------------------
 
@@ -138,7 +168,10 @@ CREATE TABLE `sales` (
 
 INSERT INTO `sales` (`id`, `admin_id`, `product_id`, `qty`, `price`, `date`) VALUES
 (1, 809361, 4, 1, '4.00', '2016-11-28'),
-(2, 809361, 4, 2, '8.00', '2016-11-28');
+(2, 809361, 4, 2, '8.00', '2016-11-28'),
+(3, 168739, 7, 1, '3.00', '2016-12-01'),
+(4, 168739, 7, 1, '3.00', '2016-12-01'),
+(5, 168739, 8, 2, '22.00', '2016-12-01');
 
 -- --------------------------------------------------------
 
@@ -156,6 +189,7 @@ CREATE TABLE `users` (
   `image` varchar(255) DEFAULT 'no_image.jpg',
   `company_name` text NOT NULL,
   `status` int(1) NOT NULL,
+  `phone` text NOT NULL,
   `last_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -163,19 +197,21 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `admin_id`, `name`, `username`, `password`, `user_level`, `image`, `company_name`, `status`, `last_login`) VALUES
-(1, 334511, ' Admin User', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '54h3w1kx1.jpg', 'nelsa inventory system', 1, '2016-11-30 10:36:16'),
-(2, 334511, 'Claire Logan', 'Special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'tyjmkqf2.jpg', 'John Doe Inventory System', 1, '2016-11-29 12:44:59'),
-(3, 334511, 'Donald Trump', 'User', '12dea96fec20593566ab75692c9949596833adc9', 3, 'd0mr49l3.jpg', '', 1, '2016-11-23 11:31:04'),
-(4, 0, 'Super Admin', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '2016-11-30 02:13:16'),
-(7, 954864, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Tala inc.', 1, NULL),
-(8, 809361, 'Mario', 'mario', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'mo6qapon8.jpg', 'Mario Bros.', 1, '2016-11-29 13:31:06'),
-(10, 809361, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Mario Bros.', 1, NULL),
-(11, 809361, 'Raijin Kunami', 'raijin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Mario Bros.', 1, '2016-11-28 02:42:31'),
-(12, 168739, 'nelma', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '2016-11-30 10:58:55'),
-(13, 168739, 'john ', 'john', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '2016-11-30 08:26:33'),
-(14, 168739, 'Clement', 'clement', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '2016-11-30 08:10:53'),
-(15, 168739, 'Reko', 'reko', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, NULL);
+INSERT INTO `users` (`id`, `admin_id`, `name`, `username`, `password`, `user_level`, `image`, `company_name`, `status`, `phone`, `last_login`) VALUES
+(1, 334511, ' Admin User', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '54h3w1kx1.jpg', 'nelsa inventory system', 1, '', '2016-12-01 11:20:28'),
+(2, 334511, 'Claire Logan', 'Special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'tyjmkqf2.jpg', 'John Doe Inventory System', 1, '', '2016-11-29 12:44:59'),
+(3, 334511, 'Donald Trump', 'User', '12dea96fec20593566ab75692c9949596833adc9', 3, 'd0mr49l3.jpg', '', 1, '', '2016-11-23 11:31:04'),
+(4, 0, 'Super Admin', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '', '2016-11-30 02:13:16'),
+(7, 954864, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Tala inc.', 1, '', NULL),
+(8, 809361, 'Mario', 'mario', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'mo6qapon8.jpg', 'Mario Bros.', 1, '', '2016-11-29 13:31:06'),
+(10, 809361, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Mario Bros.', 1, '', NULL),
+(11, 809361, 'Raijin Kunami', 'raijin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Mario Bros.', 1, '', '2016-11-28 02:42:31'),
+(12, 168739, 'nelma', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-02 14:34:56'),
+(13, 168739, 'john ', 'john', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-11-30 08:26:33'),
+(14, 168739, 'Clement', 'clement', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-01 09:30:23'),
+(15, 168739, 'Reko', 'reko', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', NULL),
+(16, 334511, 'Ali Baba', 'Alibaba', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Nelsa Inventory System', 1, '639436089485', NULL),
+(17, 168739, 'Torta', 'torta', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '639436089485', NULL);
 
 -- --------------------------------------------------------
 
@@ -231,6 +267,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `return_product`
+--
+ALTER TABLE `return_product`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
@@ -262,7 +304,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `privilege`
 --
@@ -272,17 +314,22 @@ ALTER TABLE `privilege`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `return_product`
+--
+ALTER TABLE `return_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `user_groups`
 --

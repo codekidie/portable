@@ -2,7 +2,6 @@
   $page_title = 'Edit product';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
-   page_require_level(2);
 ?>
 <?php
 $product = find_by_id('products',(int)$_GET['id']);
@@ -24,6 +23,8 @@ if(!$product){
        $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
        $p_buy   = remove_junk($db->escape($_POST['buying-price']));
        $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
+       $p_expiry_date  = remove_junk($db->escape($_POST['saleing-expiry-date']));
+
        if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
          $media_id = '0';
        } else {
@@ -31,7 +32,7 @@ if(!$product){
        }
        $query   = "UPDATE products SET";
        $query  .=" name ='{$p_name}', quantity ='{$p_qty}',";
-       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}'";
+       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',expiry_date='{$p_expiry_date}'";
        $query  .=" WHERE id ='{$product['id']}'";
        $result = $db->query($query);
                if($result && $db->affected_rows() === 1){
@@ -135,6 +136,17 @@ if(!$product){
                     </div>
                    </div>
                   </div>
+                  <div class="col-md-4">
+                   <div class="form-group">
+                      <label for="">Expiry Date</label>
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="pe-7s-date"></i>
+                          </span>
+                          <input type="date" class="form-control" name="saleing-expiry-date" value="<?php echo remove_junk($product['expiry_date']);?>" placeholder="Expiry Date" required="required">
+                      </div>
+                </div>
+                </div>
                </div>
               </div>
               <button type="submit" name="product" class="btn btn-danger">Update</button>

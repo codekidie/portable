@@ -2,7 +2,6 @@
   $page_title = 'Edit User';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
-   page_require_level(1);
 ?>
 <?php
   $e_user = find_by_id('users',(int)$_GET['id']);
@@ -16,16 +15,16 @@
 <?php
 //Update User basic info
   if(isset($_POST['update'])) {
-    $req_fields = array('name','username','level');
+    $req_fields = array('name','username','phone');
     validate_fields($req_fields);
     if(empty($errors)){
              $id = (int)$e_user['id'];
-           $name = remove_junk($db->escape($_POST['name']));
-           $companyname = remove_junk($db->escape($_POST['companyname']));
-       $username = remove_junk($db->escape($_POST['username']));
-          $level = (int)$db->escape($_POST['level']);
+             $name = remove_junk($db->escape($_POST['name']));
+             $companyname = remove_junk($db->escape($_POST['companyname']));
+            $username = remove_junk($db->escape($_POST['username']));
+            $phone = remove_junk($db->escape($_POST['phone']));
        $status   = remove_junk($db->escape($_POST['status']));
-            $sql = "UPDATE users SET name ='{$name}', username ='{$username}',user_level='{$level}',status='{$status}' , company_name='{$companyname}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE users SET name ='{$name}', username ='{$username}',status='{$status}', phone='{$phone}' , company_name='{$companyname}' WHERE id='{$db->escape($id)}'";
          $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
             $session->msg('s',"Acount Updated ");
@@ -72,7 +71,7 @@ if(isset($_POST['update-pass'])) {
      <div class="panel panel-default">
        <div class="panel-heading">
         <strong>
-          <span class="glyphicon glyphicon-th"></span>
+          <span class="pe-7s-user"></span>
           Update <?php echo remove_junk(ucwords($e_user['name'])); ?> Account
         </strong>
        </div>
@@ -91,14 +90,12 @@ if(isset($_POST['update-pass'])) {
                   <label for="username" class="control-label">Username</label>
                   <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
             </div>
+
             <div class="form-group">
-              <label for="level">User Role</label>
-                <select class="form-control" name="level">
-                  <?php foreach ($groups as $group ):?>
-                   <option <?php if($group['group_level'] === $e_user['user_level']) echo 'selected="selected"';?> value="<?php echo $group['group_level'];?>"><?php echo ucwords($group['group_name']);?></option>
-                <?php endforeach;?>
-                </select>
+                  <label for="phone" class="control-label">Phone</label>
+                  <input type="text" class="form-control" name="phone" value="<?php echo remove_junk(ucwords($e_user['phone'])); ?>">
             </div>
+         
             <div class="form-group">
               <label for="status">Status</label>
                 <select class="form-control" name="status">
@@ -120,7 +117,7 @@ if(isset($_POST['update-pass'])) {
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong>
-          <span class="glyphicon glyphicon-th"></span>
+          <span class="pe-7s-user"></span>
           Change <?php echo remove_junk(ucwords($e_user['name'])); ?> password
         </strong>
       </div>

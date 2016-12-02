@@ -85,6 +85,13 @@
         <span>Media</span>
       </a>
     </li>
+
+       <li>
+      <a href="add_return_product.php" >
+        <i class="pe-7s-server"></i>
+        <span>Return Product</span>
+      </a>
+    </li>
      <li class="active-pro">
       <a href="#" id="suggestions">
           <i class="pe-7s-rocket"></i>

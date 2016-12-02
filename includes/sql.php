@@ -293,8 +293,9 @@ function tableExists($table){
   /*--------------------------------------------------------------*/
   function find_all_product_info_by_title($title){
     global $db;
+    $admin_id = $_SESSION['admin_id'];
     $sql  = "SELECT * FROM products ";
-    $sql .= " WHERE name ='{$title}'";
+    $sql .= " WHERE name LIKE'%$title%' AND admin_id = '{$admin_id}'";
     $sql .=" LIMIT 1";
     return find_by_sql($sql);
   }

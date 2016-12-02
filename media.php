@@ -2,7 +2,6 @@
   $page_title = 'All Image';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
-  page_require_level(2);
 ?>
 <?php 
   $admin_id =  $_SESSION['admin_id'] ;

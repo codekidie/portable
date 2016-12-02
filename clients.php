@@ -4,7 +4,6 @@
 ?>
 <?php
 // Checkin What level user has permission to view this page
- page_require_level(0);
 //pull out all user form database
  $all_users = find_all_client();
 ?>

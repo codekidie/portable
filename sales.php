@@ -2,11 +2,10 @@
   $page_title = 'All sale';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
-   page_require_level(3);
 ?>
 <?php
 $admin_id =  $_SESSION['admin_id'] ;
-$sales = find_by_sql("SELECT * FROM sales WHERE admin_id = {$admin_id}");
+$sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_id = p.id WHERE p.admin_id = {$admin_id}");
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">

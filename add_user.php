@@ -18,12 +18,13 @@
            $name   = remove_junk($db->escape($_POST['full-name']));
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
+       $phone   = remove_junk($db->escape($_POST['phone']));
        // $user_level = (int)$db->escape($_POST['level']);
        $password = sha1($password);
         $query = "INSERT INTO users (";
-        $query .="name,username,password,user_level,status,admin_id,company_name";
+        $query .="name,username,password,user_level,status,admin_id,company_name,phone";
         $query .=") VALUES (";
-        $query .=" '{$name}', '{$username}', '{$password}','2', '1','{$admin_id}','{$company_name}'";
+        $query .=" '{$name}', '{$username}', '{$password}','2', '1','{$admin_id}','{$company_name}','{$phone}'";
         $query .=")";
         if($db->query($query)){
           //sucess
@@ -65,7 +66,12 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name ="password"  placeholder="Password">
             </div>
-        <!--     <div class="form-group">
+
+              <div class="form-group">
+                <label for="password">Phone</label>
+                <input type="text" class="form-control" name ="phone"  placeholder="phone">
+            </div>
+            <!--     <div class="form-group">
               <label for="level">User Role</label>
                 <select class="form-control" name="level">
                 <option value="1">Admin</option>
