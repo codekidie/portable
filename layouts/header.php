@@ -102,8 +102,11 @@
                                $icon = 'pe-7s-photo'; 
                                 $link = 'media.php';
                              }elseif ($access == 'Return_Product') {
-                               $icon = 'pe-7s-server'; 
+                                $icon = 'pe-7s-server'; 
                                 $link = 'add_return_product.php';
+                             }elseif ($access == 'Purchase_Order') {
+                                $icon = 'pe-7s-cart'; 
+                                $link = 'add_purchase_order.php';
                              }
 
                            
@@ -162,16 +165,16 @@
                                        foreach ($mergeuserstoproducts as $mu) {
                                           $phone =  $mu['phone'];
 
-                                          if (!isset($_SESSION['send_sms'])) {
-                                                $ch = curl_init();
-                                                curl_setopt($ch, CURLOPT_URL,"http://api.semaphore.co/api/sms");
-                                                curl_setopt($ch, CURLOPT_POST, 1);
-                                                curl_setopt($ch, CURLOPT_POSTFIELDS,"api=PFpGxb3vGHhL1zYxVXKp&number=".$phone."&message=Product ".$ex['name']." is expiring on ".$ex['expiry_date']);
-                                                // receive server response ...
-                                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                                                $server_output = curl_exec ($ch);
-                                                curl_close ($ch);
-                                          } 
+                                          // if (!isset($_SESSION['send_sms'])) {
+                                          //       $ch = curl_init();
+                                          //       curl_setopt($ch, CURLOPT_URL,"http://api.semaphore.co/api/sms");
+                                          //       curl_setopt($ch, CURLOPT_POST, 1);
+                                          //       curl_setopt($ch, CURLOPT_POSTFIELDS,"api=PFpGxb3vGHhL1zYxVXKp&number=".$phone."&message=Product ".$ex['name']." is expiring on ".$ex['expiry_date']);
+                                          //       // receive server response ...
+                                          //       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                          //       $server_output = curl_exec ($ch);
+                                          //       curl_close ($ch);
+                                          // } 
 
                                        }
                                           $_SESSION['send_sms'] = 1;

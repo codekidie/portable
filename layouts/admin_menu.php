@@ -92,6 +92,15 @@
         <span>Return Product</span>
       </a>
     </li>
+
+      <li>
+      <a href="add_purchase_order.php" >
+        <i class="pe-7s-cart"></i>
+        <span>Purchase Order</span>
+      </a>
+    </li>
+
+
      <li class="active-pro">
       <a href="#" id="suggestions">
           <i class="pe-7s-rocket"></i>

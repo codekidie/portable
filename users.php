@@ -139,6 +139,7 @@
                   <option value="Daily_Sales">Daily Sales</option>
                   <option value="Media">Media</option>
                   <option value="Return_Product">Return Product</option>
+                  <option value="Purchase_Order">Purchase Order</option>
 
                 </select>
               </div>
