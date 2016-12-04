@@ -16,15 +16,17 @@
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
        $companyname   = remove_junk($db->escape($_POST['company-name']));
+       $phone   = remove_junk($db->escape($_POST[' company-phone']));
+
 
        $six_digit_random_number = mt_rand(100000, 999999);
 
        $user_level = 1;
        $password = sha1($password);
         $query = "INSERT INTO users (";
-        $query .="name,username,password,user_level,status,company_name,admin_id";
+        $query .="name,username,password,user_level,status,company_name,admin_id,phone";
         $query .=") VALUES (";
-        $query .=" '{$name}', '{$username}', '{$password}', '{$user_level}','1','{$companyname}','{$six_digit_random_number}'";
+        $query .=" '{$name}', '{$username}', '{$password}', '{$user_level}','1','{$companyname}','{$six_digit_random_number}','{$phone}'";
         $query .=")";
         if($db->query($query)){
           //sucess
@@ -58,10 +60,16 @@
                 <label for="name">Full Name</label>
                 <input type="text" class="form-control" name="full-name" placeholder="Full Name">
             </div>
-              <div class="form-group">
+            <div class="form-group">
                 <label for="name">Company Name</label>
                 <input type="text" class="form-control" name="company-name" placeholder="Company Name">
             </div>
+
+            <div class="form-group">
+                <label for="name">Phone Number</label>
+                <input type="text" class="form-control" name="company-phone" placeholder="Phone">
+            </div>
+
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" name="username" placeholder="Username">

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2016 at 12:58 PM
+-- Generation Time: Dec 04, 2016 at 10:02 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.15
 
@@ -241,20 +241,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `admin_id`, `name`, `username`, `password`, `user_level`, `image`, `company_name`, `status`, `phone`, `last_login`) VALUES
-(1, 334511, ' Admin User', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '54h3w1kx1.jpg', 'nelsa inventory system', 1, '', '2016-12-03 10:53:47'),
+(1, 334511, ' Admin User', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '5zpjyj3r1.jpg', 'nelsa inventory system', 1, '', '2016-12-04 09:46:58'),
 (2, 334511, 'Claire Logan', 'Special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'tyjmkqf2.jpg', 'John Doe Inventory System', 1, '', '2016-11-29 12:44:59'),
 (3, 334511, 'Donald Trump', 'User', '12dea96fec20593566ab75692c9949596833adc9', 3, 'd0mr49l3.jpg', '', 1, '', '2016-11-23 11:31:04'),
-(4, 0, 'Super Admin', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '', '2016-11-30 02:13:16'),
+(4, 0, 'Super Admin', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '', '2016-12-04 09:46:47'),
 (7, 954864, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Tala inc.', 1, '', NULL),
 (8, 809361, 'Mario', 'mario', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'mo6qapon8.jpg', 'Mario Bros.', 1, '', '2016-11-29 13:31:06'),
 (10, 809361, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Mario Bros.', 1, '', NULL),
 (11, 809361, 'Raijin Kunami', 'raijin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Mario Bros.', 1, '', '2016-11-28 02:42:31'),
-(12, 168739, 'nelma', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-03 10:54:02'),
+(12, 168739, 'nelma', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-04 09:57:32'),
 (13, 168739, 'john ', 'john', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-11-30 08:26:33'),
 (14, 168739, 'Clement', 'clement', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-01 09:30:23'),
 (15, 168739, 'Reko', 'reko', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', NULL),
 (16, 334511, 'Ali Baba', 'Alibaba', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Nelsa Inventory System', 1, '639436089485', NULL),
-(17, 168739, 'Torta', 'torta', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '639436089485', NULL);
+(17, 168739, 'Torta', 'torta', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '639436089485', NULL),
+(18, 527075, 'a', 'a', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1, 'no_image.jpg', 'a', 1, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -383,7 +384,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `user_groups`
 --

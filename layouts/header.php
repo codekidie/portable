@@ -107,6 +107,9 @@
                              }elseif ($access == 'Purchase_Order') {
                                 $icon = 'pe-7s-cart'; 
                                 $link = 'add_purchase_order.php';
+                             }elseif ($access == 'View_Reports') {
+                                 $icon = 'pe-7s-graph'; 
+                                $link = 'view_reports.php';
                              }
 
                            
@@ -135,8 +138,11 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">Dashboard</a>
+
                 </div>
                 <div class="collapse navbar-collapse">
+                    <?php if(!$user['user_level'] == '0' ): ?>
+
                     <ul class="nav navbar-nav navbar-left">
                         <li>
                             <a href="http://localhost/portable_inventory/home.php" class="dropdown-toggle" data-toggle="dropdown">
@@ -144,12 +150,16 @@
                             </a>
                         </li>
                       <?php 
-                      $admin_id =  $_SESSION['admin_id'];
-                      $expire_products = getExpiringProducts($admin_id);
-                      $total_notifications = getTotalNotifications($admin_id);
 
-                      
+                            $admin_id            =  $_SESSION['admin_id'];
+                            
+                            $expire_products     = getExpiringProducts($admin_id);
 
+                            $total_notifications = getTotalProductsExpiringNotifications($admin_id);
+
+                            $minimumstocks       = getMinimumProducts($admin_id);
+                            
+                            $total_minimum_noti  = getTotalMinimumProducts($admin_id);
                    
                       ?>
                        
@@ -157,7 +167,7 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-globe"></i>
                                     <b class="caret"></b>
-                                    <span class="notification"><?php  echo  $total_notifications[0]['count']; ?></span>
+                                    <span class="notification"><?php  echo  $total_notifications[0]['count'] + $total_minimum_noti[0]['count']; ?></span>
                               </a>
                               <ul class="dropdown-menu">
                               <?php foreach ($expire_products as $ex): ?>
@@ -165,7 +175,7 @@
                                        foreach ($mergeuserstoproducts as $mu) {
                                           $phone =  $mu['phone'];
 
-                                          // if (!isset($_SESSION['send_sms'])) {
+                                
                                           //       $ch = curl_init();
                                           //       curl_setopt($ch, CURLOPT_URL,"http://api.semaphore.co/api/sms");
                                           //       curl_setopt($ch, CURLOPT_POST, 1);
@@ -174,10 +184,8 @@
                                           //       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                           //       $server_output = curl_exec ($ch);
                                           //       curl_close ($ch);
-                                          // } 
 
                                        }
-                                          $_SESSION['send_sms'] = 1;
 
 
                                 ?>
@@ -185,10 +193,15 @@
                                     <li><a href="expiry.php?id=<?php echo $ex['id']; ?>">Product <?php echo $ex['name']; ?> Expiring at <?php echo $ex['expiry_date']; ?></a></li>
                                   
                               <?php endforeach ?>
+                              <?php foreach ($minimumstocks as $ms): ?>
+                                 <li><a href="#">Product <?php echo $ms['name']; ?> Stocks Reach Minimum Level <?php echo $ms['quantity']; ?></a></li>
+                              <?php endforeach ?>
                               </ul>
                         </li>
                        
                     </ul>
+                    <?php endif ?>
+
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -203,7 +216,7 @@
                             </a>
                         </li>
                      
-                        <li>
+                        <li class="logout">
                             <a href="logout.php">
                                 Log out
                             </a>

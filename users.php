@@ -140,6 +140,7 @@
                   <option value="Media">Media</option>
                   <option value="Return_Product">Return Product</option>
                   <option value="Purchase_Order">Purchase Order</option>
+                  <option value="View_Reports">View Reports</option>
 
                 </select>
               </div>

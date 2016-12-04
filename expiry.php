@@ -31,7 +31,6 @@
                 <th class="text-center" style="width: 10%;"> Saleing Price </th>
                 <th class="text-center" style="width: 10%;"> Expiry Date </th>
                 <th class="text-center" style="width: 10%;"> Product Added </th>
-                <th class="text-center" style="width: 100px;"> Actions </th>
               </tr>
             </thead>
             <tbody>
@@ -52,16 +51,7 @@
                 <td class="text-center"> <?php echo remove_junk($product['sale_price']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['expiry_date']); ?></td>
                 <td class="text-center"> <?php echo read_date($product['date']); ?></td>
-                <td class="text-center">
-                  <div class="btn-group">
-                    <a href="edit_product.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs"  title="Edit" data-toggle="tooltip">
-                      <i class="pe-7s-edit"></i>
-                    </a>
-                    <a href="delete_product.php?id=<?php echo (int)$product['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
-                      <i class="pe-7s-trash"></i>
-                    </a>
-                  </div>
-                </td>
+               
               </tr>
              <?php endforeach; ?>
             </tbody>

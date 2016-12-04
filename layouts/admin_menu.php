@@ -99,6 +99,12 @@
         <span>Purchase Order</span>
       </a>
     </li>
+    <li>
+      <a href="view_reports.php" >
+        <i class="pe-7s-graph"></i>
+        <span>View Reports</span>
+      </a>
+    </li>
 
 
      <li class="active-pro">

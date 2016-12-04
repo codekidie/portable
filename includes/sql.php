@@ -193,7 +193,7 @@ function tableExists($table){
   function find_all_client(){
       global $db;
       $results = array();
-      $sql = "SELECT u.id,u.name,u.username,u.user_level,u.status,u.last_login,u.admin_id,u.company_name,";
+      $sql = "SELECT u.id,u.phone,u.name,u.username,u.user_level,u.status,u.last_login,u.admin_id,u.company_name,";
       $sql .="g.group_name,g.admin_id ";
       $sql .="FROM users u ";
       $sql .="LEFT JOIN user_groups g ";
@@ -418,11 +418,31 @@ function getExpiringProducts($admin_id)
 }
 
 
-function getTotalNotifications($admin_id)
+function getTotalProductsExpiringNotifications($admin_id)
 {
 
     $sql  = "SELECT COUNT(id) AS count FROM  products  WHERE  products.expiry_date >= DATE(now())";
     $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' ORDER BY date ASC"; 
+    return find_by_sql($sql);
+}
+
+
+/* Function for returning minimum products */
+function getMinimumProducts($admin_id)
+{
+
+    $sql  = "SELECT  * FROM  products  WHERE  quantity < 5 ";
+    $sql .= " AND admin_id = '{$admin_id}' GROUP BY name ORDER BY date ASC";
+    return find_by_sql($sql);
+                        
+}
+
+/* Function for returning total minimum products */
+function getTotalMinimumProducts($admin_id)
+{
+
+    $sql  = "SELECT COUNT(id) AS count FROM  products  WHERE  quantity <= 5 ";
+    $sql .= " AND  admin_id = '{$admin_id}' ORDER BY date ASC"; 
     return find_by_sql($sql);
 }
 

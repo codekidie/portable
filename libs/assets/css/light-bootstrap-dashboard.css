@@ -2812,6 +2812,10 @@ body > .navbar-collapse[data-color="purple"]:after {
     display: none;
   }
 
+  .logout{
+    margin-bottom: 100px;
+  }
+
   .main-panel {
     width: 100%;
   }
@@ -2896,7 +2900,7 @@ body > .navbar-collapse[data-color="purple"]:after {
     width: 100%;
   }
   body > .navbar-collapse .nav > li > a {
-    padding: 30px 25px;
+    /*padding: 30px 25px;*/
   }
   body > .navbar-collapse::before {
     top: 0;

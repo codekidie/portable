@@ -31,6 +31,7 @@
             <th>Name </th>
             <th>Username</th>
             <th class="text-center" style="width: 20%;">Company Name</th>
+            <th class="text-center" style="width: 20%;">Phone</th>
             <th style="width: 10%;">Status</th>
             <th style="width: 20%;">Last Login</th>
             <!-- <th class="text-center" style="width: 100px;">Actions</th> -->
@@ -43,6 +44,7 @@
            <td><?php echo remove_junk(ucwords($a_user['name']))?></td>
            <td><?php echo remove_junk(ucwords($a_user['username']))?></td>
            <td class="text-center"><?php echo remove_junk(ucwords($a_user['company_name']))?></td>
+           <td class="text-center"><?php echo remove_junk(ucwords($a_user['phone']))?></td>
            <td class="text-center">
            <?php if($a_user['status'] === '1'): ?>
             <span class="label label-success"><?php echo "Active"; ?></span>
