@@ -412,7 +412,7 @@ function getExpiringProducts($admin_id)
 {
 
     $sql  = "SELECT  * FROM  products  WHERE  products.expiry_date >= DATE(now())";
-    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' ORDER BY date ASC";
+    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' AND products.sms_sent=0  GROUP BY products.batch ORDER BY date ASC";
     return find_by_sql($sql);
                         
 }
@@ -422,7 +422,7 @@ function getTotalProductsExpiringNotifications($admin_id)
 {
 
     $sql  = "SELECT COUNT(id) AS count FROM  products  WHERE  products.expiry_date >= DATE(now())";
-    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' ORDER BY date ASC"; 
+    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' AND products.sms_sent=0 ORDER BY date ASC"; 
     return find_by_sql($sql);
 }
 
@@ -432,7 +432,7 @@ function getMinimumProducts($admin_id)
 {
 
     $sql  = "SELECT  * FROM  products  WHERE  quantity < 5 ";
-    $sql .= " AND admin_id = '{$admin_id}' GROUP BY name ORDER BY date ASC";
+    $sql .= " AND admin_id = '{$admin_id}' AND sms_sent=0 GROUP BY name ORDER BY date ASC";
     return find_by_sql($sql);
                         
 }
@@ -442,7 +442,7 @@ function getTotalMinimumProducts($admin_id)
 {
 
     $sql  = "SELECT COUNT(id) AS count FROM  products  WHERE  quantity <= 5 ";
-    $sql .= " AND  admin_id = '{$admin_id}' ORDER BY date ASC"; 
+    $sql .= " AND  admin_id = '{$admin_id}' AND sms_sent=0 ORDER BY date ASC"; 
     return find_by_sql($sql);
 }
 

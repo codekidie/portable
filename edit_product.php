@@ -14,7 +14,7 @@ if(!$product){
 ?>
 <?php
  if(isset($_POST['product'])){
-    $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
+    $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price');
     validate_fields($req_fields);
 
    if(empty($errors)){
@@ -24,6 +24,8 @@ if(!$product){
        $p_buy   = remove_junk($db->escape($_POST['buying-price']));
        $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
        $p_expiry_date  = remove_junk($db->escape($_POST['saleing-expiry-date']));
+       $p_batch  = remove_junk($db->escape($_POST['batch']));
+
 
        if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
          $media_id = '0';
@@ -32,7 +34,7 @@ if(!$product){
        }
        $query   = "UPDATE products SET";
        $query  .=" name ='{$p_name}', quantity ='{$p_qty}',";
-       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',expiry_date='{$p_expiry_date}'";
+       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',expiry_date='{$p_expiry_date}' , batch = '{$p_batch}'";
        $query  .=" WHERE id ='{$product['id']}'";
        $result = $db->query($query);
                if($result && $db->affected_rows() === 1){
@@ -61,7 +63,7 @@ if(!$product){
       <div class="panel panel-default">
         <div class="panel-heading">
           <strong>
-            <span class="glyphicon glyphicon-th"></span>
+            <span class="pe-7s-cart"></span>
             <span>Add New Product</span>
          </strong>
         </div>
@@ -71,7 +73,7 @@ if(!$product){
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">
-                   <i class="glyphicon glyphicon-th-large"></i>
+                   <i class="pe-7s-cart"></i>
                   </span>
                   <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product['name']);?>">
                </div>
@@ -106,7 +108,7 @@ if(!$product){
                     <label for="qty">Quantity</label>
                     <div class="input-group">
                       <span class="input-group-addon">
-                       <i class="glyphicon glyphicon-shopping-cart"></i>
+                       <i class="pe-7s-cart"></i>
                       </span>
                       <input type="number" class="form-control" name="product-quantity" value="<?php echo remove_junk($product['quantity']); ?>">
                    </div>
@@ -117,7 +119,7 @@ if(!$product){
                     <label for="qty">Buying price</label>
                     <div class="input-group">
                       <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-usd"></i>
+                        <i class="pe-7s-cash"></i>
                       </span>
                       <input type="number" class="form-control" name="buying-price" value="<?php echo remove_junk($product['buy_price']);?>">
                       <span class="input-group-addon">.00</span>
@@ -129,7 +131,7 @@ if(!$product){
                      <label for="qty">Selling price</label>
                      <div class="input-group">
                        <span class="input-group-addon">
-                         <i class="glyphicon glyphicon-usd"></i>
+                         <i class="pe-7s-cash"></i>
                        </span>
                        <input type="number" class="form-control" name="saleing-price" value="<?php echo remove_junk($product['sale_price']);?>">
                        <span class="input-group-addon">.00</span>
@@ -138,15 +140,24 @@ if(!$product){
                   </div>
                   <div class="col-md-4">
                    <div class="form-group">
-                      <label for="">Expiry Date</label>
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="pe-7s-date"></i>
-                          </span>
-                          <input type="date" class="form-control" name="saleing-expiry-date" value="<?php echo remove_junk($product['expiry_date']);?>" placeholder="Expiry Date" required="required">
-                      </div>
+                          <label for="">Expiry Date</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="pe-7s-date"></i>
+                              </span>
+                              <input type="date" class="form-control" name="saleing-expiry-date" value="<?php echo remove_junk($product['expiry_date']);?>" placeholder="Expiry Date" required="required">
+                          </div>
+                    </div>
                 </div>
-                </div>
+                  <div class="col-md-4">
+                  <label for="">Batch</label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="pe-7s-settings"></i>
+                      </span>
+                      <input type="text" class="form-control" name="batch" placeholder="Batch No." value="<?php echo remove_junk($product['batch']);?>" required="required">
+                   </div>
+                  </div>
                </div>
               </div>
               <button type="submit" name="product" class="btn btn-danger">Update</button>

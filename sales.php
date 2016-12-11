@@ -6,6 +6,8 @@
 <?php
 $admin_id =  $_SESSION['admin_id'] ;
 $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_id = p.id WHERE p.admin_id = {$admin_id}");
+// var_dump($sales);
+// die();
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
@@ -47,10 +49,10 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_i
                <td class="text-center"><?php echo $sale['date']; ?></td>
                <td class="text-center">
                   <div class="btn-group">
-                     <a href="edit_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
+                     <a href="edit_sale.php?id=<?php echo (int)$sale[0];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <i class="pe-7s-edit"></i>
                      </a>
-                     <a href="delete_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                     <a href="delete_sale.php?id=<?php echo (int)$sale[0];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
                        <i class="pe-7s-trash"></i>
                      </a>
                   </div>

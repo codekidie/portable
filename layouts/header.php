@@ -176,14 +176,14 @@
                                           $phone =  $mu['phone'];
 
                                 
-                                          //       $ch = curl_init();
-                                          //       curl_setopt($ch, CURLOPT_URL,"http://api.semaphore.co/api/sms");
-                                          //       curl_setopt($ch, CURLOPT_POST, 1);
-                                          //       curl_setopt($ch, CURLOPT_POSTFIELDS,"api=PFpGxb3vGHhL1zYxVXKp&number=".$phone."&message=Product ".$ex['name']." is expiring on ".$ex['expiry_date']);
-                                          //       // receive server response ...
-                                          //       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                                          //       $server_output = curl_exec ($ch);
-                                          //       curl_close ($ch);
+                                                // $ch = curl_init();
+                                                // curl_setopt($ch, CURLOPT_URL,"http://api.semaphore.co/api/sms");
+                                                // curl_setopt($ch, CURLOPT_POST, 1);
+                                                // curl_setopt($ch, CURLOPT_POSTFIELDS,"api=PFpGxb3vGHhL1zYxVXKp&number=".$phone."&message=Product ".$ex['name']." is expiring on ".$ex['expiry_date']);
+                                                // // receive server response ...
+                                                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                                // $server_output = curl_exec ($ch);
+                                                // curl_close ($ch);
 
                                        }
 

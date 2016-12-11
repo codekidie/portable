@@ -8,6 +8,9 @@
   $admin_id =  $_SESSION['admin_id'] ;
   $all_users = find_by_admin_id($admin_id);
   $all_privilege = find_by_sql("SELECT * FROM privilege p LEFT JOIN users u  ON p.user_id=u.id WHERE p.admin_id = '{$admin_id}' ORDER BY p.user_id");
+// echo '<pre>';
+//   print_r($all_privilege);
+// echo '<pre>';phea
 
   if (isset($_GET['delete_privilege_id'])) {
      $privilege_id =  $_GET['delete_privilege_id'];
@@ -26,20 +29,117 @@
           $s_privilege   = $db->escape($_POST['privilege']);
           $s_admin_id   = $db->escape($_POST['admin_id']);
 
-          $sql  = "INSERT INTO privilege (";
-          $sql .= " user_id,access,admin_id";
-          $sql .= ") VALUES (";
-          $sql .= "'{$s_user_id}','{$s_privilege}','{$s_admin_id}'";
-          $sql .= ")";
+          if (isset($_POST['Category'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Category']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
 
-          if($db->query($sql)){
-            update_product_qty($s_qty,$p_id);
+
+          if (isset($_POST['Manage_Product'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Manage_Product']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+          if (isset($_POST['Add_Product'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Add_Product']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+          if (isset($_POST['Manage_Sales'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Manage_Sales']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+          if (isset($_POST['Add_Sales'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Add_Sales']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+          if (isset($_POST['Sales_by_dates'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Sales_by_dates']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+            if (isset($_POST['Monthly_Sales'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Monthly_Sales']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+                 if (isset($_POST['Daily_Sales'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Daily_Sales']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+          if (isset($_POST['Media'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Media']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+           if (isset($_POST['Return_Product'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Return_Product']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
+
+           if (isset($_POST['Purchase_Order'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Purchase_Order']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
             $session->msg('s',"Privilege added. ");
             redirect('users.php', false);
-          } else {
-            $session->msg('d',' Sorry failed to add privilege!');
-            redirect('users.php', false);
-          }
+        
       
   }
 ?>
@@ -126,9 +226,31 @@
                   </select>
               </div>
 
-              <div class="form-group">
                   <label for="">Assign Privilege</label>
-                  <select name="privilege" class="form-control">
+                  <table class="table">
+                  <tr>
+                    <td> <input type="checkbox" name="Category" value="Category">Category</td>
+                    <td> <input type="checkbox" name="Manage_Product" value="Manage_Product">Manage Product</td>
+                    <td> <input type="checkbox" name="Add_Product" value="Add_Product">Add Product</td>
+
+                  </tr>  
+                  <tr>
+                    <td> <input type="checkbox" name="Manage_Sales" value="Manage_Sales">Manage Sales</td>
+                    <td> <input type="checkbox" name="Add_Sales" value="Add_Sales">Add Sales</td>
+                    <td> <input type="checkbox" name="Sales_by_dates" value="Sales_by_dates">Sales by dates</td>
+                  </tr>
+                  <tr>
+                    <td> <input type="checkbox" name="Monthly_Sales" value="Monthly_Sales">Monthly Sales</td>
+                    <td> <input type="checkbox" name="Daily_Sales" value="Daily_Sales">Daily Sales</td>
+                    <td> <input type="checkbox" name="Media" value="Media">Media</td>
+                  </tr>
+                  <tr>  
+                    <td>  <input type="checkbox" name="Return_Product" value="Return_Product">Return Product</td>
+                    <td> <input type="checkbox" name="Purchase_Order" value="Purchase_Order">Purchase Order</td>
+                  </tr>  
+                  </table>
+
+                 <!--  <select name="privilege" class="form-control">
                   <option value="Category">Category</option>
                   <option value="Manage_Product">Manage Product</option>
                   <option value="Add_Product">Add Product</option>
@@ -139,11 +261,10 @@
                   <option value="Daily_Sales">Daily Sales</option>
                   <option value="Media">Media</option>
                   <option value="Return_Product">Return Product</option>
-                  <option value="Purchase_Order">Purchase Order</option>
+                  <option value="Purchase_Order">Purchase Order</option> -->
                   <!-- <option value="View_Reports">View Reports</option> -->
 
-                </select>
-              </div>
+                <!-- </select> -->
 
               <div class="form-group">
               <input type="hidden" name="admin_id" value="<?php echo $admin_id; ?>">
@@ -171,7 +292,7 @@
                  <td class="text-center">
                    <div class="btn-group">
                      
-                      <a href="users.php?delete_privilege_id=<?php echo (int)$p['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                      <a href="users.php?delete_privilege_id=<?php echo (int)$p[0];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                         <i class="pe-7s-trash"></i>
                       </a>
                       </div>

@@ -13,6 +13,15 @@
 	<script src="libs/assets/js/light-bootstrap-dashboard.js"></script>
   <script src="libs/assets/js/demo.js"></script>
 	<script src="libs/js/notify.js"></script>
+  <script type="text/javascript">
+      $('.dropdown-toggle').click(function() {
+            $.ajax({
+              url: "submitnotificationajax.php",
+            }).done(function(done) {
+                $('.notification').html(0);
+            });
+      });
+  </script>
   </body>
 </html>
 
