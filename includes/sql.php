@@ -446,4 +446,27 @@ function getTotalMinimumProducts($admin_id)
     return find_by_sql($sql);
 }
 
+
+/* Function for returning minimum products */
+function getMinimumProductsHistory($admin_id)
+{
+
+    $sql  = "SELECT  * FROM  products  WHERE  quantity < 5 ";
+    $sql .= " AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY date ASC";
+    return find_by_sql($sql);
+                        
+}
+
+
+/* Function for returning expired products */
+function getExpiringProductsLogs($admin_id)
+{
+
+    $sql  = "SELECT  * FROM  products  WHERE  expiry_date >= DATE(now())";
+    $sql .= " AND  expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY date ASC";
+    return find_by_sql($sql);
+                        
+}
+
+
 ?>

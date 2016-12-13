@@ -19,6 +19,10 @@
                                                ru.reason as ru_reason,
                                                ru.quantity as ru_quantity,
                                                p.name as p_name FROM return_product ru LEFT JOIN products p ON ru.product_id = p.id WHERE p.admin_id = '{$admin_id}' GROUP BY ru.product_id");
+
+
+
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 <h1>Overall Reports</h1>
@@ -135,5 +139,55 @@
       </div>
   </div>
 
+<?php   
+  $expire_products     = getExpiringProductsLogs($admin_id);
+
+
+  $minimumstocks       = getMinimumProductsHistory($admin_id); ?>
+   <div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>
+            <span class="pe-7s-cart"></span>
+            <span>Log of Notifications</span>
+         </strong>
+        </div>
+        <div class="panel-body">
+         <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                    <th>Products Expiring Logs</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php foreach ($expire_products as $exs): ?>
+                    <tr>
+                         <td>Product <?php echo $exs['name']; ?> Expiring at <?php echo $exs['expiry_date']; ?></td>     
+                    </tr>           
+                  <?php endforeach ?>
+              </tbody>
+            </table>
+
+              <table class="table">
+              <thead>
+                <tr>
+                    <th>Minimum Level Stocks Logs</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php foreach ($minimumstocks as $mss): ?>
+                    <tr>
+                        <td>Product <?php echo $mss['name']; ?> Stocks Reach Minimum Level <?php echo $mss['quantity']; ?></td>
+                    </tr>    
+                  <?php endforeach ?>
+              </tbody>
+            </table>
+
+         </div>
+        </div>
+      </div>
+  </div>
+                     
 
 <?php include_once('layouts/footer.php'); ?>
