@@ -15,16 +15,18 @@
    validate_fields($req_fields);
 
    if(empty($errors)){
-           $name   = remove_junk($db->escape($_POST['full-name']));
+       $name   = remove_junk($db->escape($_POST['full-name']));
+       $mname   = remove_junk($db->escape($_POST['m-name']));
+       $lname   = remove_junk($db->escape($_POST['l-name']));
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
        $phone   = remove_junk($db->escape($_POST['phone']));
        // $user_level = (int)$db->escape($_POST['level']);
        $password = sha1($password);
         $query = "INSERT INTO users (";
-        $query .="name,username,password,user_level,status,admin_id,company_name,phone";
+        $query .="name,mname,lname,username,password,user_level,status,admin_id,company_name,phone";
         $query .=") VALUES (";
-        $query .=" '{$name}', '{$username}', '{$password}','2', '1','{$admin_id}','{$company_name}','{$phone}'";
+        $query .=" '{$name}', '{$mname}', '{$lname}','{$username}', '{$password}','2', '1','{$admin_id}','{$company_name}','{$phone}'";
         $query .=")";
         if($db->query($query)){
           //sucess
@@ -55,8 +57,17 @@
         <div class="col-md-6">
           <form method="post" action="add_user.php">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" name="full-name" placeholder="Full Name">
+                <label for="name">First Name</label>
+                <input type="text" class="form-control" name="full-name" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="name">Middle Name</label>
+                <input type="text" class="form-control" name="m-name" placeholder="Middle Name">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text" class="form-control" name="l-name" placeholder="Last Name">
             </div>
             <div class="form-group">
                 <label for="username">Username</label>

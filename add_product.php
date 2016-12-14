@@ -6,6 +6,8 @@
 
   $all_categories = find_by_sql("SELECT * FROM categories WHERE admin_id = '{$admin_id}'");
   $all_photo = find_by_sql("SELECT * FROM media WHERE admin_id = '{$admin_id}'");
+  $all_batch = find_by_sql("SELECT * FROM batch WHERE admin_id = '{$admin_id}'");
+
 
 ?>
 <?php
@@ -18,7 +20,8 @@
      $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
      $p_buy   = remove_junk($db->escape($_POST['buying-price']));
      $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
-     $unit_of_measure = remove_junk($db->escape($_POST['unit_of_measure'])); 
+     $unit_of_measure =  remove_junk($db->escape($_POST['unit_of_measure_num'])) .' '.remove_junk($db->escape($_POST['unit_of_measure'])); 
+
      $p_batch  = remove_junk($db->escape($_POST['batch']));
      $p_expiry_date  = remove_junk($db->escape($_POST['saleing-expiry-date']));
 
@@ -141,13 +144,18 @@
                      </div>
                     </div>
 
+
                    <div class="col-md-4">
                     <label for="">Batch</label>
                       <div class="input-group">
                         <span class="input-group-addon">
                           <i class="pe-7s-settings"></i>
                         </span>
-                        <input type="text" class="form-control" name="batch" placeholder="Batch No." required="required">
+                        <select name="batch" class="form-control">
+                            <?php foreach ($all_batch as $b): ?>
+                                <option><?php echo $b['name'] ?></option>
+                            <?php endforeach ?>
+                        </select>
                      </div>
                     </div>
 
@@ -157,7 +165,38 @@
                             <span class="input-group-addon">
                               <i class="pe-7s-graph"></i>
                             </span>
-                            <input type="text" class="form-control" name="unit_of_measure" placeholder="Unit of Measure" required="required">
+                            <input type="text" class="form-control" name="unit_of_measure_num" placeholder="Unit of Measure" required="required">
+
+                              <select name="unit_of_measure" class="form-control" required="">
+                                  <option> none </option> 
+                                  <option> microgram </option> 
+                                  <option> milligram </option>
+                                  <option> carat </option> 
+                                  <option> gram </option> 
+                                  <option> kilogram </option> 
+                                 <option>  metric ton </option> 
+                                  <option> pound </option>
+                                 <option>  nanometer </option> 
+                                 <option>  millimeter </option>
+                                 <option>  centimeter </option>
+                                  <option> inch </option> 
+                                  <option> foot </option> 
+                                 <option>  yard </option> 
+                                 <option>  meter  </option> 
+                                  <option> kilometer </option> 
+                                 <option>  khelter </option> 
+                                 <option>  salt pan </option>
+                                 <option>  mile </option> 
+                                 <option>  visvia </option> 
+                                <option>   megalight </option> 
+                                  <option> light year </option> 
+                                 <option>  parsec </option>
+                                 <option>  Siriometer </option> 
+                               <option>    kiloparsec </option>
+                                <option>  Megaparsec </option>
+                                 <option>  Gigaparsec</option>
+                                <option>   Teraparsec </option>
+                              </select>
                          </div>
                         </div>
                  </div>

@@ -229,24 +229,24 @@
                   <label for="">Assign Privilege</label>
                   <table class="table">
                   <tr>
-                    <td> <input type="checkbox" name="Category" value="Category">Category</td>
-                    <td> <input type="checkbox" name="Manage_Product" value="Manage_Product">Manage Product</td>
-                    <td> <input type="checkbox" name="Add_Product" value="Add_Product">Add Product</td>
+                    <td> Category <br> <input type="checkbox" name="Category" value="Category"></td>
+                    <td> Manage Product <br> <input type="checkbox" name="Manage_Product" value="Manage_Product"></td>
+                    <td> Add Product <br> <input type="checkbox" name="Add_Product" value="Add_Product"></td>
 
                   </tr>  
                   <tr>
-                    <td> <input type="checkbox" name="Manage_Sales" value="Manage_Sales">Manage Sales</td>
-                    <td> <input type="checkbox" name="Add_Sales" value="Add_Sales">Add Sales</td>
-                    <td> <input type="checkbox" name="Sales_by_dates" value="Sales_by_dates">Sales by dates</td>
+                    <td> Manage Sales <br> <input type="checkbox" name="Manage_Sales" value="Manage_Sales"></td>
+                    <td> Add Sales <br>  <input type="checkbox" name="Add_Sales" value="Add_Sales"></td>
+                    <td> Sales By Dates <br> <input type="checkbox" name="Sales_by_dates" value="Sales_by_dates"></td>
                   </tr>
                   <tr>
-                    <td> <input type="checkbox" name="Monthly_Sales" value="Monthly_Sales">Monthly Sales</td>
-                    <td> <input type="checkbox" name="Daily_Sales" value="Daily_Sales">Daily Sales</td>
-                    <td> <input type="checkbox" name="Media" value="Media">Media</td>
+                    <td> Monthly Sales <br> <input type="checkbox" name="Monthly_Sales" value="Monthly_Sales"></td>
+                    <td> Daily Sales <br> <input type="checkbox" name="Daily_Sales" value="Daily_Sales"></td>
+                    <td> Media <br> <input type="checkbox" name="Media" value="Media"></td>
                   </tr>
                   <tr>  
-                    <td>  <input type="checkbox" name="Return_Product" value="Return_Product">Return Product</td>
-                    <td> <input type="checkbox" name="Purchase_Order" value="Purchase_Order">Purchase Order</td>
+                    <td> Return Product  <br> <input type="checkbox" name="Return_Product" value="Return_Product"></td>
+                    <td> Purchase Order <br>  <input type="checkbox" name="Purchase_Order" value="Purchase_Order"> </td>
                   </tr>  
                   </table>
 

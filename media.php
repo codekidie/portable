@@ -64,7 +64,7 @@
                 <tr class="list-inline">
                  <td class="text-center"><?php echo count_id();?></td>
                   <td class="text-center">
-                      <img src="uploads/products/<?php echo $media_file['file_name'];?>" class="img-thumbnail" />
+                      <img src="uploads/products/<?php echo $media_file['file_name'];?>" class="img-thumbnail" style="height:100px;width:100px;" />
                   </td>
                 <td class="text-center">
                   <?php echo $media_file['file_name'];?>

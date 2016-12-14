@@ -25,20 +25,20 @@
   <li>
     <a href="categorie.php" >
       <i class="pe-7s-keypad"></i>
-      <span>Categorie</span>
+      <span>Categories</span>
     </a>
   </li>
 
    <li>
     <a href="product.php">
       <i class="pe-7s-server"></i>
-      <span>Manage product</span>
+      <span>Manage Product</span>
     </a>
   </li>
     <li>
       <a href="add_product.php">
       <i class="pe-7s-network"></i>
-      <span>Add product</span>
+      <span>Add Product</span>
     </a>
   </li>
 
@@ -61,21 +61,21 @@
   <li>
       <a href="sales_report.php">
       <i class="pe-7s-date"></i>
-      <span>Sales by dates</span>
+      <span>Sales By Dates</span>
     </a>
   </li>
 
    <li>
       <a href="monthly_sales.php">
       <i class="pe-7s-date"></i>
-      <span>Monthly sales</span>
+      <span>Monthly Sales</span>
     </a>
   </li>
 
     <li>
       <a href="daily_sales.php">
       <i class="pe-7s-date"></i>
-      <span>Daily sales</span>
+      <span>Daily Sales</span>
     </a>
   </li>
 

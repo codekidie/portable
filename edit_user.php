@@ -20,11 +20,13 @@
     if(empty($errors)){
              $id = (int)$e_user['id'];
              $name = remove_junk($db->escape($_POST['name']));
+             $mname   = remove_junk($db->escape($_POST['m-name']));
+             $lname   = remove_junk($db->escape($_POST['l-name']));
              $companyname = remove_junk($db->escape($_POST['companyname']));
             $username = remove_junk($db->escape($_POST['username']));
             $phone = remove_junk($db->escape($_POST['phone']));
        $status   = remove_junk($db->escape($_POST['status']));
-            $sql = "UPDATE users SET name ='{$name}', username ='{$username}',status='{$status}', phone='{$phone}' , company_name='{$companyname}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE users SET name ='{$name}', mname ='{$mname}', lname ='{$lname}', username ='{$username}',status='{$status}', phone='{$phone}' , company_name='{$companyname}' WHERE id='{$db->escape($id)}'";
          $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
             $session->msg('s',"Acount Updated ");
@@ -83,8 +85,17 @@ if(isset($_POST['update-pass'])) {
                 
             </div>
             <div class="form-group">
-                  <label for="name" class="control-label">Name</label>
+                  <label for="name" class="control-label">First Name</label>
                   <input type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
+            </div>
+            <div class="form-group">
+                <label for="name">Middle Name</label>
+                <input type="text" class="form-control" name="m-name" value="<?php echo remove_junk(ucwords($e_user['mname'])); ?>" placeholder="Middle Name">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text" class="form-control" name="l-name" value="<?php echo remove_junk(ucwords($e_user['lname'])); ?>" placeholder="Last Name">
             </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>

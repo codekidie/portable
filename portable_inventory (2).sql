@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2016 at 05:03 AM
+-- Generation Time: Dec 14, 2016 at 09:29 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `portable_inventory`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `batch`
+--
+
+CREATE TABLE `batch` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `admin_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `batch`
+--
+
+INSERT INTO `batch` (`id`, `name`, `admin_id`) VALUES
+(1, 'firstbatch', 168739),
+(2, 'second batch', 168739);
 
 -- --------------------------------------------------------
 
@@ -62,7 +82,8 @@ CREATE TABLE `media` (
 INSERT INTO `media` (`id`, `admin_id`, `file_name`, `file_type`) VALUES
 (1, 0, 'd0mr49l3.jpg', 'image/jpeg'),
 (2, 809361, 'AMA_University_logo.png', 'image/png'),
-(3, 168739, 'Roger_in_His_Youth.png', '');
+(3, 168739, 'Roger_in_His_Youth.png', ''),
+(4, 168739, 'blue berry yakult.jpg', 'image/jpeg');
 
 -- --------------------------------------------------------
 
@@ -118,14 +139,9 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `admin_id`, `name`, `quantity`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `expiry_date`, `unit_of_measure`, `batch`, `sms_sent`, `date`) VALUES
 (4, 809361, 'Laptop', '-2', '2.00', '4.00', 1, 2, '0000-00-00', '', '', 0, '2016-11-28 01:59:27'),
-(5, 168739, 'Nokia Power Ranger', '1', '2.00', '4.00', 1, 1, '2016-12-19', '', 'frea', 1, '2016-11-30 08:17:28'),
-(6, 168739, 'Laptop', '-2', '1.00', '3.00', 3, 0, '2016-11-30', '', '', 1, '2016-11-30 08:31:06'),
-(7, 168739, 'macbook pro', '-2', '2.00', '3.00', 3, 0, '2016-11-30', '', '', 1, '2016-11-30 08:35:24'),
-(8, 168739, 'blueberry yakult', '3', '10.00', '11.00', 3, 3, '2016-12-31', '', '', 1, '2016-12-01 10:57:13'),
 (9, 334511, 'test', '8', '7.00', '3.00', 4, 0, '2016-12-12', '', '', 1, '2016-12-11 18:51:10'),
 (10, 334511, 'testa', '3', '4.00', '4.00', 4, 0, '2016-12-12', '', 'testbatch', 1, '2016-12-11 18:59:25'),
-(11, 168739, 'macfloat', '2', '4.00', '9.00', 3, 3, '2016-12-16', '', '20', 1, '2016-12-13 03:10:48'),
-(12, 168739, 'solinoed', '3', '5.00', '10.00', 3, 3, '2016-12-14', 'kilogram', '1423df', 0, '2016-12-14 03:05:35');
+(15, 168739, 'Blue Berry Yakult', '0', '120.00', '150.00', 3, 4, '2016-12-21', '6 inch', 'firstbatch', 1, '2016-12-14 21:04:57');
 
 -- --------------------------------------------------------
 
@@ -223,7 +239,9 @@ INSERT INTO `sales` (`id`, `admin_id`, `product_id`, `qty`, `price`, `date`) VAL
 (5, 168739, 8, 2, '22.00', '2016-12-01'),
 (6, 168739, 6, 1, '3.00', '2016-12-14'),
 (7, 168739, 6, 2, '3.00', '2016-12-14'),
-(8, 168739, 7, 1, '3.00', '2016-12-14');
+(8, 168739, 7, 1, '3.00', '2016-12-14'),
+(11, 168739, 15, 3, '450.00', '2016-12-14'),
+(12, 168739, 15, 12, '1800.00', '2016-12-14');
 
 -- --------------------------------------------------------
 
@@ -235,6 +253,8 @@ CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `admin_id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL,
+  `mname` text NOT NULL,
+  `lname` text NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_level` int(11) NOT NULL,
@@ -249,22 +269,22 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `admin_id`, `name`, `username`, `password`, `user_level`, `image`, `company_name`, `status`, `phone`, `last_login`) VALUES
-(1, 334511, ' Admin User', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '5zpjyj3r1.jpg', 'nelsa inventory system', 1, '', '2016-12-13 03:02:33'),
-(2, 334511, 'Claire Logan', 'Special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'tyjmkqf2.jpg', 'John Doe Inventory System', 1, '', '2016-11-29 12:44:59'),
-(3, 334511, 'Donald Trump', 'User', '12dea96fec20593566ab75692c9949596833adc9', 3, 'd0mr49l3.jpg', '', 1, '', '2016-11-23 11:31:04'),
-(4, 0, 'Super Admin', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '', '2016-12-04 09:46:47'),
-(7, 954864, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Tala inc.', 1, '', NULL),
-(8, 809361, 'Mario', 'mario', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'mo6qapon8.jpg', 'Mario Bros.', 1, '', '2016-11-29 13:31:06'),
-(10, 809361, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Mario Bros.', 1, '', NULL),
-(11, 809361, 'Raijin Kunami', 'raijin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Mario Bros.', 1, '', '2016-11-28 02:42:31'),
-(12, 168739, 'nelma', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-14 04:31:22'),
-(13, 168739, 'john ', 'john', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-11-30 08:26:33'),
-(14, 168739, 'Clement', 'clement', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-01 09:30:23'),
-(15, 168739, 'Reko', 'reko', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', NULL),
-(16, 334511, 'Ali Baba', 'Alibaba', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Nelsa Inventory System', 1, '639436089485', NULL),
-(17, 168739, 'Torta', 'torta', 'b6b5ec93b27307f4ce746eea982f12d851553bb4', 2, 'no_image.jpg', 'Green Coffee', 1, '639436089485', '2016-12-14 02:14:55'),
-(18, 527075, 'a', 'a', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'a', 1, '', '2016-12-14 02:09:37');
+INSERT INTO `users` (`id`, `admin_id`, `name`, `mname`, `lname`, `username`, `password`, `user_level`, `image`, `company_name`, `status`, `phone`, `last_login`) VALUES
+(1, 334511, ' Admin User', '', '', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '5zpjyj3r1.jpg', 'nelsa inventory system', 1, '', '2016-12-13 03:02:33'),
+(2, 334511, 'Claire Logan', '', '', 'Special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'tyjmkqf2.jpg', 'John Doe Inventory System', 1, '', '2016-11-29 12:44:59'),
+(3, 334511, 'Donald Trump', '', '', 'User', '12dea96fec20593566ab75692c9949596833adc9', 3, 'd0mr49l3.jpg', '', 1, '', '2016-11-23 11:31:04'),
+(4, 0, 'Super Admin', '', '', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '', '2016-12-04 09:46:47'),
+(7, 954864, 'Krystal Amora', '', '', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Tala inc.', 1, '', NULL),
+(8, 809361, 'Mario', '', '', 'mario', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'mo6qapon8.jpg', 'Mario Bros.', 1, '', '2016-11-29 13:31:06'),
+(10, 809361, 'Krystal Amora', '', '', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Mario Bros.', 1, '', NULL),
+(11, 809361, 'Raijin Kunami', '', '', 'raijin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Mario Bros.', 1, '', '2016-11-28 02:42:31'),
+(12, 168739, 'nelma', '', '', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-14 15:16:41'),
+(13, 168739, 'john ', '', '', 'john', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-11-30 08:26:33'),
+(14, 168739, 'Clement', '', '', 'clement', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-01 09:30:23'),
+(15, 168739, 'Reko', '', '', 'reko', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', NULL),
+(16, 334511, 'Ali Baba', '', '', 'Alibaba', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Nelsa Inventory System', 1, '639436089485', NULL),
+(17, 168739, 'Torta', '', '', 'torta', 'b6b5ec93b27307f4ce746eea982f12d851553bb4', 2, 'no_image.jpg', 'Green Coffee', 1, '639436089485', '2016-12-14 02:14:55'),
+(18, 527075, 'a', '', '', 'a', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'a', 1, '', '2016-12-14 02:09:37');
 
 -- --------------------------------------------------------
 
@@ -294,6 +314,12 @@ INSERT INTO `user_groups` (`id`, `admin_id`, `group_name`, `group_level`, `group
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `batch`
+--
+ALTER TABLE `batch`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `categories`
@@ -355,6 +381,11 @@ ALTER TABLE `user_groups`
 --
 
 --
+-- AUTO_INCREMENT for table `batch`
+--
+ALTER TABLE `batch`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -363,7 +394,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `privilege`
 --
@@ -373,7 +404,7 @@ ALTER TABLE `privilege`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `purchase_order`
 --
@@ -388,7 +419,7 @@ ALTER TABLE `return_product`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users`
 --

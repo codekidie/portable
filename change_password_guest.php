@@ -28,7 +28,7 @@
   }
 ?>
 <?php include_once('layouts/header.php'); ?>
-<div class="login-page">
+<div class="login-page col-sm-12 col-md-6 col-md-offset-3 form-box" style="margin-top:20px;margin-bottom:20px;">
   <center><img src="uploads/logo.jpg" alt="" class="col-sm-12"></center>
 
     <div class="text-center">

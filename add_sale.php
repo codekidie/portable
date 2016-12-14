@@ -16,20 +16,35 @@
                 $date      = $db->escape($_POST['date'][$key]);
                 $s_date    = make_date();
 
-                $sql  = "INSERT INTO sales (";
-                $sql .= " product_id,qty,price,date,admin_id";
-                $sql .= ") VALUES (";
-                $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}','{$admin_id}'";
-                $sql .= ")";
 
-                if($db->query($sql)){
-                  update_product_qty($s_qty,$p_id);
-                  $session->msg('s',"Sale added. ");
-                  redirect('add_sale.php', false);
-                } else {
-                  $session->msg('d',' Sorry failed to add!');
-                  redirect('add_sale.php', false);
+                $sell = find_by_sql("SELECT * FROM products WHERE admin_id = '{$admin_id}' AND id = '{$p_id}'");
+                if ($sell) {
+                  foreach ($sell as $s) {
+                    $sell_qty = $s['quantity'];
+                    $sell_product = $s['name'];
+                      if ($sell_qty < $s_qty) {
+                          $session->msg('d',' Sorry failed to add sale insufficient stocks! '.$sell_product.' '.$sell_qty.' stocks left!');
+                                redirect('add_sale.php', false);
+                      }else if($sell_qty > $_sqty){
+                        $s_total = $s_total * $s_qty;
+                              $sql  = "INSERT INTO sales (";
+                              $sql .= " product_id,qty,price,date,admin_id";
+                              $sql .= ") VALUES (";
+                              $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}','{$admin_id}'";
+                              $sql .= ")";
+
+                              if($db->query($sql)){
+                                update_product_qty($s_qty,$p_id);
+                                $session->msg('s',"Sale added. ");
+                                redirect('add_sale.php', false);
+                              } else {
+                                $session->msg('d',' Sorry failed to add!');
+                                redirect('add_sale.php', false);
+                              }
+                      } 
+                  }                 
                 }
+              
           }
 
        
