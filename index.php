@@ -20,6 +20,7 @@
             <input type="password" name= "password" class="form-control" placeholder="password">
         </div>
         <div class="form-group">
+                <a href="http://localhost/portable_inventory/change_password_guest.php" class="btn btn-primary pull-left">Recover Password</a>
                 <button type="submit" class="btn btn-info  pull-right">Login</button>
         </div>
     </form>

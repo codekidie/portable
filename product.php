@@ -4,7 +4,7 @@
   // Checkin What level user has permission to view this page
    $admin_id =  $_SESSION['admin_id'] ;
   
-   $products = find_by_sql("SELECT p.id,p.name,p.quantity,p.buy_price,p.batch,p.sale_price,p.media_id,p.admin_id,p.date,p.expiry_date,c.name AS categorie,m.file_name AS image  FROM products p LEFT JOIN categories c ON c.id = p.categorie_id  LEFT JOIN media m ON m.id = p.media_id WHERE p.admin_id = '{$admin_id}' ORDER BY p.id ASC");
+   $products = find_by_sql("SELECT p.id,p.name,p.quantity,p.buy_price,p.batch,p.unit_of_measure,p.sale_price,p.media_id,p.admin_id,p.date,p.expiry_date,c.name AS categorie,m.file_name AS image  FROM products p LEFT JOIN categories c ON c.id = p.categorie_id  LEFT JOIN media m ON m.id = p.media_id WHERE p.admin_id = '{$admin_id}' ORDER BY p.id ASC");
 
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -32,6 +32,7 @@
                 <th class="text-center" style="width: 10%;"> Saleing Price </th>
                 <th class="text-center" style="width: 10%;"> Expiry Date </th>
                 <th class="text-center" style="width: 10%;"> Product Added </th>
+                <th class="text-center" style="width: 10%;"> Unit Of Measure </th>
                 <th class="text-center" style="width: 10%;"> Product Batch </th>
                 <th class="text-center" style="width: 100px;"> Actions </th>
               </tr>
@@ -54,6 +55,7 @@
                 <td class="text-center"> <?php echo remove_junk($product['sale_price']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['expiry_date']); ?></td>
                 <td class="text-center"> <?php echo read_date($product['date']); ?></td>
+                <td class="text-center"> <?php echo remove_junk($product['unit_of_measure']); ?></td>
                 
                 <td class="text-center"> <?php echo remove_junk($product['batch']); ?></td>
                 <td class="text-center">

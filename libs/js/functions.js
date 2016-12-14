@@ -1,4 +1,8 @@
 
+
+
+                $('.product_sale').hide();
+
 function suggetion() {
 
      $('#sug_input').keyup(function(e) {
@@ -57,7 +61,7 @@ function suggetion() {
         })
             .done(function(data) {
                 //console.log(data);
-                $('#product_info').html(data).show();
+                $('#product_info').append(data).show();
                 total();
                 $('.datePicker').datepicker('update', new Date());
 
@@ -65,6 +69,8 @@ function suggetion() {
                 $('#product_info').html(data).show();
             });
       e.preventDefault();
+                $('.product_sale').show();
+
   });
   function total(){
     $('#product_info input').change(function(e)  {

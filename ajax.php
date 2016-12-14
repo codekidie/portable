@@ -37,22 +37,25 @@
           $html .= "<tr>";
 
           $html .= "<td id=\"s_name\">".$result['name']."</td>";
-          $html .= "<input type=\"hidden\" name=\"s_id\" value=\"{$result['id']}\">";
+          $html .= "<input type=\"hidden\" name=\"s_id[]\" value=\"{$result['id']}\" required>";
           $html  .= "<td>";
-          $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" value=\"{$result['sale_price']}\">";
+          $html  .= "<input type=\"text\" class=\"form-control\" name=\"price[]\" value=\"{$result['sale_price']}\" required>";
           $html  .= "</td>";
           $html .= "<td id=\"s_qty\">";
-          $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity\" value=\"1\">";
+          $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity[]\" value=\"1\" required>";
           $html  .= "</td>";
+         
           $html  .= "<td>";
-          $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" value=\"{$result['sale_price']}\">";
+          $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date[]\" data-date data-date-format=\"yyyy-mm-dd\" required>";
           $html  .= "</td>";
-          $html  .= "<td>";
-          $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date\" data-date data-date-format=\"yyyy-mm-dd\">";
+
+           $html  .= "<td>";
+          $html  .= "<input type=\"text\" class=\"form-control\" name=\"total[]\" value=\"{$result['sale_price']}\" required>";
           $html  .= "</td>";
-          $html  .= "<td>";
-          $html  .= "<button type=\"submit\" name=\"add_sale\" class=\"btn btn-primary\">Add sale</button>";
-          $html  .= "</td>";
+
+          // $html  .= "<td>";
+          // $html  .= "<button type=\"submit\" name=\"add_sale\" class=\"btn btn-primary\">Add sale</button>";
+          // $html  .= "</td>";
           $html  .= "</tr>";
 
         }

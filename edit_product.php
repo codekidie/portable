@@ -24,6 +24,8 @@ if(!$product){
        $p_buy   = remove_junk($db->escape($_POST['buying-price']));
        $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
        $p_expiry_date  = remove_junk($db->escape($_POST['saleing-expiry-date']));
+     $unit_of_measure = remove_junk($db->escape($_POST['unit_of_measure'])); 
+
        $p_batch  = remove_junk($db->escape($_POST['batch']));
 
 
@@ -33,9 +35,10 @@ if(!$product){
          $media_id = remove_junk($db->escape($_POST['product-photo']));
        }
        $query   = "UPDATE products SET";
-       $query  .=" name ='{$p_name}', quantity ='{$p_qty}',";
+       $query  .=" name ='{$p_name}', quantity ='{$p_qty}', unit_of_measure ='{$unit_of_measure}', ";
        $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',expiry_date='{$p_expiry_date}' , batch = '{$p_batch}'";
        $query  .=" WHERE id ='{$product['id']}'";
+
        $result = $db->query($query);
                if($result && $db->affected_rows() === 1){
                  $session->msg('s',"Product updated ");
@@ -158,6 +161,16 @@ if(!$product){
                       <input type="text" class="form-control" name="batch" placeholder="Batch No." value="<?php echo remove_junk($product['batch']);?>" required="required">
                    </div>
                   </div>
+
+                    <div class="col-md-4">
+                        <label for="">Unit of Measure</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="pe-7s-graph"></i>
+                            </span>
+                            <input type="text" class="form-control" name="unit_of_measure" value="<?php echo remove_junk($product['unit_of_measure']);?>" placeholder="Unit of Measure" required="required">
+                         </div>
+                        </div>
                </div>
               </div>
               <button type="submit" name="product" class="btn btn-danger">Update</button>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2016 at 10:05 PM
+-- Generation Time: Dec 14, 2016 at 05:03 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -106,6 +106,7 @@ CREATE TABLE `products` (
   `categorie_id` int(11) NOT NULL,
   `media_id` int(11) NOT NULL,
   `expiry_date` date NOT NULL,
+  `unit_of_measure` text NOT NULL,
   `batch` text NOT NULL,
   `sms_sent` int(1) NOT NULL,
   `date` datetime NOT NULL
@@ -115,14 +116,16 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `admin_id`, `name`, `quantity`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `expiry_date`, `batch`, `sms_sent`, `date`) VALUES
-(4, 809361, 'Laptop', '-2', '2.00', '4.00', 1, 2, '0000-00-00', '', 0, '2016-11-28 01:59:27'),
-(5, 168739, 'Nokia Power Ranger', '1', '2.00', '4.00', 1, 1, '2016-12-07', '', 0, '2016-11-30 08:17:28'),
-(6, 168739, 'Laptop', '1', '1.00', '3.00', 3, 0, '2016-11-30', '', 0, '2016-11-30 08:31:06'),
-(7, 168739, 'macbook pro', '-1', '2.00', '3.00', 3, 0, '2016-11-30', '', 0, '2016-11-30 08:35:24'),
-(8, 168739, 'blueberry yakult', '3', '10.00', '11.00', 3, 3, '2016-12-31', '', 0, '2016-12-01 10:57:13'),
-(9, 334511, 'test', '8', '7.00', '3.00', 4, 0, '2016-12-12', '', 1, '2016-12-11 18:51:10'),
-(10, 334511, 'testa', '3', '4.00', '4.00', 4, 0, '2016-12-12', 'testbatch', 1, '2016-12-11 18:59:25');
+INSERT INTO `products` (`id`, `admin_id`, `name`, `quantity`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `expiry_date`, `unit_of_measure`, `batch`, `sms_sent`, `date`) VALUES
+(4, 809361, 'Laptop', '-2', '2.00', '4.00', 1, 2, '0000-00-00', '', '', 0, '2016-11-28 01:59:27'),
+(5, 168739, 'Nokia Power Ranger', '1', '2.00', '4.00', 1, 1, '2016-12-19', '', 'frea', 1, '2016-11-30 08:17:28'),
+(6, 168739, 'Laptop', '-2', '1.00', '3.00', 3, 0, '2016-11-30', '', '', 1, '2016-11-30 08:31:06'),
+(7, 168739, 'macbook pro', '-2', '2.00', '3.00', 3, 0, '2016-11-30', '', '', 1, '2016-11-30 08:35:24'),
+(8, 168739, 'blueberry yakult', '3', '10.00', '11.00', 3, 3, '2016-12-31', '', '', 1, '2016-12-01 10:57:13'),
+(9, 334511, 'test', '8', '7.00', '3.00', 4, 0, '2016-12-12', '', '', 1, '2016-12-11 18:51:10'),
+(10, 334511, 'testa', '3', '4.00', '4.00', 4, 0, '2016-12-12', '', 'testbatch', 1, '2016-12-11 18:59:25'),
+(11, 168739, 'macfloat', '2', '4.00', '9.00', 3, 3, '2016-12-16', '', '20', 1, '2016-12-13 03:10:48'),
+(12, 168739, 'solinoed', '3', '5.00', '10.00', 3, 3, '2016-12-14', 'kilogram', '1423df', 0, '2016-12-14 03:05:35');
 
 -- --------------------------------------------------------
 
@@ -216,9 +219,11 @@ CREATE TABLE `sales` (
 INSERT INTO `sales` (`id`, `admin_id`, `product_id`, `qty`, `price`, `date`) VALUES
 (1, 809361, 4, 1, '4.00', '2016-11-28'),
 (2, 809361, 4, 2, '8.00', '2016-11-28'),
-(3, 168739, 7, 1, '3.00', '2016-12-01'),
 (4, 168739, 7, 1, '3.00', '2016-12-01'),
-(5, 168739, 8, 2, '22.00', '2016-12-01');
+(5, 168739, 8, 2, '22.00', '2016-12-01'),
+(6, 168739, 6, 1, '3.00', '2016-12-14'),
+(7, 168739, 6, 2, '3.00', '2016-12-14'),
+(8, 168739, 7, 1, '3.00', '2016-12-14');
 
 -- --------------------------------------------------------
 
@@ -245,7 +250,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `admin_id`, `name`, `username`, `password`, `user_level`, `image`, `company_name`, `status`, `phone`, `last_login`) VALUES
-(1, 334511, ' Admin User', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '5zpjyj3r1.jpg', 'nelsa inventory system', 1, '', '2016-12-11 17:04:44'),
+(1, 334511, ' Admin User', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '5zpjyj3r1.jpg', 'nelsa inventory system', 1, '', '2016-12-13 03:02:33'),
 (2, 334511, 'Claire Logan', 'Special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'tyjmkqf2.jpg', 'John Doe Inventory System', 1, '', '2016-11-29 12:44:59'),
 (3, 334511, 'Donald Trump', 'User', '12dea96fec20593566ab75692c9949596833adc9', 3, 'd0mr49l3.jpg', '', 1, '', '2016-11-23 11:31:04'),
 (4, 0, 'Super Admin', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '', '2016-12-04 09:46:47'),
@@ -253,13 +258,13 @@ INSERT INTO `users` (`id`, `admin_id`, `name`, `username`, `password`, `user_lev
 (8, 809361, 'Mario', 'mario', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'mo6qapon8.jpg', 'Mario Bros.', 1, '', '2016-11-29 13:31:06'),
 (10, 809361, 'Krystal Amora', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Mario Bros.', 1, '', NULL),
 (11, 809361, 'Raijin Kunami', 'raijin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Mario Bros.', 1, '', '2016-11-28 02:42:31'),
-(12, 168739, 'nelma', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-10 07:58:30'),
+(12, 168739, 'nelma', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-14 04:31:22'),
 (13, 168739, 'john ', 'john', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-11-30 08:26:33'),
 (14, 168739, 'Clement', 'clement', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-01 09:30:23'),
 (15, 168739, 'Reko', 'reko', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', NULL),
 (16, 334511, 'Ali Baba', 'Alibaba', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Nelsa Inventory System', 1, '639436089485', NULL),
-(17, 168739, 'Torta', 'torta', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '639436089485', NULL),
-(18, 527075, 'a', 'a', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1, 'no_image.jpg', 'a', 1, '', NULL);
+(17, 168739, 'Torta', 'torta', 'b6b5ec93b27307f4ce746eea982f12d851553bb4', 2, 'no_image.jpg', 'Green Coffee', 1, '639436089485', '2016-12-14 02:14:55'),
+(18, 527075, 'a', 'a', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'a', 1, '', '2016-12-14 02:09:37');
 
 -- --------------------------------------------------------
 
@@ -363,12 +368,12 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `privilege`
 --
 ALTER TABLE `privilege`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `purchase_order`
 --
@@ -383,7 +388,7 @@ ALTER TABLE `return_product`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
