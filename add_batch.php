@@ -47,8 +47,9 @@
          </strong>
         </div>
         <div class="panel-body">
-         <div class="col-md-12">
           <form method="post" action="" class="clearfix">
+         <div class="col-md-12">
+
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">
@@ -57,9 +58,37 @@
                   <input type="text" class="form-control" name="batch" placeholder="Batch Name">
                </div>
               </div>
-            <button type="submit" name="add_batch" class="btn btn-danger">Add Batch</button>
-          </form>
          </div>
+
+              <div class="col-md-12">
+                    <label for="">Expiry Date</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="pe-7s-date"></i>
+                        </span>
+                        <input type="date" class="form-control" name="saleing-expiry-date" placeholder="Expiry Date" required="required">
+                     </div>
+                    </div>
+
+
+                   <div class="col-md-12">
+                    <label for="">Batch</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="pe-7s-settings"></i>
+                        </span>
+                        <select name="batch" class="form-control">
+                            <?php foreach ($all_batch as $b): ?>
+                                <option><?php echo $b['name'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                     </div>
+                    </div>
+                   <div class="col-md-12">
+                   <hr>
+                     <button type="submit" name="add_batch" class="btn btn-danger">Add Batch</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

@@ -157,17 +157,28 @@
 
                             $total_notifications = getTotalProductsExpiringNotifications($admin_id);
 
+                            $item_expiry_notifications = getTotalProductsExpiringItem($admin_id);
+
+                          //  echo '<pre>'; 
+                          //    print_r($item_expiry_notifications);
+                          //  echo '<pre>'; 
+
+                          // die();
+
                             $minimumstocks       = getMinimumProducts($admin_id);
                             
                             $total_minimum_noti  = getTotalMinimumProducts($admin_id);
-                   
+
+                            $item_expiry_by_batch = getItemNum($admin_id);
+
+
                       ?>
                        
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-globe"></i>
                                     <b class="caret"></b>
-                                    <span class="notification"><?php  echo  $total_notifications[0]['count'] + $total_minimum_noti[0]['count']; ?></span>
+                                    <span class="notification"><?php  echo  $total_notifications[0]['count'] + $total_minimum_noti[0]['count'] + sizeof($item_expiry_by_batch); ?></span>
                               </a>
                               <ul class="dropdown-menu">
                               <?php foreach ($expire_products as $ex): ?>
@@ -196,6 +207,22 @@
                               <?php foreach ($minimumstocks as $ms): ?>
                                  <li><a href="#">Product <?php echo $ms['name']; ?> Stocks Reach Minimum Level <?php echo $ms['quantity']; ?></a></li>
                               <?php endforeach ?>
+
+                              <?php for ($i=0; $i < sizeof($item_expiry_by_batch) ; $i++) {  ?>
+                                     <li><a href="#">
+                                     <?php $messg = 'Item '; ?>
+                              <?php for ($ii=0; $ii < sizeof($item_expiry_notifications); $ii++) {  ?>
+                                      <?php if ($item_expiry_notifications[$ii][5] == $item_expiry_by_batch[$i]['expiry_date']): ?>
+                                      <?php  $messg .= $item_expiry_notifications[$ii]['item_name'].' , '; ?> 
+                                            
+                                      <?php endif ?>
+                              <?php } ?>
+                                      <?php echo $messg .= "Expiring at ".$item_expiry_by_batch[$i]['expiry_date'];  ?>
+
+                                      </a></li>
+                              <?php } ?>
+
+                              
                               </ul>
                         </li>
                        

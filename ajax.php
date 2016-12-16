@@ -42,9 +42,40 @@
           $html  .= "<input type=\"text\" class=\"form-control\" name=\"price[]\" value=\"{$result['sale_price']}\" required>";
           $html  .= "</td>";
           $html .= "<td id=\"s_qty\">";
-          $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity[]\" value=\"1\" required>";
+          $html .= "<input type=\"number\" class=\"form-control\" name=\"quantity[]\" value=\"1\" required>";
           $html  .= "</td>";
          
+          $html  .= '<td><select name="mode_of_selling" class="form-control" required="">
+                                  <option> none </option> 
+                                  <option> piece </option> 
+                                  <option> box </option> 
+                                  <option> dozen </option> 
+                                  <option> can </option> 
+                              </select></td>';
+
+          $html  .= '<td> <select name="unit_of_measure" class="form-control" required="">
+                                  <option> none </option> 
+                                  <option> Liter </option> 
+                                  <option> 1.5 Liter </option> 
+                                  <option> 8oz </option> 
+                                  <option> 12oz </option> 
+                                  <option> milligram </option>
+                                  <option> carat </option> 
+                                  <option> gram </option> 
+                                  <option> kilogram </option> 
+                                 <option>  metric ton </option> 
+                                  <option> pound </option>
+                                 <option>  nanometer </option> 
+                                 <option>  millimeter </option>
+                                 <option>  centimeter </option>
+                                  <option> inch </option> 
+                                  <option> foot </option> 
+                                 <option>  yard </option> 
+                                 <option>  meter  </option> 
+                                  <option> kilometer </option>  
+                                 <option>  mile </option> 
+                              </select></td>';                    
+
           $html  .= "<td>";
           $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date[]\" data-date data-date-format=\"yyyy-mm-dd\" required>";
           $html  .= "</td>";
@@ -59,8 +90,6 @@
           $html  .= "</tr>";
 
         }
-    } else {
-        $html ='<tr><td>product name not resgister in database</td></tr>';
     }
 
     echo json_encode($html);

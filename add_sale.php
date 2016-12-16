@@ -13,6 +13,10 @@
                 $p_id      = $db->escape((int)$_POST['s_id'][$key]);
                 $s_qty     = $db->escape((int)$_POST['quantity'][$key]);
                 $s_total   = $db->escape($_POST['total'][$key]);
+
+                $mode_of_selling   = $db->escape($_POST['mode_of_selling'][$key]);
+                $unit_of_measure   = $db->escape($_POST['unit_of_measure'][$key]);
+               
                 $date      = $db->escape($_POST['date'][$key]);
                 $s_date    = make_date();
 
@@ -25,27 +29,28 @@
                       if ($sell_qty < $s_qty) {
                           $session->msg('d',' Sorry failed to add sale insufficient stocks! '.$sell_product.' '.$sell_qty.' stocks left!');
                                 redirect('add_sale.php', false);
-                      }else if($sell_qty > $_sqty){
+                      }else if($sell_qty > $s_qty){
                         $s_total = $s_total * $s_qty;
                               $sql  = "INSERT INTO sales (";
-                              $sql .= " product_id,qty,price,date,admin_id";
+                              $sql .= " product_id,qty,price,date,admin_id,mode_of_selling,unit_of_measure";
                               $sql .= ") VALUES (";
-                              $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}','{$admin_id}'";
+                              $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$date}','{$admin_id}','{$mode_of_selling}','{$unit_of_measure}'";
                               $sql .= ")";
 
                               if($db->query($sql)){
                                 update_product_qty($s_qty,$p_id);
                                 $session->msg('s',"Sale added. ");
-                                redirect('add_sale.php', false);
                               } else {
                                 $session->msg('d',' Sorry failed to add!');
-                                redirect('add_sale.php', false);
                               }
                       } 
                   }                 
                 }
               
           }
+
+                                redirect('add_sale.php', false);
+          
 
        
   }
@@ -59,7 +64,7 @@
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary">Find It</button>
+              <button type="submit" class="btn btn-primary">Search Items</button>
             </span>
             <input type="text" id="sug_input" class="form-control" name="title"  placeholder="Search for product name">
          </div>
@@ -85,6 +90,8 @@
             <th> Item </th>
             <th> Price </th>
             <th> Qty </th>
+            <th> Mode of Selling </th>
+            <th> Unit of Measurement </th>
             <th> Date</th>
             <th> Total </th>
             <!-- <th> Action</th> -->

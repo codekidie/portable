@@ -145,10 +145,10 @@
   </div>
 
 <?php   
-  $expire_products     = getExpiringProductsLogs($admin_id);
-
-
-  $minimumstocks       = getMinimumProductsHistory($admin_id); ?>
+  $expire_products     =  getExpiringProductsLogs($admin_id);
+  $minimumstocks       =  getMinimumProductsHistory($admin_id); 
+  $expire_items        =  getExpiringItemLogs($admin_id);
+  ?>
    <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -169,6 +169,11 @@
                   <?php foreach ($expire_products as $exs): ?>
                     <tr>
                          <td>Product <?php echo $exs['name']; ?> Expiring at <?php echo $exs['expiry_date']; ?></td>     
+                    </tr>           
+                  <?php endforeach ?>
+                    <?php foreach ($expire_items as $exs): ?>
+                    <tr>
+                         <td>Product <?php echo $exs['item_name']; ?> Expiring at <?php echo $exs['expiry_date']; ?></td>     
                     </tr>           
                   <?php endforeach ?>
               </tbody>

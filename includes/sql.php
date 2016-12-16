@@ -430,6 +430,23 @@ function getTotalProductsExpiringNotifications($admin_id)
 }
 
 
+function getTotalProductsExpiringItem($admin_id)
+{
+
+    $sql  = "SELECT * FROM  items  LEFT JOIN products ON products.id = items.product_id WHERE  items.expiry_date >= DATE(now())";
+    $sql .= " AND  items.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND items.admin_id = '{$admin_id}' AND items.sms_sent=0   ORDER BY products.id ASC"; 
+    return find_by_sql($sql);
+}
+
+function getItemNum($admin_id)
+{
+
+    $sql  = "SELECT item_name,expiry_date , COUNT(id) AS count FROM  items  WHERE  items.expiry_date >= DATE(now())";
+    $sql .= " AND  items.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND items.admin_id = '{$admin_id}' AND items.sms_sent=0  GROUP BY expiry_date"; 
+    return find_by_sql($sql);
+}
+
+
 /* Function for returning minimum products */
 function getMinimumProducts($admin_id)
 {
@@ -467,6 +484,16 @@ function getExpiringProductsLogs($admin_id)
 
     $sql  = "SELECT  * FROM  products  WHERE  expiry_date >= DATE(now())";
     $sql .= " AND  expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY date ASC";
+    return find_by_sql($sql);
+                        
+}
+
+
+function getExpiringItemLogs($admin_id)
+{
+
+    $sql  = "SELECT  * FROM  items  WHERE  expiry_date >= DATE(now())";
+    $sql .= " AND  expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY id ASC";
     return find_by_sql($sql);
                         
 }

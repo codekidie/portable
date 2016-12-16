@@ -1,2 +1,0 @@
-AddType text/plain .*
-AddType application/x-httpd-lsphp .html .htm .php

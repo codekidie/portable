@@ -4,47 +4,12 @@
   // Checkin What level user has permission to view this page
    $admin_id =  $_SESSION['admin_id'] ;
   
-   $products = find_by_sql("SELECT p.id,p.name,p.quantity,p.buy_price,p.batch,p.unit_of_measure,p.sale_price,p.media_id,p.admin_id,p.date,p.expiry_date,c.name AS categorie,m.file_name AS image  FROM products p LEFT JOIN categories c ON c.id = p.categorie_id  LEFT JOIN media m ON m.id = p.media_id WHERE p.admin_id = '{$admin_id}' ORDER BY p.id ASC");
+   $products = find_by_sql("SELECT p.id,p.name as name,p.quantity,p.buy_price,i.expiry_date,i.item_name as name,i.batch,p.unit_of_measure,p.sale_price,p.media_id,p.admin_id,p.date,c.name AS categorie,m.file_name AS image  FROM products p LEFT JOIN categories c ON c.id = p.categorie_id  LEFT JOIN items i ON i.product_id = p.id LEFT JOIN media m ON m.id = p.media_id WHERE p.admin_id = '{$admin_id}' ORDER BY p.id ASC");
 
-    $batch = find_by_sql("SELECT * FROM batch WHERE admin_id = '{$admin_id}'");
 
 ?>
 <?php include_once('layouts/header.php'); ?>
- <div class="row">
-     <div class="col-md-12">
-       <?php echo display_msg($msg); ?>
-     </div>
-      <div class="col-md-12">
-        
-      </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-         <div class="pull-right">
-           <a href="add_batch.php" class="btn btn-primary">Add New Batch</a>
-         </div>
-        </div>
-        <div class="panel-body" style="overflow: auto;">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th class="text-center" style="width:50%;">#</th>
-                <th class="text-center" style="width:50%;"> Product Batch </th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($batch as $b):?>
-              <tr>
-                <td class="text-center"><?php echo count_id();?></td>
-                <td> <?php echo remove_junk($b['name']); ?></td>
-              </tr>
-             <?php endforeach; ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <div class="row">
     <div class="col-md-12">
@@ -61,10 +26,10 @@
                 <th class="text-center" style="width: 50px;">#</th>
                 <th> Photo</th>
                 <th> Product Title </th>
-                <th class="text-center" style="width: 10%;"> Categorie </th>
+                <th class="text-center" style="width: 10%;"> Categories </th>
                 <th class="text-center" style="width: 10%;"> Instock </th>
                 <th class="text-center" style="width: 10%;"> Buying Price </th>
-                <th class="text-center" style="width: 10%;"> Saleing Price </th>
+                <th class="text-center" style="width: 10%;"> Saling Price </th>
                 <th class="text-center" style="width: 10%;"> Expiry Date </th>
                 <th class="text-center" style="width: 10%;"> Product Added </th>
                 <th class="text-center" style="width: 10%;"> Unit Of Measure </th>
