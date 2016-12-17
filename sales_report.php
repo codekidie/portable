@@ -20,9 +20,9 @@ $page_title = 'Sale Report';
             <div class="form-group">
               <label class="form-label">Date Range</label>
                 <div class="input-group">
-                  <input type="text" class="datepicker form-control" name="start-date" placeholder="From">
+                  <input type="date" class="datepicker form-control" name="start-date" placeholder="From">
                   <span class="input-group-addon"><i class="pe-7s-date"></i></span>
-                  <input type="text" class="datepicker form-control" name="end-date" placeholder="To">
+                  <input type="date" class="datepicker form-control" name="end-date" placeholder="To">
                 </div>
             </div>
             <div class="form-group">

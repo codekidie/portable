@@ -5,22 +5,22 @@
 ?>
 <?php $user = current_user(); ?>
 <?php
-  if(isset($_POST['update'])){
+  if(isset($_GET['email'])){
 
     if(empty($errors)){
+        $email = $_GET['email'];
+        $user= find_by_sql("SELECT email FROM users WHERE email='{$email}'");
+        if (!empty($user)) {
+          $new_pass = $_GET['password'];
+          echo 1;
+          $sql = "UPDATE users SET password='".sha1($new_pass)."' WHERE email ='{$email}' LIMIT 1";
+          $result = $db->query($sql);
+        }
+        
 
-            $username = $_POST['username'];
-            $new = remove_junk($db->escape(sha1($_POST['new-password'])));
-            $sql = "UPDATE users SET password ='{$new}' WHERE username='{$db->escape($username)}'";
-            $result = $db->query($sql);
-                if($result && $db->affected_rows() === 1):
-                  $session->logout();
-                  $session->msg('s',"Login with your new password.");
-                  redirect('index.php', false);
-                else:
-                  $session->msg('d',' Sorry failed to updated!');
-                  redirect('change_password_guest.php', false);
-                endif;
+      $session->msg("s", 'Success Send Mail');
+      redirect('change_password_guest.php',false);
+      
     } else {
       $session->msg("d", $errors);
       redirect('change_password_guest.php',false);
@@ -32,23 +32,43 @@
   <center><img src="uploads/logo.jpg" alt="" class="col-sm-12"></center>
 
     <div class="text-center">
-       <h3>Change your password</h3>
+       <h3 style="margin-top: 20px;">Recover your password</h3>
      </div>
      <?php echo display_msg($msg); ?>
       <form method="post" action="" class="clearfix">
          <div class="form-group">
-              <label class="control-label">Username</label>
-              <input type="text" class="form-control" name="username" placeholder="Username">
+              <label class="control-label">Email</label>
+              <input type="hidden" name="password" class="passval" value="<?php echo uniqid();?>">
+              <input type="email" class="form-control emailval" name="email" placeholder="email" required="">
         </div>
-        <div class="form-group">
-              <label for="newPassword" class="control-label">New password</label>
-              <input type="password" class="form-control" name="new-password" placeholder="New password">
-        </div>
-      
         <div class="form-group clearfix">
-               <input type="hidden" name="id" value="<?php echo (int)$user['id'];?>">
-                <button type="submit" name="update" class="btn btn-info">Change</button>
+                <button type="submit" name="update" class="btn btn-info submit-email">Submit</button>
         </div>
     </form>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_U6MqmzisMcx22HmaFc5ol");
+   })();
+</script>
+<script type="text/javascript">
+$('.submit-email').click(function(event) {
+    event.preventDefault()
+    var emailval = $('.emailval').val();
+    var passval = $('.passval').val();
+   
+    emailjs.send("gmail", "inventory_reset_password", {"to_mail":"codekidie@gmail.com","reply_to":emailval,"message_html":"Your new password is "+passval})
+    console.log(emailjs);
+
+    $.ajax({
+    url: "http://localhost/portable_inventory/change_password_guest.php?email="+emailval+"&password="+passval,
+    }).done(function() {
+        alert('Email Recover Sent!');
+    });
+
+});
+
+</script>
 <?php include_once('layouts/footer.php'); ?>

@@ -25,8 +25,11 @@
     if(empty($errors)){
              $id = (int)$_SESSION['user_id'];
            $name = remove_junk($db->escape($_POST['name']));
-       $username = remove_junk($db->escape($_POST['username']));
-            $sql = "UPDATE users SET name ='{$name}', username ='{$username}' WHERE id='{$id}'";
+           $username = remove_junk($db->escape($_POST['username']));
+           $email = remove_junk($db->escape($_POST['email']));
+
+
+            $sql = "UPDATE users SET name ='{$name}', username ='{$username}' , email='{$email}' WHERE id='{$id}'";
     $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
             $session->msg('s',"Acount updated ");
@@ -89,6 +92,10 @@
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
                   <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
+            </div>
+               <div class="form-group">
+                  <label for="username" class="control-label">Email</label>
+                  <input type="email" class="form-control" name="email" value="<?php echo remove_junk(ucwords($user['email'])); ?>">
             </div>
             <div class="form-group clearfix">
                     <a href="change_password.php" title="change password" class="btn btn-danger pull-right">Change Password</a>
