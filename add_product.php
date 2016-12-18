@@ -13,16 +13,18 @@
 ?>
 <?php
  if(isset($_POST['add_product'])){
-   $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
+   $req_fields = array('product-title','product-categorie','buying-price', 'saleing-price' );
    validate_fields($req_fields);
    if(empty($errors)){
      $p_name  = remove_junk($db->escape($_POST['product-title']));
      $p_cat   = remove_junk($db->escape($_POST['product-categorie']));
-     $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
      $p_buy   = remove_junk($db->escape($_POST['buying-price']));
      $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
-     $unit_of_measure =  remove_junk($db->escape($_POST['unit_of_measure'])); 
      $mode_of_selling =  remove_junk($db->escape($_POST['mode_of_selling'])); 
+     $measure_num =  remove_junk($db->escape($_POST['measure_num'])); 
+     $unit_of_measure =  $measure_num.' '.remove_junk($db->escape($_POST['unit_of_measure'])); 
+
+     $flavor =  remove_junk($db->escape($_POST['flavor'])); 
 
 
 
@@ -33,9 +35,9 @@
      }
      $date    = make_date();
      $query  = "INSERT INTO products (";
-     $query .=" name,quantity,buy_price,sale_price,categorie_id,media_id,date,admin_id,unit_of_measure,mode_of_selling";
+     $query .=" name,buy_price,sale_price,categorie_id,media_id,date,admin_id,unit_of_measure,mode_of_selling,flavor";
      $query .=") VALUES (";
-     $query .=" '{$p_name}', '{$p_qty}', '{$p_buy}', '{$p_sale}', '{$p_cat}', '{$media_id}', '{$date}','{$admin_id}','{$unit_of_measure}','{$mode_of_selling}'";
+     $query .=" '{$p_name}','{$p_buy}', '{$p_sale}', '{$p_cat}', '{$media_id}', '{$date}','{$admin_id}','{$unit_of_measure}','{$mode_of_selling}','{$flavor}'";
      $query .=")";
      $query .=" ON DUPLICATE KEY UPDATE name='{$p_name}'";
      if($db->query($query) === TRUE){
@@ -66,12 +68,13 @@
      $p_title  = remove_junk($db->escape($_POST['item-title']));
      $p_batch  = remove_junk($db->escape($_POST['item-batch']));
      $p_exp  = remove_junk($db->escape($_POST['item-exp-date']));
+     $p_qty  = remove_junk($db->escape($_POST['item-qty']));
 
 
       $query  = "INSERT INTO items (";
-       $query .=" product_id, admin_id, item_name,batch, expiry_date";
+       $query .=" product_id, admin_id, item_name,batch, expiry_date,quantity";
        $query .=") VALUES (";
-       $query .=" '{$p_id}','{$admin_id}', '{$p_title}', '{$p_batch}', '{$p_exp}'";
+       $query .=" '{$p_id}','{$admin_id}', '{$p_title}', '{$p_batch}', '{$p_exp}','{$p_qty}'";
       $query .=")";
       $query .=" ON DUPLICATE KEY UPDATE item_name='{$p_title}'";
        if($db->query($query) === TRUE){
@@ -129,6 +132,17 @@
                    <i class="pe-7s-note2"></i>
                   </span>
                   <input type="number" class="form-control" name="item-batch" placeholder="Batch #">
+               </div>
+              </div>
+
+                 <div class="form-group">
+                    <label for="">Quantity :</label>
+
+                <div class="input-group">
+                  <span class="input-group-addon">
+                   <i class="pe-7s-note2"></i>
+                  </span>
+                  <input type="number" class="form-control" name="item-qty" placeholder="Quantity">
                </div>
               </div>
 
@@ -195,14 +209,19 @@
 
               <div class="form-group">
                <div class="row">
-                 <div class="col-md-4">
+               <div class="col-md-4">
                    <div class="input-group">
-                     <span class="input-group-addon">
-                      <i class="pe-7s-pen"></i>
-                     </span>
-                     <input type="number" class="form-control" name="product-quantity" placeholder="Product Quantity">
-                  </div>
-                 </div>
+
+                            <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="pe-7s-graph"></i>
+                              </span>
+                                <input type="text"  name="flavor" class="form-control" required="" placeholder="Flavor">
+                           </div>
+                          </div>
+                  </div>        
+
+              
                  <div class="col-md-4">
                    <div class="input-group">
                      <span class="input-group-addon">
@@ -228,11 +247,8 @@
                        <div class="col-md-4">
                         <label for="">Unit of Measure</label>
                           <div class="input-group">
-                            <span class="input-group-addon">
-                              <i class="pe-7s-graph"></i>
-                            </span>
-                           
-
+                         
+                            <input type="text" name="measure_num" class="form-control">
                               <select name="unit_of_measure" class="form-control" required="">
                                   <option> none </option> 
                                   <option> Liter </option> 
@@ -271,10 +287,10 @@
                                   <option> piece </option> 
                                   <option> box </option> 
                                   <option> dozen </option> 
-                                  <option> can </option> 
                               </select>
                          </div>
                         </div>
+
                  </div>
               </div>
 

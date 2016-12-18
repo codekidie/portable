@@ -145,6 +145,9 @@
   }
 ?>
 <?php include_once('layouts/header.php'); ?>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="libs/js/jquery.confirm.js"></script>
+
 <div class="row">
    <div class="col-md-12">
      <?php echo display_msg($msg); ?>
@@ -191,7 +194,7 @@
                 <a href="edit_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                   <i class="pe-7s-edit"></i>
                </a>
-                <a href="delete_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                <a href="delete_user.php?id=<?php echo (int)$a_user['id'];?>" class="complexConfirm btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                   <i class="pe-7s-trash"></i>
                 </a>
                 </div>
@@ -293,7 +296,7 @@
                  <td class="text-center">
                    <div class="btn-group">
                      
-                      <a href="users.php?delete_privilege_id=<?php echo (int)$p[0];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                      <a href="users.php?delete_privilege_id=<?php echo (int)$p[0];?>" class="btn btn-xs complexConfirm btn-danger" data-toggle="tooltip" title="Remove">
                         <i class="pe-7s-trash"></i>
                       </a>
                       </div>
@@ -307,4 +310,21 @@
     </div>
   </div>
 </div>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script type="text/javascript">
+          $(".complexConfirm").confirm({
+              title:"Delete confirmation",
+              text:"This is very dangerous, you shouldn't do it! Are you really really sure?",
+              confirm: function(button) {
+                var href = $(button).attr("href");
+                window.location.replace(href);
+              },
+              cancel: function(button) {
+                    alert("You aborted the operation.");
+              },
+              confirmButton: "Yes I am",
+              cancelButton: "No"
+          });
+  </script>
   <?php include_once('layouts/footer.php'); ?>

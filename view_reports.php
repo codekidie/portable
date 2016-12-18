@@ -10,6 +10,9 @@
  $sales = monthlySales($year,$admin_id);
  $dsales = dailySales($year,$month,$admin_id);
 
+ $all_qty = find_by_sql("SELECT * FROM items WHERE admin_id = '{$admin_id}'");
+
+
  $all_products = find_by_sql("SELECT * FROM products WHERE admin_id = '{$admin_id}'");
  $all_returned_products = find_by_sql("SELECT  ru.name as ru_name,
                                                ru.email as ru_email,
@@ -107,6 +110,40 @@
     </div>
   </div>
   <div class="row">
+      <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <strong>
+            <span class="pe-7s-date"></span>
+            <span>Product Quantity</span>
+          </strong>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 50px;">#</th>
+                <th> Product name </th>
+                <th class="text-center" style="width: 15%;"> Quantity Instocks </th>
+             </tr>
+            </thead>
+           <tbody>
+             <?php foreach ($all_qty as $sale):?>
+                  <?php if (!empty($sale['item_name'])): ?>
+                         <tr>
+                           <td class="text-center"><?php echo count_id();?></td>
+                           <td><?php echo remove_junk($sale['item_name']); ?></td>
+                           <td class="text-center"><?php echo (int)$sale['quantity']; ?></td>
+                         </tr>
+                  <?php endif ?>
+             <?php endforeach;?>
+           </tbody>
+         </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
           <strong>
@@ -188,7 +225,7 @@
               <tbody>
                   <?php foreach ($minimumstocks as $mss): ?>
                     <tr>
-                        <td>Product <?php echo $mss['name']; ?> Stocks Reach Minimum Level <?php echo $mss['quantity']; ?></td>
+                        <td>Product <?php echo $mss['item_name']; ?> Stocks Reach Minimum Level <?php echo $mss['quantity']; ?></td>
                     </tr>    
                   <?php endforeach ?>
               </tbody>

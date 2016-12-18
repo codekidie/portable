@@ -10,6 +10,9 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_i
 // die();
 ?>
 <?php include_once('layouts/header.php'); ?>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="libs/js/jquery.confirm.js"></script>
+
 <div class="row">
   <div class="col-md-6">
     <?php echo display_msg($msg); ?>
@@ -52,7 +55,7 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_i
                      <a href="edit_sale.php?id=<?php echo (int)$sale[0];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <i class="pe-7s-edit"></i>
                      </a>
-                     <a href="delete_sale.php?id=<?php echo (int)$sale[0];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                     <a href="delete_sale.php?id=<?php echo (int)$sale[0];?>" class="btn btn-danger complexConfirm  btn-xs"  title="Delete" data-toggle="tooltip">
                        <i class="pe-7s-trash"></i>
                      </a>
                   </div>
@@ -65,4 +68,21 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_i
       </div>
     </div>
   </div>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script type="text/javascript">
+            $(".complexConfirm").confirm({
+                title:"Delete confirmation",
+                text:"This is very dangerous, you shouldn't do it! Are you really really sure?",
+                confirm: function(button) {
+                  var href = $(button).attr("href");
+                  window.location.replace(href);
+                },
+                cancel: function(button) {
+                      alert("You aborted the operation.");
+                },
+                confirmButton: "Yes I am",
+                cancelButton: "No"
+            });
+    </script>
 <?php include_once('layouts/footer.php'); ?>

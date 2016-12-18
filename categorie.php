@@ -29,7 +29,8 @@
  }
 ?>
 <?php include_once('layouts/header.php'); ?>
-
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="libs/js/jquery.confirm.js"></script>
   <div class="row">
      <div class="col-md-12">
        <?php echo display_msg($msg); ?>
@@ -81,7 +82,8 @@
                         <a href="edit_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                           <span class="pe-7s-edit"></span>
                         </a>
-                        <a href="delete_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                        <!-- delete_categorie.php?id=<?php //echo (int)$cat['id'];?> -->
+                        <a href="delete_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger complexConfirm">
                           <span class="pe-7s-trash"></span>
                         </a>
                       </div>
@@ -96,4 +98,24 @@
     </div>
    </div>
   </div>
+
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script type="text/javascript">
+            $(".complexConfirm").confirm({
+                title:"Delete confirmation",
+                text:"This is very dangerous, you shouldn't do it! Are you really really sure?",
+                confirm: function(button) {
+                  var href = $(button).attr("href");
+                  window.location.replace(href);
+                },
+                cancel: function(button) {
+                      alert("You aborted the operation.");
+                },
+                confirmButton: "Yes I am",
+                cancelButton: "No"
+            });
+    </script>
+
+ 
   <?php include_once('layouts/footer.php'); ?>

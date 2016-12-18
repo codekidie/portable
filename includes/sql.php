@@ -307,7 +307,7 @@ function tableExists($table){
     global $db;
     $qty = (int) $qty;
     $id  = (int)$p_id;
-    $sql = "UPDATE products SET quantity=quantity -'{$qty}' WHERE id = '{$id}'";
+    $sql = "UPDATE items SET quantity=quantity -'{$qty}' WHERE id = '{$id}'";
     $result = $db->query($sql);
     return($db->affected_rows() === 1 ? true : false);
 
@@ -389,7 +389,7 @@ function  dailySales($year,$month,$admin_id){
   
   $sql .= " FROM sales s";
   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
-  $sql .= " WHERE DATE_FORMAT(s.date, '%Y-%m' ) = '{$year}-{$month}' AND s.admin_id = '{$admin_id}'";
+  $sql .= " WHERE DATE_FORMAT(s.date, '%Y-%m' ) = '{$year}-{$month}' AND s.date = CURDATE()  AND s.admin_id = '{$admin_id}'";
   $sql .= " GROUP BY DATE_FORMAT( s.date,  '%e' ),s.product_id";
   return find_by_sql($sql);
 }
@@ -451,8 +451,8 @@ function getItemNum($admin_id)
 function getMinimumProducts($admin_id)
 {
 
-    $sql  = "SELECT  * FROM  products  WHERE  quantity < 5 ";
-    $sql .= " AND admin_id = '{$admin_id}' AND sms_sent=0 GROUP BY name ORDER BY date ASC";
+    $sql  = "SELECT  * FROM  items  WHERE  quantity <= 10 ";
+    $sql .= " AND admin_id = '{$admin_id}' AND sms_sent=0 GROUP BY item_name ORDER BY id ASC";
     return find_by_sql($sql);
                         
 }
@@ -461,8 +461,8 @@ function getMinimumProducts($admin_id)
 function getTotalMinimumProducts($admin_id)
 {
 
-    $sql  = "SELECT COUNT(id) AS count FROM  products  WHERE  quantity <= 5 ";
-    $sql .= " AND  admin_id = '{$admin_id}' AND sms_sent=0 ORDER BY date ASC"; 
+    $sql  = "SELECT COUNT(id) AS count FROM  items  WHERE  quantity <= 5 ";
+    $sql .= " AND  admin_id = '{$admin_id}' AND sms_sent=0 ORDER BY id ASC"; 
     return find_by_sql($sql);
 }
 
@@ -471,8 +471,8 @@ function getTotalMinimumProducts($admin_id)
 function getMinimumProductsHistory($admin_id)
 {
 
-    $sql  = "SELECT  * FROM  products  WHERE  quantity < 5 ";
-    $sql .= " AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY date ASC";
+    $sql  = "SELECT  * FROM  items  WHERE  quantity <= 10 ";
+    $sql .= " AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY id ASC";
     return find_by_sql($sql);
                         
 }

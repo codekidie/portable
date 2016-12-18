@@ -8,13 +8,11 @@ $results = '';
 ?>
 <?php
   if(isset($_POST['submit'])){
-    $req_dates = array('start-date','end-date',$admin_id);
-    validate_fields($req_dates);
 
     if(empty($errors)):
       $start_date   = remove_junk($db->escape($_POST['start-date']));
       $end_date     = remove_junk($db->escape($_POST['end-date']));
-      $results      = find_sale_by_dates($start_date,$end_date);
+      $results      = find_sale_by_dates($start_date,$end_date,$admin_id);
     else:
       $session->msg("d", $errors);
       redirect('sales_report.php', false);
@@ -77,6 +75,7 @@ $results = '';
    </style>
 </head>
 <body>
+
   <?php if($results): ?>
     <div class="page-break">
        <div class="sale-head pull-right">
@@ -112,14 +111,14 @@ $results = '';
          <tr class="text-right">
            <td colspan="4"></td>
            <td colspan="1">Grand Total</td>
-           <td> $
+           <td> PHP
            <?php echo number_format(total_price($results)[0], 2);?>
           </td>
          </tr>
          <tr class="text-right">
            <td colspan="4"></td>
            <td colspan="1">Profit</td>
-           <td> $<?php echo number_format(total_price($results)[1], 2);?></td>
+           <td> PHP <?php echo number_format(total_price($results)[1], 2);?></td>
          </tr>
         </tfoot>
       </table>

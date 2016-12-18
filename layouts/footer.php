@@ -9,10 +9,9 @@
 	<script src="libs/assets/js/bootstrap-checkbox-radio-switch.js"></script>
 	<script src="libs/assets/js/chartist.min.js"></script>
     <script src="libs/assets/js/bootstrap-notify.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="libs/assets/js/light-bootstrap-dashboard.js"></script>
   <script src="libs/assets/js/demo.js"></script>
-	<script src="libs/js/notify.js"></script>
+	<script src="libs/js/notify.js"></script>s
   <script type="text/javascript">
       $('.dropdown-toggle').click(function() {
             $.ajax({
@@ -22,6 +21,7 @@
             });
       });
   </script>
+    
   </body>
 </html>
 

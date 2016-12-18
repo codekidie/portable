@@ -76,9 +76,9 @@
                                  <option>  mile </option> 
                               </select></td>';                    
 
-          $html  .= "<td>";
-          $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date[]\" data-date data-date-format=\"yyyy-mm-dd\" required>";
-          $html  .= "</td>";
+          // $html  .= "<td>";
+          // $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date[]\" data-date data-date-format=\"yyyy-mm-dd\" required>";
+          // $html  .= "</td>";
 
            $html  .= "<td>";
           $html  .= "<input type=\"text\" class=\"form-control\" name=\"total[]\" value=\"{$result['sale_price']}\" required>";

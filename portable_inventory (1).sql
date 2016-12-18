@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Dec 16, 2016 at 09:04 AM
+-- Generation Time: Dec 18, 2016 at 11:48 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -50,7 +50,7 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `categories`
@@ -61,7 +61,9 @@ INSERT INTO `categories` (`id`, `admin_id`, `name`) VALUES
 (2, 809361, 'test'),
 (3, 168739, 'beverage'),
 (4, 334511, 'test'),
-(5, 168739, 'Can Goods');
+(10, 168739, 'Can Goods'),
+(11, 168739, 'Candies'),
+(12, 168739, 'Biscuits');
 
 -- --------------------------------------------------------
 
@@ -76,21 +78,27 @@ CREATE TABLE `items` (
   `item_name` text NOT NULL,
   `batch` int(11) NOT NULL,
   `expiry_date` date NOT NULL,
-  `sms_sent` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `sms_sent` int(1) NOT NULL DEFAULT '0',
+  `quantity` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `product_id`, `admin_id`, `item_name`, `batch`, `expiry_date`, `sms_sent`) VALUES
-(1, 34, 168739, 'Mega', 1, '2016-12-31', 1),
-(2, 37, 168739, 'Argentina Meat loaf', 1, '2016-12-17', 1),
-(3, 37, 168739, 'Beef Loaf', 1, '2016-12-17', 1),
-(4, 38, 168739, 'Century Tuna', 2, '2016-12-24', 1),
-(5, 39, 168739, '555 Tuna', 2, '2016-12-17', 1),
-(6, 40, 168739, 'Mega Tuna', 3, '2016-12-20', 1),
-(7, 41, 168739, 'Nagoya Sardines', 2, '2016-12-21', 1);
+INSERT INTO `items` (`id`, `product_id`, `admin_id`, `item_name`, `batch`, `expiry_date`, `sms_sent`, `quantity`) VALUES
+(1, 34, 168739, 'Mega', 1, '2016-12-31', 1, 0),
+(2, 37, 168739, 'Argentina Meat loaf', 1, '2016-12-17', 1, 0),
+(3, 37, 168739, 'Beef Loaf', 1, '2016-12-17', 1, 0),
+(4, 38, 168739, 'Century Tuna', 2, '2016-12-24', 1, 0),
+(5, 39, 168739, '555 Tuna', 2, '2016-12-17', 1, 0),
+(6, 40, 168739, 'Mega Tuna', 3, '2016-12-20', 1, 0),
+(7, 41, 168739, 'Nagoya Sardines', 2, '2016-12-21', 1, 0),
+(8, 42, 168739, 'test1', 324, '2016-12-16', 1, 20),
+(9, 43, 168739, 'Maxx', 1, '2016-12-31', 1, 50),
+(10, 44, 168739, 'Marie', 1, '2016-12-30', 1, 15),
+(11, 45, 168739, 'Nagoya Sardines', 2, '2016-12-26', 1, 18),
+(12, 46, 168739, 'Coca Cola', 2, '2016-12-23', 1, 15);
 
 -- --------------------------------------------------------
 
@@ -103,7 +111,7 @@ CREATE TABLE `media` (
   `admin_id` int(11) NOT NULL,
   `file_name` text NOT NULL,
   `file_type` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `media`
@@ -112,8 +120,7 @@ CREATE TABLE `media` (
 INSERT INTO `media` (`id`, `admin_id`, `file_name`, `file_type`) VALUES
 (1, 0, 'd0mr49l3.jpg', 'image/jpeg'),
 (2, 809361, 'AMA_University_logo.png', 'image/png'),
-(3, 168739, 'Roger_in_His_Youth.png', ''),
-(4, 168739, 'blue berry yakult.jpg', 'image/jpeg');
+(3, 168739, 'Roger_in_His_Youth.png', '');
 
 -- --------------------------------------------------------
 
@@ -134,7 +141,6 @@ CREATE TABLE `privilege` (
 
 INSERT INTO `privilege` (`id`, `user_id`, `access`, `admin_id`) VALUES
 (6, 13, 'Manage_Product', 168739),
-(7, 13, 'Daily_Sales', 168739),
 (8, 12, 'Sales_by_dates', 168739),
 (9, 14, 'Add_Product', 168739),
 (12, 1, 'Category', 334511),
@@ -151,7 +157,6 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `quantity` varchar(50) NOT NULL,
   `buy_price` decimal(25,2) NOT NULL,
   `sale_price` decimal(25,2) NOT NULL,
   `categorie_id` int(11) NOT NULL,
@@ -161,20 +166,22 @@ CREATE TABLE `products` (
   `batch` text NOT NULL,
   `sms_sent` int(1) NOT NULL,
   `mode_of_selling` text NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+  `date` datetime NOT NULL,
+  `flavor` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `admin_id`, `name`, `quantity`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `expiry_date`, `unit_of_measure`, `batch`, `sms_sent`, `mode_of_selling`, `date`) VALUES
-(4, 809361, 'Laptop', '-2', '2.00', '4.00', 1, 2, '0000-00-00', '', '', 0, '', '2016-11-28 01:59:27'),
-(9, 334511, 'test', '8', '7.00', '3.00', 4, 0, '2016-12-12', '', '', 1, '', '2016-12-11 18:51:10'),
-(10, 334511, 'testa', '3', '4.00', '4.00', 4, 0, '2016-12-12', '', 'testbatch', 1, '', '2016-12-11 18:59:25'),
-(39, 168739, '555 Tuna', '17', '15.00', '18.00', 5, 4, '0000-00-00', 'gram', '', 1, 'none', '2016-12-15 22:28:35'),
-(40, 168739, 'Mega Tuna', '15', '28.00', '32.00', 5, 4, '0000-00-00', 'gram', '', 1, 'none', '2016-12-15 23:03:32'),
-(41, 168739, 'Nagoya Sardines', '16', '14.00', '17.00', 5, 4, '0000-00-00', 'gram', '', 1, 'none', '2016-12-16 00:18:38');
+INSERT INTO `products` (`id`, `admin_id`, `name`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `expiry_date`, `unit_of_measure`, `batch`, `sms_sent`, `mode_of_selling`, `date`, `flavor`) VALUES
+(4, 809361, 'Laptop', '2.00', '4.00', 1, 2, '0000-00-00', '', '', 0, '', '2016-11-28 01:59:27', ''),
+(9, 334511, 'test', '7.00', '3.00', 4, 0, '2016-12-12', '', '', 1, '', '2016-12-11 18:51:10', ''),
+(10, 334511, 'testa', '4.00', '4.00', 4, 0, '2016-12-12', '', 'testbatch', 1, '', '2016-12-11 18:59:25', ''),
+(43, 168739, 'Maxx', '48.00', '1.00', 11, 3, '0000-00-00', '0 gram', '', 1, 'piece', '2016-12-16 21:04:06', 'menthol'),
+(44, 168739, 'Marie', '36.00', '3.00', 12, 3, '0000-00-00', '120 gram', '', 1, 'dozen', '2016-12-16 21:05:14', 'none'),
+(45, 168739, 'Nagoya Sardines', '14.00', '18.00', 10, 3, '0000-00-00', '25 gram', '', 1, 'dozen', '2016-12-16 21:06:43', 'Chili'),
+(46, 168739, 'Coca Cola', '26.00', '31.00', 3, 3, '0000-00-00', '150 gram', '', 1, 'piece', '2016-12-16 21:08:12', 'No Sugar');
 
 -- --------------------------------------------------------
 
@@ -261,7 +268,7 @@ CREATE TABLE `sales` (
   `mode_of_selling` text NOT NULL,
   `unit_of_measure` text NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sales`
@@ -278,7 +285,9 @@ INSERT INTO `sales` (`id`, `admin_id`, `product_id`, `qty`, `price`, `mode_of_se
 (11, 168739, 15, 3, '450.00', '', '', '2016-12-14'),
 (12, 168739, 15, 12, '1800.00', '', '', '2016-12-14'),
 (13, 168739, 41, 1, '17.00', 'c', 'g', '2016-12-16'),
-(14, 168739, 41, 1, '17.00', 'c', 'g', '2016-12-16');
+(18, 168739, 43, 1, '1.00', 'p', '1', '2016-12-16'),
+(19, 168739, 43, 1, '1.00', 'p', 'g', '2016-12-16'),
+(20, 168739, 45, 2, '36.00', 'p', 'g', '2016-12-17');
 
 -- --------------------------------------------------------
 
@@ -307,7 +316,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `admin_id`, `name`, `mname`, `lname`, `username`, `password`, `user_level`, `image`, `company_name`, `status`, `phone`, `last_login`) VALUES
-(1, 334511, ' Admin User', '', '', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '5zpjyj3r1.jpg', 'nelsa inventory system', 1, '', '2016-12-15 13:14:43'),
+(1, 334511, ' Admin User', '', '', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '5zpjyj3r1.jpg', 'nelsa inventory system', 1, '', '2016-12-16 21:33:51'),
 (2, 334511, 'Claire Logan', '', '', 'Special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'tyjmkqf2.jpg', 'John Doe Inventory System', 1, '', '2016-11-29 12:44:59'),
 (3, 334511, 'Donald Trump', '', '', 'User', '12dea96fec20593566ab75692c9949596833adc9', 3, 'd0mr49l3.jpg', '', 1, '', '2016-11-23 11:31:04'),
 (4, 0, 'Super Admin', '', '', 'super', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 0, 'no_image.jpg', '', 1, '', '2016-12-04 09:46:47'),
@@ -315,7 +324,7 @@ INSERT INTO `users` (`id`, `admin_id`, `name`, `mname`, `lname`, `username`, `pa
 (8, 809361, 'Mario', '', '', 'mario', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'mo6qapon8.jpg', 'Mario Bros.', 1, '', '2016-11-29 13:31:06'),
 (10, 809361, 'Krystal Amora', '', '', 'admin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Mario Bros.', 1, '', NULL),
 (11, 809361, 'Raijin Kunami', '', '', 'raijin', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Mario Bros.', 1, '', '2016-11-28 02:42:31'),
-(12, 168739, 'nelma', '', '', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-15 13:03:29'),
+(12, 168739, 'nelma', '', '', 'nelma', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 1, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-16 21:34:01'),
 (13, 168739, 'john ', '', '', 'john', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-11-30 08:26:33'),
 (14, 168739, 'Clement', '', '', 'clement', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', '2016-12-01 09:30:23'),
 (15, 168739, 'Reko', '', '', 'reko', 'efebddf7bd15ba2627baa23f8c3d8e386b99cd74', 2, 'no_image.jpg', 'Green Coffee', 1, '', NULL),
@@ -432,17 +441,17 @@ ALTER TABLE `batch`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `privilege`
 --
@@ -452,7 +461,7 @@ ALTER TABLE `privilege`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `purchase_order`
 --
@@ -467,7 +476,7 @@ ALTER TABLE `return_product`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `users`
 --

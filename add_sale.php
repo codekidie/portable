@@ -17,14 +17,14 @@
                 $mode_of_selling   = $db->escape($_POST['mode_of_selling'][$key]);
                 $unit_of_measure   = $db->escape($_POST['unit_of_measure'][$key]);
                
-                $date      = $db->escape($_POST['date'][$key]);
+                // $date      = $db->escape($_POST['date'][$key]);
                 $s_date    = make_date();
 
 
-                $sell = find_by_sql("SELECT * FROM products WHERE admin_id = '{$admin_id}' AND id = '{$p_id}'");
+                $sell = find_by_sql("SELECT *,items.quantity as prod_qty FROM products LEFT JOIN items ON products.id=items.product_id WHERE products.admin_id = '{$admin_id}' AND products.id = '{$p_id}'");
                 if ($sell) {
                   foreach ($sell as $s) {
-                    $sell_qty = $s['quantity'];
+                    $sell_qty = $s['prod_qty'];
                     $sell_product = $s['name'];
                       if ($sell_qty < $s_qty) {
                           $session->msg('d',' Sorry failed to add sale insufficient stocks! '.$sell_product.' '.$sell_qty.' stocks left!');
@@ -34,7 +34,7 @@
                               $sql  = "INSERT INTO sales (";
                               $sql .= " product_id,qty,price,date,admin_id,mode_of_selling,unit_of_measure";
                               $sql .= ") VALUES (";
-                              $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$date}','{$admin_id}','{$mode_of_selling}','{$unit_of_measure}'";
+                              $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}','{$admin_id}','{$mode_of_selling}','{$unit_of_measure}'";
                               $sql .= ")";
 
                               if($db->query($sql)){
@@ -92,7 +92,7 @@
             <th> Qty </th>
             <th> Mode of Selling </th>
             <th> Unit of Measurement </th>
-            <th> Date</th>
+            <!-- <th> Date</th> -->
             <th> Total </th>
             <!-- <th> Action</th> -->
            </thead>
