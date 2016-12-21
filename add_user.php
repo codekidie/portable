@@ -21,6 +21,7 @@
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
        $phone   = remove_junk($db->escape($_POST['phone']));
+       $company_name = remove_junk($db->escape($company_name));
        // $user_level = (int)$db->escape($_POST['level']);
        $password = sha1($password);
         $query = "INSERT INTO users (";

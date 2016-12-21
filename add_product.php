@@ -287,6 +287,7 @@
                                   <option> piece </option> 
                                   <option> box </option> 
                                   <option> dozen </option> 
+                                  <option> pack </option> 
                               </select>
                          </div>
                         </div>

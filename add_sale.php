@@ -30,7 +30,7 @@
                           $session->msg('d',' Sorry failed to add sale insufficient stocks! '.$sell_product.' '.$sell_qty.' stocks left!');
                                 redirect('add_sale.php', false);
                       }else if($sell_qty > $s_qty){
-                        $s_total = $s_total * $s_qty;
+                              $s_total = $s_total * $s_qty;
                               $sql  = "INSERT INTO sales (";
                               $sql .= " product_id,qty,price,date,admin_id,mode_of_selling,unit_of_measure";
                               $sql .= ") VALUES (";

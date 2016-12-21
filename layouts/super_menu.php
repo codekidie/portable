@@ -12,10 +12,10 @@
       <span>Manage Clients</span>
     </a>
   </li>
-  <li class="active-pro">
+  <!-- <li class="active-pro">
       <a href="#" id="suggestions">
           <i class="pe-7s-rocket"></i>
           <p>Suggestions</p>
       </a>
-  </li>
+  </li> -->
 </ul>

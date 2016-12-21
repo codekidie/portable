@@ -18,7 +18,7 @@
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
        $companyname   = remove_junk($db->escape($_POST['company-name']));
-       $phone   = remove_junk($db->escape($_POST[' company-phone']));
+       $phone   = remove_junk($db->escape($_POST['company-phone']));
 
 
        $six_digit_random_number = mt_rand(100000, 999999);

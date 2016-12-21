@@ -73,7 +73,7 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_i
     <script type="text/javascript">
             $(".complexConfirm").confirm({
                 title:"Delete confirmation",
-                text:"This is very dangerous, you shouldn't do it! Are you really really sure?",
+                text:"Are you sure you want to delete?",
                 confirm: function(button) {
                   var href = $(button).attr("href");
                   window.location.replace(href);
