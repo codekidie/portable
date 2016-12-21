@@ -27,7 +27,7 @@ $results = '';
 <html lang="en-US">
  <head>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <title>Default Page Title</title>
+   <title>Sales Report</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
    <style>
    @media print {

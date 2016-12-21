@@ -31,7 +31,7 @@
         $query .=")";
         if($db->query($query)){
           //sucess
-          $session->msg('s',"User account has been creted! ");
+          $session->msg('s',"User account has been created! ");
           redirect('add_user.php', false);
         } else {
           //failed

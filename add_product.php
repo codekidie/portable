@@ -177,6 +177,8 @@
          <div class="col-md-12">
           <form method="post" action="add_product.php" class="clearfix">
               <div class="form-group">
+                        <label for="">Product Title</label>
+
                 <div class="input-group">
                   <span class="input-group-addon">
                    <i class="pe-7s-note2"></i>
@@ -187,6 +189,8 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6">
+                        <label for="">Product Category</label>
+
                     <select class="form-control" name="product-categorie">
                       <option value="">Select Product Category</option>
                     <?php  foreach ($all_categories as $cat): ?>
@@ -196,6 +200,8 @@
                     </select>
                   </div>
                   <div class="col-md-6">
+                        <label for="">Product Photo</label>
+
                     <select class="form-control" name="product-photo">
                       <option value="">Select Product Photo</option>
                     <?php  foreach ($all_photo as $photo): ?>
@@ -210,6 +216,8 @@
               <div class="form-group">
                <div class="row">
                <div class="col-md-4">
+                        <label for="">Flavor</label>
+
                    <div class="input-group">
 
                             <div class="input-group">
@@ -223,6 +231,8 @@
 
               
                  <div class="col-md-4">
+                        <label for="">Buying Price</label>
+
                    <div class="input-group">
                      <span class="input-group-addon">
                        <i class="pe-7s-cash"></i>
@@ -231,6 +241,8 @@
                   </div>
                  </div>
                   <div class="col-md-4">
+                        <label for="">Selling Price</label>
+
                     <div class="input-group">
                       <span class="input-group-addon">
                         <i class="pe-7s-cash"></i>

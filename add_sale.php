@@ -16,12 +16,16 @@
 
                 $mode_of_selling   = $db->escape($_POST['mode_of_selling'][$key]);
                 $unit_of_measure   = $db->escape($_POST['unit_of_measure'][$key]);
+                $unit_of_measure_text   = $db->escape($_POST['unit_of_measure_text'][$key]);
+
                
                 // $date      = $db->escape($_POST['date'][$key]);
                 $s_date    = make_date();
 
 
-                $sell = find_by_sql("SELECT *,items.quantity as prod_qty FROM products LEFT JOIN items ON products.id=items.product_id WHERE products.admin_id = '{$admin_id}' AND products.id = '{$p_id}'");
+                $sell = find_by_sql("SELECT *,items.quantity as prod_qty FROM products LEFT JOIN items ON products.id=items.product_id WHERE products.admin_id = '{$admin_id}'");
+               
+
                 if ($sell) {
                   foreach ($sell as $s) {
                     $sell_qty = $s['prod_qty'];
@@ -31,11 +35,15 @@
                                 redirect('add_sale.php', false);
                       }else if($sell_qty > $s_qty){
                               $s_total = $s_total * $s_qty;
+                              $unit_of_measure = $unit_of_measure.' '.$unit_of_measure_text;
+
                               $sql  = "INSERT INTO sales (";
                               $sql .= " product_id,qty,price,date,admin_id,mode_of_selling,unit_of_measure";
                               $sql .= ") VALUES (";
                               $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}','{$admin_id}','{$mode_of_selling}','{$unit_of_measure}'";
                               $sql .= ")";
+
+
 
                               if($db->query($sql)){
                                 update_product_qty($s_qty,$p_id);
@@ -48,6 +56,8 @@
                 }
               
           }
+
+
 
                                 redirect('add_sale.php', false);
           
@@ -92,8 +102,9 @@
             <th> Qty </th>
             <th> Mode of Selling </th>
             <th> Unit of Measurement </th>
+            <th> Batch </th>
             <!-- <th> Date</th> -->
-            <th> Total </th>
+            <!-- <th> Total </th> -->
             <!-- <th> Action</th> -->
            </thead>
              <tbody  id="product_info"> </tbody>

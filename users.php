@@ -138,6 +138,17 @@
             $db->query($sql);
           }
 
+
+
+           if (isset($_POST['List_Expiration'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['List_Expiration']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
             $session->msg('s',"Privilege added. ");
             redirect('users.php', false);
         
@@ -251,6 +262,7 @@
                   <tr>  
                     <td> Return Product  <br> <input type="checkbox" name="Return_Product" value="Return_Product"></td>
                     <td> Purchase Order <br>  <input type="checkbox" name="Purchase_Order" value="Purchase_Order"> </td>
+                     <td> Lists of Expiration <br>  <input type="checkbox" name="List_Expiration" value="List_Expiration"> </td>
                   </tr>  
                   </table>
 

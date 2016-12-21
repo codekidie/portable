@@ -294,8 +294,8 @@ function tableExists($table){
   function find_all_product_info_by_title($title){
     global $db;
     $admin_id = $_SESSION['admin_id'];
-    $sql  = "SELECT * FROM products ";
-    $sql .= " WHERE name LIKE'%$title%' AND admin_id = '{$admin_id}'";
+    $sql  = "SELECT * FROM products LEFT JOIN items ON products.id=items.product_id";
+    $sql .= " WHERE products.name LIKE'%$title%' AND products.admin_id = '{$admin_id}'";
     $sql .=" LIMIT 1";
     return find_by_sql($sql);
   }
@@ -371,7 +371,8 @@ function find_sale_by_dates($start_date,$end_date,$admin_id){
   $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price,";
   $sql .= "SUM(p.buy_price * s.qty) AS total_buying_price ";
   $sql .= "FROM sales s ";
-  $sql .= "LEFT JOIN products p ON s.product_id = p.id";
+  $sql .= "LEFT JOIN items i ON s.product_id = i.id ";
+  $sql .= "LEFT JOIN products p ON i.product_id = p.id ";
   $sql .= " WHERE s.date BETWEEN '{$start_date}' AND '{$end_date}' AND s.admin_id = '{$admin_id}'";
   $sql .= " GROUP BY DATE(s.date),p.name";
   $sql .= " ORDER BY DATE(s.date) DESC";
@@ -388,7 +389,10 @@ function  dailySales($year,$month,$admin_id){
   $sql .= " , SUM(s.qty) AS qty";
   
   $sql .= " FROM sales s";
-  $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+
+  $sql .= " LEFT JOIN items i ON s.product_id = i.id ";
+  $sql .= " LEFT JOIN products p ON i.product_id = p.id ";
+
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y-%m' ) = '{$year}-{$month}' AND s.date = CURDATE()  AND s.admin_id = '{$admin_id}'";
   $sql .= " GROUP BY DATE_FORMAT( s.date,  '%e' ),s.product_id";
   return find_by_sql($sql);
@@ -403,7 +407,11 @@ function  monthlySales($year,$admin_id){
   $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price";
   $sql .= " , SUM(s.qty) AS qty";
   $sql .= " FROM sales s";
-  $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+
+  $sql .= " LEFT JOIN items i ON s.product_id = i.id ";
+  $sql .= " LEFT JOIN products p ON i.product_id = p.id ";
+
+
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y' ) = '{$year}'  AND s.admin_id = '{$admin_id}'";
   $sql .= " GROUP BY DATE_FORMAT( s.date,  '%c' ),s.product_id";
   $sql .= " ORDER BY date_format(s.date, '%c' ) ASC";
@@ -415,7 +423,7 @@ function getExpiringProducts($admin_id)
 {
 
     $sql  = "SELECT  * FROM  products  WHERE  products.expiry_date >= DATE(now())";
-    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' AND products.sms_sent=0  GROUP BY products.batch ORDER BY date ASC";
+    $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' AND products.sms_sent=0  GROUP BY products.id ORDER BY date ASC";
     return find_by_sql($sql);
                         
 }
@@ -482,8 +490,8 @@ function getMinimumProductsHistory($admin_id)
 function getExpiringProductsLogs($admin_id)
 {
 
-    $sql  = "SELECT  * FROM  products  WHERE  expiry_date >= DATE(now())";
-    $sql .= " AND  expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY date ASC";
+    $sql  = "SELECT  * FROM  products  LEFT JOIN items ON items.admin_id = products.admin_id WHERE  items.expiry_date >= DATE(now())";
+    $sql .= " AND  items.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND items.admin_id = '{$admin_id}' AND products.sms_sent=0  ORDER BY date ASC";
     return find_by_sql($sql);
                         
 }

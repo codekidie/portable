@@ -75,6 +75,7 @@ function redirect($url, $permanent = false)
 function total_price($totals){
    $sum = 0;
    $sub = 0;
+   $profit = 0;
    foreach($totals as $total ){
      $sum += $total['total_saleing_price'];
      $sub += $total['total_buying_price'];

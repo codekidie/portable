@@ -29,6 +29,16 @@
 ?>
 <?php include_once('layouts/header.php'); ?>
 <h1>Overall Reports</h1>
+
+<button class="btn btn-info btn-md pull-right" onclick="myFunction()">Print</button>
+<br style="clear: both;">
+<br>
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
+
 <div class="row">
   <div class="col-md-6">
     <?php echo display_msg($msg); ?>

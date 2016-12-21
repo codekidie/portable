@@ -5,7 +5,7 @@
 ?>
 <?php
 $admin_id =  $_SESSION['admin_id'] ;
-$sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_id = p.id WHERE p.admin_id = {$admin_id}");
+$sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id = i.id  WHERE i.admin_id = {$admin_id}");
 // var_dump($sales);
 // die();
 ?>
@@ -46,7 +46,7 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN products p  ON s.product_i
              <?php foreach ($sales as $sale):?>
              <tr>
                <td class="text-center"><?php echo count_id();?></td>
-               <td><?php echo remove_junk($sale['name']); ?></td>
+               <td><?php echo remove_junk($sale['item_name']); ?></td>
                <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
                <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>
                <td class="text-center"><?php echo $sale['date']; ?></td>

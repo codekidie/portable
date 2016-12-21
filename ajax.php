@@ -32,6 +32,7 @@
   {
     $product_title = remove_junk($db->escape($_POST['p_name']));
     if($results = find_all_product_info_by_title($product_title)){
+        
         foreach ($results as $result) {
 
           $html .= "<tr>";
@@ -45,15 +46,16 @@
           $html .= "<input type=\"number\" class=\"form-control\" name=\"quantity[]\" value=\"1\" required>";
           $html  .= "</td>";
          
-          $html  .= '<td><select name="mode_of_selling" class="form-control" required="">
+          $html  .= '<td><select name="mode_of_selling[]" class="form-control" required="">
                                   <option> none </option> 
                                   <option> piece </option> 
                                   <option> box </option> 
                                   <option> dozen </option> 
+                                  <option> pack </option> 
                                   <option> can </option> 
                               </select></td>';
 
-          $html  .= '<td> <select name="unit_of_measure" class="form-control" required="">
+          $html  .= '<td> <input type="number" name="unit_of_measure[]" required><select name="unit_of_measure_text[]" class="form-control" required="">
                                   <option> none </option> 
                                   <option> Liter </option> 
                                   <option> 1.5 Liter </option> 
@@ -80,9 +82,15 @@
           // $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date[]\" data-date data-date-format=\"yyyy-mm-dd\" required>";
           // $html  .= "</td>";
 
-           $html  .= "<td>";
-          $html  .= "<input type=\"text\" class=\"form-control\" name=\"total[]\" value=\"{$result['sale_price']}\" required>";
+          
+          $html  .= "<td>";
+          $html  .= "<input type=\"text\" class=\"form-control\" name=\"batch[]\" value=\"{$result['batch']}\" disabled>";
           $html  .= "</td>";
+
+
+           // $html  .= "<td>";
+          $html  .= "<input type=\"hidden\" class=\"form-control\" name=\"total[]\" value=\"{$result['sale_price']}\" required>";
+          // $html  .= "</td>";
 
           // $html  .= "<td>";
           // $html  .= "<button type=\"submit\" name=\"add_sale\" class=\"btn btn-primary\">Add sale</button>";
