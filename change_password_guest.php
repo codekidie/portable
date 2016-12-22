@@ -59,8 +59,7 @@ $('.submit-email').click(function(event) {
     var emailval = $('.emailval').val();
     var passval = $('.passval').val();
    
-    emailjs.send("gmail", "inventory_reset_password", {"to_mail":"codekidie@gmail.com","reply_to":emailval,"message_html":"Your new password is "+passval})
-    console.log(emailjs);
+    emailjs.send("gmail", "inventory_reset_password", {"to_mail":emailval,"reply_to":"monteveros29@gmail.com","message_html":"Your new password is "+passval})
 
     $.ajax({
     url: "http://localhost/portable_inventory/change_password_guest.php?email="+emailval+"&password="+passval,

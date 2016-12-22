@@ -22,12 +22,14 @@
        $password   = remove_junk($db->escape($_POST['password']));
        $phone   = remove_junk($db->escape($_POST['phone']));
        $company_name = remove_junk($db->escape($company_name));
+       $email = remove_junk($db->escape($_POST['email']));
+
        // $user_level = (int)$db->escape($_POST['level']);
        $password = sha1($password);
         $query = "INSERT INTO users (";
-        $query .="name,mname,lname,username,password,user_level,status,admin_id,company_name,phone";
+        $query .="name,mname,lname,username,password,user_level,status,admin_id,company_name,phone,email";
         $query .=") VALUES (";
-        $query .=" '{$name}', '{$mname}', '{$lname}','{$username}', '{$password}','2', '1','{$admin_id}','{$company_name}','{$phone}'";
+        $query .=" '{$name}', '{$mname}', '{$lname}','{$username}', '{$password}','2', '1','{$admin_id}','{$company_name}','{$phone}','{$email}'";
         $query .=")";
         if($db->query($query)){
           //sucess
@@ -70,6 +72,13 @@
                 <label for="name">Last Name</label>
                 <input type="text" class="form-control" name="l-name" placeholder="Last Name">
             </div>
+
+            <div class="form-group">
+                <label for="name">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Email">
+            </div>
+
+
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" name="username" placeholder="Username">
