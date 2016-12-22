@@ -490,8 +490,8 @@ function getMinimumProductsHistory($admin_id)
 function getExpiringProductsLogs($admin_id)
 {
 
-    $sql  = "SELECT  * FROM  products  LEFT JOIN items ON items.admin_id = products.admin_id WHERE  items.expiry_date >= DATE(now())";
-    $sql .= " AND  items.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND items.admin_id = '{$admin_id}' AND products.sms_sent=0  ORDER BY date ASC";
+    $sql  = "SELECT  * FROM  products  LEFT JOIN items ON items.product_id = products.id WHERE  items.expiry_date >= DATE(now())";
+    $sql .= " AND  items.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND items.admin_id = '{$admin_id}'   ORDER BY items.id ASC";
     return find_by_sql($sql);
                         
 }

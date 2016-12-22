@@ -22,7 +22,7 @@
          </div>
         </div>
         <div class="panel-body" style="overflow: auto;">
-          <table class="table table-bordered">
+          <table class="table table-bordered" id="tb">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>

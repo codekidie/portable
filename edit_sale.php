@@ -62,7 +62,7 @@ if(!$sale){
      </div>
     </div>
     <div class="panel-body">
-       <table class="table table-bordered">
+       <table class="table table-bordered" id="tb">
          <thead>
           <th> Product title </th>
           <th> Qty </th>

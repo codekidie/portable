@@ -13,17 +13,21 @@
                 $p_id      = $db->escape((int)$_POST['s_id'][$key]);
                 $s_qty     = $db->escape((int)$_POST['quantity'][$key]);
                 $s_total   = $db->escape($_POST['total'][$key]);
+                $s_name   = $db->escape($_POST['s_name'][$key]);
 
                 $mode_of_selling   = $db->escape($_POST['mode_of_selling'][$key]);
                 $unit_of_measure   = $db->escape($_POST['unit_of_measure'][$key]);
                 $unit_of_measure_text   = $db->escape($_POST['unit_of_measure_text'][$key]);
+
+
 
                
                 // $date      = $db->escape($_POST['date'][$key]);
                 $s_date    = make_date();
 
 
-                $sell = find_by_sql("SELECT *,items.quantity as prod_qty FROM products LEFT JOIN items ON products.id=items.product_id WHERE products.admin_id = '{$admin_id}'");
+                $sell = find_by_sql("SELECT *,items.quantity as prod_qty FROM products LEFT JOIN items ON products.id=items.product_id WHERE products.admin_id = '{$admin_id}' AND products.name='{$s_name}' AND items.id='{$p_id}' ");
+               
                
 
                 if ($sell) {
@@ -76,7 +80,7 @@
             <span class="input-group-btn">
               <button type="submit" class="btn btn-primary">Search Items</button>
             </span>
-            <input type="text" id="sug_input" class="form-control" name="title"  placeholder="Search for product name">
+            <input type="text" id="sug_input" class="form-control" name="title" style="height: 40px;"  placeholder="Search for product name">
          </div>
          <div id="result" class="list-group"></div>
         </div>

@@ -29,6 +29,24 @@ $results = '';
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <title>Sales Report</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+       <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+    <!-- <link rel="stylesheet" href="libs/css/main.css" /> -->
+     <!-- Bootstrap core CSS     -->
+    <link href="libs/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="libs/assets/css/animate.min.css" rel="stylesheet"/>
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="libs/assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="libs/assets/css/demo.css" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="libs/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="libs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
    <style>
    @media print {
      html,body{
@@ -77,12 +95,25 @@ $results = '';
 <body>
 
   <?php if($results): ?>
+
+    <script>
+    function myFunction() {
+        window.print();
+    }
+    </script>
     <div class="page-break">
        <div class="sale-head pull-right">
            <h1>Sales Report</h1>
            <strong><?php if(isset($start_date)){ echo $start_date;}?> To <?php if(isset($end_date)){echo $end_date;}?> </strong>
+            <button class="btn btn-info btn-md" onclick="myFunction()">Print</button>
+    <br>
+    <br>
        </div>
-      <table class="table table-border">
+    <br style="clear: both;">
+
+    </div>
+    <div class="container">
+      <table class="table table-border" id="tb">
         <thead>
           <tr>
               <th>Date</th>
@@ -122,13 +153,51 @@ $results = '';
          </tr>
         </tfoot>
       </table>
-    </div>
   <?php
     else:
         $session->msg("d", "Sorry no sales has been found. ");
         redirect('sales_report.php', false);
      endif;
   ?>
+  </div>
 </body>
 </html>
+     </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="libs/js/functions.js"></script>
+
+    <script src="libs/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+  <script src="libs/assets/js/bootstrap-checkbox-radio-switch.js"></script>
+  <script src="libs/assets/js/chartist.min.js"></script>
+    <script src="libs/assets/js/bootstrap-notify.js"></script>
+  <script src="libs/assets/js/light-bootstrap-dashboard.js"></script>
+  <script src="libs/assets/js/demo.js"></script>
+  <script src="libs/js/notify.js"></script>
+  <script src="libs/js/jquery.dataTables.min.js"></script>
+
+  <script src="libs/js/dataTables.bootstrap.min.js"></script>
+
+
+  <script type="text/javascript">
+      $('.dropdown-toggle').click(function() {
+            $.ajax({
+              url: "submitnotificationajax.php",
+            }).done(function(done) {
+                $('.notification').html(0);
+            });
+      });
+
+     
+      $('#tb').DataTable();
+      $('#tb2').DataTable();
+      $('#tb3').DataTable();
+  </script>
+    
+  </body>
+</html>
+
 <?php if(isset($db)) { $db->db_disconnect(); } ?>
+

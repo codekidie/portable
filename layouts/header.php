@@ -27,6 +27,9 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="libs/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="libs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
     
     <style>
           .img-circle{

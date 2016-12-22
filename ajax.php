@@ -37,7 +37,7 @@
 
           $html .= "<tr>";
 
-          $html .= "<td id=\"s_name\">".$result['name']."</td>";
+          $html .= "<td id=\"s_name\"><input type=\"hidden\" name=\"s_name[]\" value=\"{$result['name']}\" required>".$result['name']."</td>";
           $html .= "<input type=\"hidden\" name=\"s_id[]\" value=\"{$result['id']}\" required>";
           $html  .= "<td>";
           $html  .= "<input type=\"text\" class=\"form-control\" name=\"price[]\" value=\"{$result['sale_price']}\" required>";
@@ -46,7 +46,7 @@
           $html .= "<input type=\"number\" class=\"form-control\" name=\"quantity[]\" value=\"1\" required>";
           $html  .= "</td>";
          
-          $html  .= '<td><select name="mode_of_selling[]" class="form-control" required="">
+          $html  .= '<td><select name="mode_of_selling[]" class="form-control">
                                   <option> none </option> 
                                   <option> piece </option> 
                                   <option> box </option> 
@@ -55,7 +55,7 @@
                                   <option> can </option> 
                               </select></td>';
 
-          $html  .= '<td> <input type="number" name="unit_of_measure[]" required><select name="unit_of_measure_text[]" class="form-control" required="">
+          $html  .= '<td> <input type="number" name="unit_of_measure[]"><select name="unit_of_measure_text[]" class="form-control">
                                   <option> none </option> 
                                   <option> Liter </option> 
                                   <option> 1.5 Liter </option> 

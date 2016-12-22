@@ -11,7 +11,12 @@
     <script src="libs/assets/js/bootstrap-notify.js"></script>
 	<script src="libs/assets/js/light-bootstrap-dashboard.js"></script>
   <script src="libs/assets/js/demo.js"></script>
-	<script src="libs/js/notify.js"></script>s
+  <script src="libs/js/notify.js"></script>
+  <script src="libs/js/jquery.dataTables.min.js"></script>
+
+  <script src="libs/js/dataTables.bootstrap.min.js"></script>
+
+
   <script type="text/javascript">
       $('.dropdown-toggle').click(function() {
             $.ajax({
@@ -20,6 +25,11 @@
                 $('.notification').html(0);
             });
       });
+
+     
+      $('#tb').DataTable();
+      $('#tb2').DataTable();
+      $('#tb3').DataTable();
   </script>
     
   </body>
