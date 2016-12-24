@@ -29,6 +29,10 @@
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="libs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+    <!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+
 
     
     <style>
@@ -164,12 +168,6 @@
 
                             $item_expiry_notifications = getTotalProductsExpiringItem($admin_id);
 
-                          //  echo '<pre>'; 
-                          //    print_r($item_expiry_notifications);
-                          //  echo '<pre>'; 
-
-                          // die();
-
                             $minimumstocks       = getMinimumProducts($admin_id);
                             
                             $total_minimum_noti  = getTotalMinimumProducts($admin_id);
@@ -206,11 +204,11 @@
 
                                 ?>
 
-                                    <li><a href="expiry.php?id=<?php echo $ex['id']; ?>">Product <?php echo $ex['name']; ?> Expiring at <?php echo $ex['expiry_date']; ?></a></li>
+                                    <li><a href="expiry.php?id=<?php echo $ex['id']; ?>">Product : <?php echo $ex['name']; ?> Batch : <?php echo $ex['batch']; ?> Expiring at <?php echo $ex['expiry_date']; ?></a></li>
                                   
                               <?php endforeach ?>
                               <?php foreach ($minimumstocks as $ms): ?>
-                                 <li><a href="#">Product <?php echo $ms['name']; ?> Stocks Reach Minimum Level <?php echo $ms['quantity']; ?></a></li>
+                                 <li><a href="#">Product : <?php echo $ms['item_name']; ?> Batch : <?php echo $ms['batch']; ?> Stocks Reach Minimum Level <?php echo $ms['quantity']; ?></a></li>
                               <?php endforeach ?>
 
                               <?php for ($i=0; $i < sizeof($item_expiry_by_batch) ; $i++) {  ?>
@@ -222,6 +220,7 @@
                                             
                                       <?php endif ?>
                               <?php } ?>
+                               <?php echo "Batch :".$item_expiry_notifications[$i]['batch']; ?> 
                                       <?php echo $messg .= "Expiring at ".$item_expiry_by_batch[$i]['expiry_date'];  ?>
 
                                       </a></li>

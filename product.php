@@ -10,7 +10,6 @@
 ?>
 <?php include_once('layouts/header.php'); ?>
 
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="libs/js/jquery.confirm.js"></script>
 
   <div class="row">
@@ -81,7 +80,6 @@
     </div>
   </div>
 
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
     <script type="text/javascript">
             $(".complexConfirm").confirm({

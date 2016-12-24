@@ -54,7 +54,7 @@ function myFunction() {
           </strong>
         </div>
         <div class="panel-body">
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" id="tb">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
@@ -90,7 +90,7 @@ function myFunction() {
           </strong>
         </div>
         <div class="panel-body">
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" id="tb2">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
@@ -129,7 +129,7 @@ function myFunction() {
           </strong>
         </div>
         <div class="panel-body">
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" id="tb3">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
@@ -213,14 +213,10 @@ function myFunction() {
                 </tr>
               </thead>
               <tbody>
-                  <?php foreach ($expire_products as $exs): ?>
-                    <tr>
-                         <td>Product <?php echo $exs['name']; ?> Expiring at <?php echo $exs['expiry_date']; ?></td>     
-                    </tr>           
-                  <?php endforeach ?>
+          
                     <?php foreach ($expire_items as $exs): ?>
                     <tr>
-                         <td>Product <?php echo $exs['item_name']; ?> Expiring at <?php echo $exs['expiry_date']; ?></td>     
+                         <td>Batch : <?php echo $exs['batch']; ?>  , Product <?php echo $exs['item_name'];  ?> , Expiring at <?php echo $exs['expiry_date']; ?></td>     
                     </tr>           
                   <?php endforeach ?>
               </tbody>

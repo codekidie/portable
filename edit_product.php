@@ -4,7 +4,13 @@
   // Checkin What level user has permission to view this page
 ?>
 <?php
-$product = find_by_id('products',(int)$_GET['id']);
+
+$admin_id =  $_SESSION['admin_id'] ;
+
+$product = find_by_sql("SELECT  products.id, products.name,items.quantity,products.buy_price,products.sale_price,items.expiry_date,items.batch, products.unit_of_measure  FROM  products  LEFT JOIN items ON products.id = items.product_id  WHERE  products.id = '{$_GET['id']}' AND products.admin_id = '{$admin_id}'");
+
+var_dump($product);
+
 $all_categories = find_all('categories');
 $all_photo = find_all('media');
 if(!$product){
@@ -72,13 +78,13 @@ if(!$product){
         </div>
         <div class="panel-body">
          <div class="col-md-7">
-           <form method="post" action="edit_product.php?id=<?php echo (int)$product['id'] ?>">
+           <form method="post" action="edit_product.php?id=<?php echo (int)$product[0]['id'] ?>">
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">
                    <i class="pe-7s-cart"></i>
                   </span>
-                  <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product['name']);?>">
+                  <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product[0]['name']);?>">
                </div>
               </div>
               <div class="form-group">
@@ -113,7 +119,7 @@ if(!$product){
                       <span class="input-group-addon">
                        <i class="pe-7s-cart"></i>
                       </span>
-                      <input type="number" class="form-control" name="product-quantity" value="<?php echo remove_junk($product['quantity']); ?>">
+                      <input type="number" class="form-control" name="product-quantity" value="<?php echo remove_junk($product[0]['quantity']); ?>">
                    </div>
                   </div>
                  </div>
@@ -124,7 +130,7 @@ if(!$product){
                       <span class="input-group-addon">
                         <i class="pe-7s-cash"></i>
                       </span>
-                      <input type="number" class="form-control" name="buying-price" value="<?php echo remove_junk($product['buy_price']);?>">
+                      <input type="number" class="form-control" name="buying-price" value="<?php echo remove_junk($product[0]['buy_price']);?>">
                       <span class="input-group-addon">.00</span>
                    </div>
                   </div>
@@ -136,7 +142,7 @@ if(!$product){
                        <span class="input-group-addon">
                          <i class="pe-7s-cash"></i>
                        </span>
-                       <input type="number" class="form-control" name="saleing-price" value="<?php echo remove_junk($product['sale_price']);?>">
+                       <input type="number" class="form-control" name="saleing-price" value="<?php echo remove_junk($product[0]['sale_price']);?>">
                        <span class="input-group-addon">.00</span>
                     </div>
                    </div>
@@ -148,7 +154,7 @@ if(!$product){
                               <span class="input-group-addon">
                                 <i class="pe-7s-date"></i>
                               </span>
-                              <input type="date" class="form-control" name="saleing-expiry-date" value="<?php echo remove_junk($product['expiry_date']);?>" placeholder="Expiry Date" required="required">
+                              <input type="date" class="form-control" name="saleing-expiry-date" value="<?php echo remove_junk($product[0]['expiry_date']);?>" placeholder="Expiry Date" required="required">
                           </div>
                     </div>
                 </div>
@@ -158,7 +164,7 @@ if(!$product){
                       <span class="input-group-addon">
                         <i class="pe-7s-settings"></i>
                       </span>
-                      <input type="text" class="form-control" name="batch" placeholder="Batch No." value="<?php echo remove_junk($product['batch']);?>" required="required">
+                      <input type="text" class="form-control" name="batch" placeholder="Batch No." value="<?php echo remove_junk($product[0]['batch']);?>" required="required">
                    </div>
                   </div>
 
@@ -168,7 +174,7 @@ if(!$product){
                             <span class="input-group-addon">
                               <i class="pe-7s-graph"></i>
                             </span>
-                            <input type="text" class="form-control" name="unit_of_measure" value="<?php echo remove_junk($product['unit_of_measure']);?>" placeholder="Unit of Measure" required="required">
+                            <input type="text" class="form-control" name="unit_of_measure" value="<?php echo remove_junk($product[0]['unit_of_measure']);?>" placeholder="Unit of Measure" required="required">
                          </div>
                         </div>
                </div>

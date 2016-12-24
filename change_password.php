@@ -43,16 +43,22 @@
      <?php echo display_msg($msg); ?>
       <form method="post" action="change_password.php" class="clearfix">
         <div class="form-group">
-              <label for="newPassword" class="control-label">New password</label>
-              <input type="password" class="form-control" name="new-password" placeholder="New password">
+              <label for="newPassword" class="control-label">New Password</label>
+              <input type="password" class="form-control" name="new-password" id="txtNewPassword" placeholder="New password">
         </div>
+        
+        <div class="form-group">
+              <label for="newPassword" class="control-label">Confirm Password</label>
+              <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Confirm password">
+        </div>
+        
         <div class="form-group">
               <label for="oldPassword" class="control-label">Old password</label>
               <input type="password" class="form-control" name="old-password" placeholder="Old password">
         </div>
         <div class="form-group clearfix">
                <input type="hidden" name="id" value="<?php echo (int)$user['id'];?>">
-                <button type="submit" name="update" class="btn btn-info">Change</button>
+                <button type="submit" name="update" class="btn btn-info submit-settings">Change</button>
         </div>
     </form>
 </div>

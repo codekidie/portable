@@ -6,11 +6,9 @@
 <?php
 $admin_id =  $_SESSION['admin_id'] ;
 $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id = i.id  WHERE i.admin_id = {$admin_id}");
-// var_dump($sales);
-// die();
+
 ?>
 <?php include_once('layouts/header.php'); ?>
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="libs/js/jquery.confirm.js"></script>
 
 <div class="row">
@@ -31,12 +29,13 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id =
           </div>
         </div>
         <div class="panel-body">
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" id="tb">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
                 <th> Product name </th>
                 <th class="text-center" style="width: 15%;"> Quantity</th>
+                <th class="text-center" style="width: 15%;"> Batch</th>
                 <th class="text-center" style="width: 15%;"> Total </th>
                 <th class="text-center" style="width: 15%;"> Date </th>
                 <th class="text-center" style="width: 100px;"> Actions </th>
@@ -48,6 +47,7 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id =
                <td class="text-center"><?php echo count_id();?></td>
                <td><?php echo remove_junk($sale['item_name']); ?></td>
                <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
+               <td class="text-center"><?php echo remove_junk($sale['batch']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>
                <td class="text-center"><?php echo $sale['date']; ?></td>
                <td class="text-center">
@@ -68,7 +68,6 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id =
       </div>
     </div>
   </div>
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
     <script type="text/javascript">
             $(".complexConfirm").confirm({

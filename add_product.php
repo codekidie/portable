@@ -237,7 +237,7 @@
                      <span class="input-group-addon">
                        <i class="pe-7s-cash"></i>
                      </span>
-                     <input type="number" class="form-control" name="buying-price" placeholder="Buying Price">
+                     <input type="text" class="form-control" name="buying-price" placeholder="Buying Price">
                   </div>
                  </div>
                   <div class="col-md-4">
@@ -247,7 +247,7 @@
                       <span class="input-group-addon">
                         <i class="pe-7s-cash"></i>
                       </span>
-                      <input type="number" class="form-control" name="saleing-price" placeholder="Selling Price">
+                      <input type="text" class="form-control" name="saleing-price" placeholder="Selling Price">
                    </div>
                   </div>
                </div>

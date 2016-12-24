@@ -5,7 +5,8 @@
   $admin_id =  $_SESSION['admin_id'] ;
 
   $all_products = find_by_sql("SELECT * FROM products WHERE admin_id = '{$admin_id}'");
-  $all_returned_products = find_by_sql("SELECT ru.name as ru_name,
+  $all_returned_products = find_by_sql("SELECT ru.id as id, 
+                                              ru.name as ru_name,
                                                ru.email as ru_email,
                                                ru.phone as ru_phone,
                                                ru.comment as ru_comment,
@@ -13,12 +14,6 @@
                                                ru.reason as ru_reason,
                                                ru.quantity as ru_quantity,
                                                p.name as p_name FROM return_product ru LEFT JOIN products p ON ru.product_id = p.id WHERE p.admin_id = '{$admin_id}' GROUP BY ru.product_id");
-
-  // echo '<pre>';
-  // print_r($all_returned_products);
-  // echo '</pre>';
-
-  // die();
 
 ?>
 <?php
@@ -56,6 +51,8 @@
 
 ?>
 <?php include_once('layouts/header.php'); ?>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="libs/js/jquery.confirm.js"></script>
 <div class="row">
   <div class="col-md-12">
     <?php echo display_msg($msg); ?>
@@ -144,10 +141,10 @@
         </div>
         <div class="panel-body">
          <div class="col-md-12">
-            <table class="table">
+            <table class="table" id="tb">
               <thead>
                 <tr>
-                    <th>Product Name</th><th>Full Name</th><th>email</th><th>phone</th><th>comment</th><th>replace product</th><th>reason</th><th>quantity</th>
+                    <th>Name</th><th>Client Name</th><th>email</th><th>phone</th><th>comment</th><th>replace product</th><th>reason</th><th>quantity</th><th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -162,6 +159,12 @@
                   <td><?php echo $ar['ru_rp']; ?></td>
                   <td><?php echo $ar['ru_reason']; ?></td>
                   <td><?php echo $ar['ru_quantity']; ?></td>
+                  <td>  <a href="edit_return_product.php?id=<?php echo (int)$ar['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
+                  <i class="pe-7s-edit"></i>
+               </a>
+                <a href="delete_return.php?id=<?php echo (int)$ar['id'];?>" class="btn btn-xs btn-danger complexConfirm" data-toggle="tooltip" title="Remove">
+                  <i class="pe-7s-trash"></i>
+                </a></td>
                 </tr> 
                   
                  <?php endforeach ?>
@@ -172,4 +175,21 @@
       </div>
   </div>
 
+ <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script type="text/javascript">
+            $(".complexConfirm").confirm({
+                title:"Delete confirmation",
+                text:"Are you sure you want to delete?",
+                confirm: function(button) {
+                  var href = $(button).attr("href");
+                  window.location.replace(href);
+                },
+                cancel: function(button) {
+                      alert("You aborted the operation.");
+                },
+                confirmButton: "Yes I am",
+                cancelButton: "No"
+            });
+    </script>
 <?php include_once('layouts/footer.php'); ?>

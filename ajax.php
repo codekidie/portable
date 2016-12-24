@@ -46,45 +46,13 @@
           $html .= "<input type=\"number\" class=\"form-control\" name=\"quantity[]\" value=\"1\" required>";
           $html  .= "</td>";
          
-          $html  .= '<td><select name="mode_of_selling[]" class="form-control">
-                                  <option> none </option> 
-                                  <option> piece </option> 
-                                  <option> box </option> 
-                                  <option> dozen </option> 
-                                  <option> pack </option> 
-                                  <option> can </option> 
-                              </select></td>';
+          $html  .= "<td><input type='text' name='mode_of_selling[]' class='form-control' value='{$result['mode_of_selling']}' readonly></td>";
 
-          $html  .= '<td> <input type="number" name="unit_of_measure[]"><select name="unit_of_measure_text[]" class="form-control">
-                                  <option> none </option> 
-                                  <option> Liter </option> 
-                                  <option> 1.5 Liter </option> 
-                                  <option> 8oz </option> 
-                                  <option> 12oz </option> 
-                                  <option> milligram </option>
-                                  <option> carat </option> 
-                                  <option> gram </option> 
-                                  <option> kilogram </option> 
-                                 <option>  metric ton </option> 
-                                  <option> pound </option>
-                                 <option>  nanometer </option> 
-                                 <option>  millimeter </option>
-                                 <option>  centimeter </option>
-                                  <option> inch </option> 
-                                  <option> foot </option> 
-                                 <option>  yard </option> 
-                                 <option>  meter  </option> 
-                                  <option> kilometer </option>  
-                                 <option>  mile </option> 
-                              </select></td>';                    
-
-          // $html  .= "<td>";
-          // $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date[]\" data-date data-date-format=\"yyyy-mm-dd\" required>";
-          // $html  .= "</td>";
+          $html  .= "<td> <input type='text' name='unit_of_measure[]' class='form-control' value='{$result['unit_of_measure']}' readonly></td>";                    
 
           
           $html  .= "<td>";
-          $html  .= "<input type=\"text\" class=\"form-control\" name=\"batch[]\" value=\"{$result['batch']}\" disabled>";
+          $html  .= "<input type=\"text\" class=\"form-control\" name=\"batch[]\" value=\"{$result['batch']}\" readonly>";
           $html  .= "</td>";
 
 

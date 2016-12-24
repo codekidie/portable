@@ -1,6 +1,25 @@
-$( "#suggestions" ).on( "click", function() {
-		$.notify({
-			title: "<strong>Message Me on FB for any suggestion:</strong> ",
-			message: "This web app has been provided to you by Nelsa <a href=\"https://www.facebook.com/aslenmae?fref=ts\" style=\"color:#fff;\" target=\"_blank\">@Nelsa Mae Monteveros</a>"
+function checkPasswordMatch() {
+    var password = $("#txtNewPassword").val();
+    var confirmPassword = $("#txtConfirmPassword").val();
+
+    if (password != confirmPassword)
+    {
+            $.notify({
+				message: "Passwords do not match!"
+			});	
+            $('.submit-settings').hide();
+
+    }else{
+        $.notify({
+			message: "Passwords match!"
 		});	
+
+        $('.submit-settings').show();
+    }     
+
+}
+
+$(document).ready(function () {
+   $("#txtConfirmPassword").keyup(checkPasswordMatch);
 });
+

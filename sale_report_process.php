@@ -49,6 +49,9 @@ $results = '';
     <link href="libs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
    <style>
    @media print {
+    .sale-head{
+      display: none;
+     }
      html,body{
         font-size: 9.5pt;
         margin: 0;

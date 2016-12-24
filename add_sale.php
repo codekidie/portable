@@ -10,6 +10,7 @@
   if(isset($_POST['add_sale'])){
 
           foreach ($_POST['price'] as $key => $value) {
+
                 $p_id      = $db->escape((int)$_POST['s_id'][$key]);
                 $s_qty     = $db->escape((int)$_POST['quantity'][$key]);
                 $s_total   = $db->escape($_POST['total'][$key]);
@@ -17,7 +18,6 @@
 
                 $mode_of_selling   = $db->escape($_POST['mode_of_selling'][$key]);
                 $unit_of_measure   = $db->escape($_POST['unit_of_measure'][$key]);
-                $unit_of_measure_text   = $db->escape($_POST['unit_of_measure_text'][$key]);
 
 
 
@@ -37,9 +37,8 @@
                       if ($sell_qty < $s_qty) {
                           $session->msg('d',' Sorry failed to add sale insufficient stocks! '.$sell_product.' '.$sell_qty.' stocks left!');
                                 redirect('add_sale.php', false);
-                      }else if($sell_qty > $s_qty){
+                      }else if($sell_qty >= $s_qty){
                               $s_total = $s_total * $s_qty;
-                              $unit_of_measure = $unit_of_measure.' '.$unit_of_measure_text;
 
                               $sql  = "INSERT INTO sales (";
                               $sql .= " product_id,qty,price,date,admin_id,mode_of_selling,unit_of_measure";
@@ -55,6 +54,9 @@
                               } else {
                                 $session->msg('d',' Sorry failed to add!');
                               }
+                      }
+                      else {
+                        $session->msg('d',' Sorry failed to add!');
                       } 
                   }                 
                 }
@@ -63,7 +65,7 @@
 
 
 
-                                redirect('add_sale.php', false);
+          redirect('add_sale.php', false);
           
 
        
@@ -107,9 +109,6 @@
             <th> Mode of Selling </th>
             <th> Unit of Measurement </th>
             <th> Batch </th>
-            <!-- <th> Date</th> -->
-            <!-- <th> Total </th> -->
-            <!-- <th> Action</th> -->
            </thead>
              <tbody  id="product_info"> </tbody>
          </table>

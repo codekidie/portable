@@ -422,7 +422,7 @@ function  monthlySales($year,$admin_id){
 function getExpiringProducts($admin_id)
 {
 
-    $sql  = "SELECT  * FROM  products  WHERE  products.expiry_date >= DATE(now())";
+    $sql  = "SELECT  * FROM  products  LEFT JOIN items ON products.id = items.product_id  WHERE  products.expiry_date >= DATE(now())";
     $sql .= " AND  products.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND products.admin_id = '{$admin_id}' AND products.sms_sent=0  GROUP BY products.id ORDER BY date ASC";
     return find_by_sql($sql);
                         

@@ -156,7 +156,6 @@
   }
 ?>
 <?php include_once('layouts/header.php'); ?>
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="libs/js/jquery.confirm.js"></script>
 
 <div class="row">
@@ -266,21 +265,7 @@
                   </tr>  
                   </table>
 
-                 <!--  <select name="privilege" class="form-control">
-                  <option value="Category">Category</option>
-                  <option value="Manage_Product">Manage Product</option>
-                  <option value="Add_Product">Add Product</option>
-                  <option value="Manage_Sales">Manage Sales</option>
-                  <option value="Add_Sales">Add Sales</option>
-                  <option value="Sales_by_dates">Sales by dates</option>
-                  <option value="Monthly_Sales">Monthly Sales</option>
-                  <option value="Daily_Sales">Daily Sales</option>
-                  <option value="Media">Media</option>
-                  <option value="Return_Product">Return Product</option>
-                  <option value="Purchase_Order">Purchase Order</option> -->
-                  <!-- <option value="View_Reports">View Reports</option> -->
-
-                <!-- </select> -->
+             
 
               <div class="form-group">
               <input type="hidden" name="admin_id" value="<?php echo $admin_id; ?>">
@@ -322,7 +307,6 @@
     </div>
   </div>
 </div>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
   <script type="text/javascript">
           $(".complexConfirm").confirm({
