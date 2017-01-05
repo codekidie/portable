@@ -44,203 +44,230 @@ function myFunction() {
     <?php echo display_msg($msg); ?>
   </div>
 </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-          <strong>
-            <span class="pe-7s-date"></span>
-            <span>Monthly Sales</span>
-          </strong>
-        </div>
-        <div class="panel-body">
-          <table class="table table-bordered table-striped" id="tb">
-            <thead>
-              <tr>
-                <th class="text-center" style="width: 50px;">#</th>
-                <th> Product name </th>
-                <th class="text-center" style="width: 15%;"> Quantity sold</th>
-                <th class="text-center" style="width: 15%;"> Total </th>
-                <th class="text-center" style="width: 15%;"> Date </th>
-             </tr>
-            </thead>
-           <tbody>
-             <?php foreach ($sales as $sale):?>
-                  <?php if (!empty($sale['name'])): ?>
-                         <tr>
-                           <td class="text-center"><?php echo count_id();?></td>
-                           <td><?php echo remove_junk($sale['name']); ?></td>
-                           <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
-                           <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
-                           <td class="text-center"><?php echo $sale['date']; ?></td>
-                         </tr>
-                  <?php endif ?>
-             <?php endforeach;?>
-           </tbody>
-         </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-          <strong>
-            <span class="pe-7s-cash"></span>
-            <span>Daily Sales</span>
-          </strong>
-        </div>
-        <div class="panel-body">
-          <table class="table table-bordered table-striped" id="tb2">
-            <thead>
-              <tr>
-                <th class="text-center" style="width: 50px;">#</th>
-                <th> Product name </th>
-                <th class="text-center" style="width: 15%;"> Quantity sold</th>
-                <th class="text-center" style="width: 15%;"> Total </th>
-                <th class="text-center" style="width: 15%;"> Date </th>
-             </tr>
-            </thead>
-           <tbody>
-             <?php foreach ($dsales as $sale):?>
-                  <?php if (!empty($sale['name'])): ?>
 
-             <tr>
-               <td class="text-center"><?php echo count_id();?></td>
-               <td><?php echo remove_junk($sale['name']); ?></td>
-               <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
-               <td class="text-center"><?php echo $sale['date']; ?></td>
-             </tr>
-           <?php endif ?>
-             <?php endforeach;?>
-           </tbody>
-         </table>
+    <div class="row">
+      <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-info">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1default" data-toggle="tab">Monthly Sales</a></li>
+                            <li><a href="#tab2default" data-toggle="tab">Daily Sales</a></li>
+                            <li><a href="#tab3default" data-toggle="tab">Product Quantity</a></li>
+                            <li><a href="#tab4default" data-toggle="tab">Returned Stocks</a></li>
+                            <li><a href="#tab5default" data-toggle="tab">Log of Notifications</a></li>
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1default">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                  <div class="panel-heading clearfix">
+                                    <strong>
+                                      <span class="pe-7s-date"></span>
+                                      <span>Monthly Sales</span>
+                                    </strong>
+                                  </div>
+                                  <div class="panel-body">
+                                    <table class="table table-bordered table-striped" id="tb">
+                                      <thead>
+                                        <tr>
+                                          <th class="text-center" style="width: 50px;">#</th>
+                                          <th> Product name </th>
+                                          <th class="text-center" style="width: 15%;"> Quantity sold</th>
+                                          <th class="text-center" style="width: 15%;"> Total </th>
+                                          <th class="text-center" style="width: 15%;"> Date </th>
+                                       </tr>
+                                      </thead>
+                                     <tbody>
+                                       <?php foreach ($sales as $sale):?>
+                                            <?php if (!empty($sale['name'])): ?>
+                                                   <tr>
+                                                     <td class="text-center"><?php echo count_id();?></td>
+                                                     <td><?php echo remove_junk($sale['name']); ?></td>
+                                                     <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
+                                                     <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
+                                                     <td class="text-center"><?php echo $sale['date']; ?></td>
+                                                   </tr>
+                                            <?php endif ?>
+                                       <?php endforeach;?>
+                                     </tbody>
+                                   </table>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab2default">
+                               <div class="col-md-12">
+                                  <div class="panel panel-default">
+                                    <div class="panel-heading clearfix">
+                                      <strong>
+                                        <span class="pe-7s-cash"></span>
+                                        <span>Daily Sales</span>
+                                      </strong>
+                                    </div>
+                                    <div class="panel-body">
+                                      <table class="table table-bordered table-striped" id="tb2">
+                                        <thead>
+                                          <tr>
+                                            <th class="text-center" style="width: 50px;">#</th>
+                                            <th> Product name </th>
+                                            <th class="text-center" style="width: 15%;"> Quantity sold</th>
+                                            <th class="text-center" style="width: 15%;"> Total </th>
+                                            <th class="text-center" style="width: 15%;"> Date </th>
+                                         </tr>
+                                        </thead>
+                                       <tbody>
+                                         <?php foreach ($dsales as $sale):?>
+                                              <?php if (!empty($sale['name'])): ?>
+
+                                         <tr>
+                                           <td class="text-center"><?php echo count_id();?></td>
+                                           <td><?php echo remove_junk($sale['name']); ?></td>
+                                           <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
+                                           <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
+                                           <td class="text-center"><?php echo $sale['date']; ?></td>
+                                         </tr>
+                                       <?php endif ?>
+                                         <?php endforeach;?>
+                                       </tbody>
+                                     </table>
+                                    </div>
+                                  </div>
+                                </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab3default">
+                           <div class="col-md-12">
+                            <div class="panel panel-default">
+                              <div class="panel-heading clearfix">
+                                <strong>
+                                  <span class="pe-7s-date"></span>
+                                  <span>Product Quantity</span>
+                                </strong>
+                              </div>
+                              <div class="panel-body">
+                                <table class="table table-bordered table-striped" id="tb3">
+                                  <thead>
+                                    <tr>
+                                      <th class="text-center" style="width: 50px;">#</th>
+                                      <th> Product name </th>
+                                      <th class="text-center" style="width: 15%;"> Quantity Instocks </th>
+                                   </tr>
+                                  </thead>
+                                 <tbody>
+                                   <?php foreach ($all_qty as $sale):?>
+                                        <?php if (!empty($sale['item_name'])): ?>
+                                               <tr>
+                                                 <td class="text-center"><?php echo count_id();?></td>
+                                                 <td><?php echo remove_junk($sale['item_name']); ?></td>
+                                                 <td class="text-center"><?php echo (int)$sale['quantity']; ?></td>
+                                               </tr>
+                                        <?php endif ?>
+                                   <?php endforeach;?>
+                                 </tbody>
+                               </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab4default">
+                             <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <strong>
+                                      <span class="pe-7s-cart"></span>
+                                      <span>Returned Stocks</span>
+                                   </strong>
+                                  </div>
+                                  <div class="panel-body">
+                                   <div class="col-md-12">
+                                      <table class="table" id="tb4">
+                                        <thead>
+                                          <tr>
+                                              <th>Product Name</th><th>Full Name</th><th>email</th><th>phone</th><th>comment</th><th>replace product</th><th>reason</th><th>quantity</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                           <?php foreach ($all_returned_products as $ar): ?>
+                                          <tr>
+
+                                            <td><?php echo $ar['p_name']; ?></td>
+                                            <td><?php echo $ar['ru_name']; ?></td>
+                                            <td><?php echo $ar['ru_email']; ?></td>
+                                            <td><?php echo $ar['ru_phone']; ?></td>
+                                            <td><?php echo $ar['ru_comment']; ?></td>
+                                            <td><?php echo $ar['ru_rp']; ?></td>
+                                            <td><?php echo $ar['ru_reason']; ?></td>
+                                            <td><?php echo $ar['ru_quantity']; ?></td>
+                                          </tr> 
+                                            
+                                           <?php endforeach ?>
+                                        </tbody>
+                                      </table>
+                                   </div>
+                                  </div>
+                              </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab5default">
+                           <?php   
+                              $expire_products     =  getExpiringProductsLogs($admin_id);
+                              $minimumstocks       =  getMinimumProductsHistory($admin_id); 
+                              $expire_items        =  getExpiringItemLogs($admin_id);
+                            ?>
+                              <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <strong>
+                                      <span class="pe-7s-cart"></span>
+                                      <span>Log of Notifications</span>
+                                   </strong>
+                                  </div>
+                                  <div class="panel-body">
+                                   <div class="col-md-12">
+                                        <center><h2>Products Expiring Logs</h2></center>
+                                        <hr>
+                                      <table class="table" id="tb5">
+                                        <thead>
+                                          <tr>
+                                              <th></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                    
+                                              <?php foreach ($expire_items as $exs): ?>
+                                              <tr>
+                                                   <td>Batch : <?php echo $exs['batch']; ?>  , Product <?php echo $exs['item_name'];  ?> , Expiring at <?php echo $exs['expiry_date']; ?></td>     
+                                              </tr>           
+                                            <?php endforeach ?>
+                                        </tbody>
+                                      </table>
+                                        <center><h2>Minimum Level Stocks Logs</h2></center>
+                                        <hr>
+                                        <table class="table" id="tb6">
+                                        <thead>
+                                          <tr>
+                                              <th></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($minimumstocks as $mss): ?>
+                                              <tr>
+                                                  <td>Product <?php echo $mss['item_name']; ?> Stocks Reach Minimum Level <?php echo $mss['quantity']; ?></td>
+                                              </tr>    
+                                            <?php endforeach ?>
+                                        </tbody>
+                                      </table>
+
+                                   </div>
+                                  </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
   </div>
-  <div class="row">
-      <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-          <strong>
-            <span class="pe-7s-date"></span>
-            <span>Product Quantity</span>
-          </strong>
-        </div>
-        <div class="panel-body">
-          <table class="table table-bordered table-striped" id="tb3">
-            <thead>
-              <tr>
-                <th class="text-center" style="width: 50px;">#</th>
-                <th> Product name </th>
-                <th class="text-center" style="width: 15%;"> Quantity Instocks </th>
-             </tr>
-            </thead>
-           <tbody>
-             <?php foreach ($all_qty as $sale):?>
-                  <?php if (!empty($sale['item_name'])): ?>
-                         <tr>
-                           <td class="text-center"><?php echo count_id();?></td>
-                           <td><?php echo remove_junk($sale['item_name']); ?></td>
-                           <td class="text-center"><?php echo (int)$sale['quantity']; ?></td>
-                         </tr>
-                  <?php endif ?>
-             <?php endforeach;?>
-           </tbody>
-         </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong>
-            <span class="pe-7s-cart"></span>
-            <span>Returned Stocks</span>
-         </strong>
-        </div>
-        <div class="panel-body">
-         <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                    <th>Product Name</th><th>Full Name</th><th>email</th><th>phone</th><th>comment</th><th>replace product</th><th>reason</th><th>quantity</th>
-                </tr>
-              </thead>
-              <tbody>
-                 <?php foreach ($all_returned_products as $ar): ?>
-                <tr>
 
-                  <td><?php echo $ar['p_name']; ?></td>
-                  <td><?php echo $ar['ru_name']; ?></td>
-                  <td><?php echo $ar['ru_email']; ?></td>
-                  <td><?php echo $ar['ru_phone']; ?></td>
-                  <td><?php echo $ar['ru_comment']; ?></td>
-                  <td><?php echo $ar['ru_rp']; ?></td>
-                  <td><?php echo $ar['ru_reason']; ?></td>
-                  <td><?php echo $ar['ru_quantity']; ?></td>
-                </tr> 
-                  
-                 <?php endforeach ?>
-              </tbody>
-            </table>
-         </div>
-        </div>
-      </div>
-  </div>
 
-<?php   
-  $expire_products     =  getExpiringProductsLogs($admin_id);
-  $minimumstocks       =  getMinimumProductsHistory($admin_id); 
-  $expire_items        =  getExpiringItemLogs($admin_id);
-  ?>
-   <div class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong>
-            <span class="pe-7s-cart"></span>
-            <span>Log of Notifications</span>
-         </strong>
-        </div>
-        <div class="panel-body">
-         <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                    <th>Products Expiring Logs</th>
-                </tr>
-              </thead>
-              <tbody>
-          
-                    <?php foreach ($expire_items as $exs): ?>
-                    <tr>
-                         <td>Batch : <?php echo $exs['batch']; ?>  , Product <?php echo $exs['item_name'];  ?> , Expiring at <?php echo $exs['expiry_date']; ?></td>     
-                    </tr>           
-                  <?php endforeach ?>
-              </tbody>
-            </table>
 
-              <table class="table">
-              <thead>
-                <tr>
-                    <th>Minimum Level Stocks Logs</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <?php foreach ($minimumstocks as $mss): ?>
-                    <tr>
-                        <td>Product <?php echo $mss['item_name']; ?> Stocks Reach Minimum Level <?php echo $mss['quantity']; ?></td>
-                    </tr>    
-                  <?php endforeach ?>
-              </tbody>
-            </table>
-
-         </div>
-        </div>
-      </div>
-  </div>
                      
 
 <?php include_once('layouts/footer.php'); ?>

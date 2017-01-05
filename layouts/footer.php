@@ -31,6 +31,9 @@
       $('#tb').DataTable();
       $('#tb2').DataTable();
       $('#tb3').DataTable();
+      $('#tb4').DataTable();
+      $('#tb5').DataTable();
+      $('#tb6').DataTable();
   </script>
 
     
