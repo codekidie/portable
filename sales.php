@@ -5,7 +5,9 @@
 ?>
 <?php
 $admin_id =  $_SESSION['admin_id'] ;
-$sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id = i.id  WHERE i.admin_id = {$admin_id}");
+$sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id = i.id
+  LEFT JOIN products p  ON p.id = i.product_id
+  WHERE i.admin_id = {$admin_id}");
 
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -34,6 +36,7 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id =
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
                 <th> Product name </th>
+                <th>Flavor</th>
                 <th class="text-center" style="width: 15%;"> Quantity</th>
                 <th class="text-center" style="width: 15%;"> Batch</th>
                 <th class="text-center" style="width: 15%;"> Total </th>
@@ -46,6 +49,7 @@ $sales = find_by_sql("SELECT * FROM sales s LEFT JOIN items i  ON s.product_id =
              <tr>
                <td class="text-center"><?php echo count_id();?></td>
                <td><?php echo remove_junk($sale['item_name']); ?></td>
+               <td><?php echo remove_junk($sale['flavor']); ?></td>
                <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
                <td class="text-center"><?php echo remove_junk($sale['batch']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>

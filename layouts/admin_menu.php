@@ -29,7 +29,7 @@
   <li>
     <a href="add_batch.php">
       <i class="pe-7s-server"></i>
-      <span>Add Batch</span>
+      <span>Add Quantity</span>
     </a>
   </li>
 

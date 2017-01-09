@@ -93,7 +93,7 @@ $user = current_user(); ?>
                              }elseif ($access == 'Add_Product') {
                                 $icon = 'pe-7s-network'; 
                                 $link = 'product.php';
-                             }elseif ($access == 'Add_Batch') {
+                             }elseif ($access == 'Add_Quantity') {
                                 $icon = 'pe-7s-network'; 
                                 $link = 'add_batch.php';
                              }elseif ($access == 'Manage_Sales') {

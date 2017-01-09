@@ -8,7 +8,7 @@
     $html = '';
    if(isset($_POST['product_name']) && strlen($_POST['product_name']))
    {
-     $products = find_product_by_batch($_POST['product_name']);
+     $products = find_product_by_title($_POST['product_name']);
      if($products){
         foreach ($products as $product):
            $html .= "<li class=\"list-group-item\">";
@@ -38,6 +38,9 @@
           $html .= "<tr>";
 
           $html .= "<td id=\"s_name\"><input type=\"hidden\" name=\"s_name[]\" value=\"{$result['name']}\" required>".$result['name']."</td>";
+
+          $html .= "<td id=\"s_flavor\"><input type=\"hidden\" name=\"s_flavor[]\" value=\"{$result['flavor']}\" required>".$result['flavor']."</td>";
+
           $html .= "<input type=\"hidden\" name=\"s_id[]\" value=\"{$result['id']}\" required>";
           $html  .= "<td>";
           $html  .= "<input type=\"text\" class=\"form-control\" name=\"price[]\" value=\"{$result['sale_price']}\" required>";
@@ -55,6 +58,9 @@
           $html  .= "<input type=\"text\" class=\"form-control\" name=\"batch[]\" value=\"{$result['batch']}\" readonly>";
           $html  .= "</td>";
 
+          $html  .= '<td>
+                <button type="button" class="removebutton" title="Remove this row">X</button>
+            </td>';
 
            // $html  .= "<td>";
           $html  .= "<input type=\"hidden\" class=\"form-control\" name=\"total[]\" value=\"{$result['sale_price']}\" required>";
@@ -64,6 +70,7 @@
           // $html  .= "<button type=\"submit\" name=\"add_sale\" class=\"btn btn-primary\">Add sale</button>";
           // $html  .= "</td>";
           $html  .= "</tr>";
+
 
         }
     }

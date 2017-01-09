@@ -101,11 +101,13 @@
          <table class="table table-bordered">
            <thead>
             <th> Item </th>
+            <th> Flavor </th>
             <th> Price </th>
             <th> Qty </th>
             <th> Mode of Selling </th>
             <th> Unit of Measurement </th>
             <th> Batch </th>
+            <th></th>
            </thead>
              <tbody  id="product_info"> </tbody>
          </table>

@@ -4,11 +4,13 @@
 ?>
 <?php
   $delete_id = delete_by_id('users',(int)$_GET['id']);
-  if($delete_id){
+  $delete_prev_id = delete_by_user_id('privilege',(int)$_GET['id']);
+
+  if($delete_id || $delete_prev_id ){
       $session->msg("s","User deleted.");
       redirect('users.php');
   } else {
-      $session->msg("d","User deletion failed Or Missing Prm.");
+      $session->msg("d","Holly Guakamoly User deletion failed something went wrong! ");
       redirect('users.php');
   }
 ?>

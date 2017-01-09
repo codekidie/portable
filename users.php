@@ -150,11 +150,11 @@
 
 
 
-           if (isset($_POST['Add_Batch'])) {
+           if (isset($_POST['Add_Quantity'])) {
             $sql  = "INSERT INTO privilege (";
             $sql .= " user_id,access,admin_id";
             $sql .= ") VALUES (";
-            $sql .= "'{$s_user_id}','{$_POST['Add_Batch']}','{$s_admin_id}'";
+            $sql .= "'{$s_user_id}','{$_POST['Add_Quantity']}','{$s_admin_id}'";
             $sql .= ")";
             $db->query($sql);
           }
@@ -253,10 +253,10 @@
                   <label for="">Assign Privilege</label>
                   <table class="table">
                   <tr>
-                    <td> Category <br> <input type="checkbox" name="Category" value="Category"></td>
+                    <!-- <td> Category <br> <input type="checkbox" name="Category" value="Category"></td> -->
                     <td> Manage Product <br> <input type="checkbox" name="Manage_Product" value="Manage_Product"></td>
                     <td> Add Product <br> <input type="checkbox" name="Add_Product" value="Add_Product"></td>
-                    <td> Add Batch <br> <input type="checkbox" name="Add_Batch" value="Add_Batch"></td>
+                    <td> Add Quantity <br> <input type="checkbox" name="Add_Quantity" value="Add_Quantity"></td>
 
                   </tr>  
                   <tr>
@@ -288,7 +288,7 @@
           </div>
           <div class="col-md-8">
            
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="tb2">
               <thead>
                 <tr>
                   <th>Name </th>

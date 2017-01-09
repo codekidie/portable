@@ -34,6 +34,14 @@
       $('#tb4').DataTable();
       $('#tb5').DataTable();
       $('#tb6').DataTable();
+
+
+     $(document).on('click', 'button.removebutton', function () {
+         alert("Data Removed Success!");
+         $(this).closest('tr').remove();
+         return false;
+     });
+
   </script>
 
     

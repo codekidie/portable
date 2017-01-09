@@ -10,7 +10,7 @@
  $sales = monthlySales($year,$admin_id);
  $dsales = dailySales($year,$month,$admin_id);
 
- $all_qty = find_by_sql("SELECT * FROM items WHERE admin_id = '{$admin_id}'");
+ $all_qty = find_by_sql("SELECT * FROM items LEFT JOIN products ON products.id = items.product_id WHERE items.admin_id = '{$admin_id}'");
 
 
  $all_products = find_by_sql("SELECT * FROM products WHERE admin_id = '{$admin_id}'");
@@ -29,15 +29,6 @@
 ?>
 <?php include_once('layouts/header.php'); ?>
 <h1>Overall Reports</h1>
-
-<button class="btn btn-info btn-md pull-right" onclick="myFunction()">Print</button>
-<br style="clear: both;">
-<br>
-<script>
-function myFunction() {
-    window.print();
-}
-</script>
 
 <div class="row">
   <div class="col-md-6">
@@ -77,6 +68,7 @@ function myFunction() {
                                         <tr>
                                           <th class="text-center" style="width: 50px;">#</th>
                                           <th> Product name </th>
+                                          <th> Flavor </th>
                                           <th class="text-center" style="width: 15%;"> Quantity sold</th>
                                           <th class="text-center" style="width: 15%;"> Total </th>
                                           <th class="text-center" style="width: 15%;"> Date </th>
@@ -88,6 +80,7 @@ function myFunction() {
                                                    <tr>
                                                      <td class="text-center"><?php echo count_id();?></td>
                                                      <td><?php echo remove_junk($sale['name']); ?></td>
+                                                     <td><?php echo remove_junk($sale['flavor']); ?></td>
                                                      <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
                                                      <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
                                                      <td class="text-center"><?php echo $sale['date']; ?></td>
@@ -111,11 +104,13 @@ function myFunction() {
                                     </div>
                                     <div class="panel-body">
                                        <a href="generate_daily.php" class="btn btn-success btn-md pull-right" style="padding:10px;margin:10px;">Print Report</a>
+                                       <br style="clear: both;">
                                       <table class="table table-bordered table-striped" id="tb2">
                                         <thead>
                                           <tr>
                                             <th class="text-center" style="width: 50px;">#</th>
-                                            <th> Product name </th>
+                                            <th style="width: 15%;"> Product name </th>
+                                            <th style="width: 15%;"> Flavor </th>
                                             <th class="text-center" style="width: 15%;"> Quantity sold</th>
                                             <th class="text-center" style="width: 15%;"> Total </th>
                                             <th class="text-center" style="width: 15%;"> Date </th>
@@ -128,6 +123,7 @@ function myFunction() {
                                          <tr>
                                            <td class="text-center"><?php echo count_id();?></td>
                                            <td><?php echo remove_junk($sale['name']); ?></td>
+                                           <td><?php echo remove_junk($sale['flavor']); ?></td>
                                            <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
                                            <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
                                            <td class="text-center"><?php echo $sale['date']; ?></td>
@@ -158,6 +154,7 @@ function myFunction() {
                                     <tr>
                                       <th class="text-center" style="width: 50px;">#</th>
                                       <th> Product name </th>
+                                      <th> Flavor </th>
                                       <th class="text-center" style="width: 15%;"> Quantity Instocks </th>
                                    </tr>
                                   </thead>
@@ -167,6 +164,7 @@ function myFunction() {
                                                <tr>
                                                  <td class="text-center"><?php echo count_id();?></td>
                                                  <td><?php echo remove_junk($sale['item_name']); ?></td>
+                                                 <td><?php echo remove_junk($sale['flavor']); ?></td>
                                                  <td class="text-center"><?php echo (int)$sale['quantity']; ?></td>
                                                </tr>
                                         <?php endif ?>
@@ -247,7 +245,7 @@ function myFunction() {
                                     
                                               <?php foreach ($expire_items as $exs): ?>
                                               <tr>
-                                                   <td>Batch : <?php echo $exs['batch']; ?>  , Product <?php echo $exs['item_name'];  ?> , Expiring at <?php echo $exs['expiry_date']; ?></td>     
+                                                   <td>Batch : <?php echo $exs['batch']; ?>  , Product <?php echo $exs['item_name'];  ?> <?php echo $exs['flavor']; ?>, Expiring at <?php echo $exs['expiry_date']; ?></td>     
                                               </tr>           
                                             <?php endforeach ?>
                                         </tbody>
@@ -263,7 +261,7 @@ function myFunction() {
                                         <tbody>
                                             <?php foreach ($minimumstocks as $mss): ?>
                                               <tr>
-                                                  <td>Product <?php echo $mss['item_name']; ?> Stocks Reach Minimum Level <?php echo $mss['quantity']; ?></td>
+                                                  <td>Product <?php echo $mss['item_name']; ?> <?php echo $mss['flavor']; ?> Stocks Reach Minimum Level <?php echo $mss['quantity']; ?></td>
                                               </tr>    
                                             <?php endforeach ?>
                                         </tbody>

@@ -182,7 +182,7 @@
         </div>
         <div class="panel-body">
          <div class="col-md-12">
-            <table class="table">
+            <table class="table" id="tb2">
               <thead>
                 <tr>
                     <th>Supplier Name</th><th>supplier address</th><th>supplier town</th><th>supplier country</th><th>supplier postcode</th><th>buyer name</th><th>buyer address</th><th>buyer town</th><th>buyer country</th><th>buyer postcode</th><th>po no</th><th>po date</th><th>quantity</th><th>description</th><th>unit price</th><th>amount</th><th>delivery address</th><th>street address</th><th>town</th><th>country</th><th>postcode</th><th>delivery date</th><th>terms</th><th>authorised by</th><th>Date Added</th>

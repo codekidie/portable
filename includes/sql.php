@@ -54,11 +54,27 @@ function delete_by_id($table,$id)
    {
     $sql = "DELETE FROM ".$db->escape($table);
     $sql .= " WHERE id=". $db->escape($id);
-    $sql .= " LIMIT 1";
     $db->query($sql);
     return ($db->affected_rows() === 1) ? true : false;
    }
 }
+
+
+/*--------------------------------------------------------------*/
+/* Function for Delete data from table by id
+/*--------------------------------------------------------------*/
+function delete_by_user_id($table,$id)
+{
+  global $db;
+  if(tableExists($table))
+   {
+    $sql = "DELETE FROM ".$db->escape($table);
+    $sql .= " WHERE user_id=". $db->escape($id);
+    $db->query($sql);
+    return ($db->affected_rows() === 1) ? true : false;
+   }
+}
+
 /*--------------------------------------------------------------*/
 /* Function for Count id  By table name
 /*--------------------------------------------------------------*/
@@ -182,7 +198,7 @@ function tableExists($table){
       $sql .="g.group_name ";
       $sql .="FROM users u ";
       $sql .="LEFT JOIN user_groups g ";
-      $sql .="ON g.group_level=u.user_level WHERE g.group_level !=0 AND u.admin_id='{$id}' GROUP BY u.name ORDER BY u.name ASC ";
+      $sql .="ON g.group_level=u.user_level WHERE g.group_level !=0 AND g.group_level !=1  AND u.admin_id='{$id}' GROUP BY u.name ORDER BY u.name ASC ";
       $result = find_by_sql($sql);
       return $result;
   }
@@ -310,7 +326,7 @@ function tableExists($table){
     global $db;
     $admin_id = $_SESSION['admin_id'];
     $sql  = "SELECT * FROM products LEFT JOIN items ON products.id=items.product_id";
-    $sql .= " WHERE items.batch LIKE'%$title%' AND products.admin_id = '{$admin_id}'";
+    $sql .= " WHERE items.item_name LIKE'%$title%' AND products.admin_id = '{$admin_id}' AND items.quantity !='0'";
     $sql .=" LIMIT 1";
     return find_by_sql($sql);
   }
@@ -398,7 +414,7 @@ function find_sale_by_dates($start_date,$end_date,$admin_id){
 /*--------------------------------------------------------------*/
 function  dailySales($year,$month,$admin_id){
   global $db;
-  $sql  = "SELECT s.qty,";
+  $sql  = "SELECT *,s.qty,";
   $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
   $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price";
   $sql .= " , SUM(s.qty) AS qty";
@@ -417,7 +433,7 @@ function  dailySales($year,$month,$admin_id){
 /*--------------------------------------------------------------*/
 function  monthlySales($year,$admin_id){
   global $db;
-  $sql  = "SELECT s.qty,";
+  $sql  = "SELECT *,s.qty,";
   $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
   $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price";
   $sql .= " , SUM(s.qty) AS qty";
@@ -494,8 +510,8 @@ function getTotalMinimumProducts($admin_id)
 function getMinimumProductsHistory($admin_id)
 {
 
-    $sql  = "SELECT  * FROM  items  WHERE  quantity <= 10 ";
-    $sql .= " AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY id ASC";
+    $sql  = "SELECT  * FROM  items LEFT JOIN products ON products.id = items.product_id  WHERE  items.quantity <= 10 ";
+    $sql .= " AND items.admin_id = '{$admin_id}' AND items.sms_sent=1  ORDER BY items.id ASC";
     return find_by_sql($sql);
                         
 }
@@ -515,8 +531,8 @@ function getExpiringProductsLogs($admin_id)
 function getExpiringItemLogs($admin_id)
 {
 
-    $sql  = "SELECT  * FROM  items  WHERE  expiry_date >= DATE(now())";
-    $sql .= " AND  expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND admin_id = '{$admin_id}' AND sms_sent=1  ORDER BY id ASC";
+    $sql  = "SELECT  * FROM  items LEFT JOIN products ON products.id = items.product_id WHERE  items.expiry_date >= DATE(now())";
+    $sql .= " AND  items.expiry_date <= DATE_ADD(DATE(now()), INTERVAL 1 WEEK) AND items.admin_id = '{$admin_id}' AND items.sms_sent=1  ORDER BY items.id ASC";
     return find_by_sql($sql);
                         
 }

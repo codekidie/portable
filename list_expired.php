@@ -42,6 +42,7 @@ if (isset($_POST['submit'])) {
                     <thead>
                       <tr>
                           <th>Product Name</th>
+                          <th>Flavor</th>
                           <th>Date Expired</th>
                           <th>Batch</th>
                       </tr>
@@ -50,6 +51,7 @@ if (isset($_POST['submit'])) {
                         <?php foreach ($sbd as $exs): ?>
                           <tr>
                                <td><?php echo $exs['name']; ?></td>     
+                               <td><?php echo $exs['flavor']; ?></td>     
                                <td><?php echo $exs['expiry_date']; ?></td>     
                                <td><?php echo $exs['batch']; ?></td>     
                           </tr>           
@@ -78,6 +80,8 @@ if (isset($_POST['submit'])) {
               <thead>
                 <tr>
                     <th>Product Name</th>
+                    <th>Flavor</th>
+                    <th>Quantity</th>
                     <th>Date Expired</th>
                     <th>Batch</th>
                 </tr>
@@ -86,6 +90,8 @@ if (isset($_POST['submit'])) {
                   <?php foreach ($expire_products as $exs): ?>
                     <tr>
                          <td><?php echo $exs['name']; ?></td>     
+                         <td><?php echo $exs['flavor']; ?></td>     
+                         <td><?php echo $exs['quantity']; ?></td>     
                          <td><?php echo $exs['expiry_date']; ?></td>     
                          <td><?php echo $exs['batch']; ?></td>     
                     </tr>           
