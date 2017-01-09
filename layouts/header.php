@@ -107,7 +107,7 @@ $user = current_user(); ?>
                                 $link = 'sales_report.php';
                              }elseif ($access == 'Monthly_Sales') {
                                $icon = 'pe-7s-date'; 
-                                $link = 'monthly_sale.php';
+                                $link = 'monthly_sales.php';
                              }elseif ($access == 'Daily_Sales') {
                                $icon = 'pe-7s-date'; 
                                 $link = 'daily_sales.php';
