@@ -69,6 +69,9 @@ function myFunction() {
                                     </strong>
                                   </div>
                                   <div class="panel-body">
+                                  <a href="generate_monthly.php" class="btn btn-success btn-md pull-right" style="padding:10px;margin:10px;">Print Report</a>
+
+                                  <br style="clear: both;">
                                     <table class="table table-bordered table-striped" id="tb">
                                       <thead>
                                         <tr>
@@ -107,6 +110,7 @@ function myFunction() {
                                       </strong>
                                     </div>
                                     <div class="panel-body">
+                                       <a href="generate_daily.php" class="btn btn-success btn-md pull-right" style="padding:10px;margin:10px;">Print Report</a>
                                       <table class="table table-bordered table-striped" id="tb2">
                                         <thead>
                                           <tr>
@@ -146,6 +150,9 @@ function myFunction() {
                                 </strong>
                               </div>
                               <div class="panel-body">
+                                 <a href="generate_product_qty.php" class="btn btn-success btn-md pull-right" style="padding:10px;margin:10px;">Print Report</a>
+                                 <br style="clear: both;">
+
                                 <table class="table table-bordered table-striped" id="tb3">
                                   <thead>
                                     <tr>
@@ -180,6 +187,9 @@ function myFunction() {
                                   </div>
                                   <div class="panel-body">
                                    <div class="col-md-12">
+                                      <a href="generate_return_stocks.php" class="btn btn-success btn-md pull-right" style="padding:10px;margin:10px;">Print Report</a>
+                                      <br style="clear: both;">
+
                                       <table class="table" id="tb4">
                                         <thead>
                                           <tr>
@@ -222,6 +232,9 @@ function myFunction() {
                                   </div>
                                   <div class="panel-body">
                                    <div class="col-md-12">
+                                     <a href="generate_log_of_notifications.php" class="btn btn-success btn-md pull-right" style="padding:10px;margin:10px;">Print Report</a>
+                                      <br style="clear: both;">
+
                                         <center><h2>Products Expiring Logs</h2></center>
                                         <hr>
                                       <table class="table" id="tb5">

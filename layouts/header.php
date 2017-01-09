@@ -1,4 +1,5 @@
-<?php $user = current_user(); ?>
+<?php 
+$user = current_user(); ?>
 <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -92,6 +93,9 @@
                              }elseif ($access == 'Add_Product') {
                                 $icon = 'pe-7s-network'; 
                                 $link = 'product.php';
+                             }elseif ($access == 'Add_Batch') {
+                                $icon = 'pe-7s-network'; 
+                                $link = 'add_batch.php';
                              }elseif ($access == 'Manage_Sales') {
                                 $icon = 'pe-7s-repeat'; 
                                 $link = 'sales.php';

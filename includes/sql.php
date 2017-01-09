@@ -287,6 +287,21 @@ function tableExists($table){
      return $result;
    }
 
+
+ /*--------------------------------------------------------------*/
+  /* Function for Finding all items batch
+  /* Request coming from ajax.php for auto suggest
+  /*--------------------------------------------------------------*/
+
+   function find_product_by_batch($product_batch){
+     global $db;
+     $p_name = remove_junk($db->escape($product_batch));
+     $sql = "SELECT item_name as name FROM items WHERE batch like '%$p_name%' LIMIT 5";
+     $result = find_by_sql($sql);
+     return $result;
+   }
+
+
   /*--------------------------------------------------------------*/
   /* Function for Finding all product info by product title
   /* Request coming from ajax.php
@@ -295,7 +310,7 @@ function tableExists($table){
     global $db;
     $admin_id = $_SESSION['admin_id'];
     $sql  = "SELECT * FROM products LEFT JOIN items ON products.id=items.product_id";
-    $sql .= " WHERE products.name LIKE'%$title%' AND products.admin_id = '{$admin_id}'";
+    $sql .= " WHERE items.batch LIKE'%$title%' AND products.admin_id = '{$admin_id}'";
     $sql .=" LIMIT 1";
     return find_by_sql($sql);
   }

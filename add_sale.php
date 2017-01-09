@@ -19,9 +19,6 @@
                 $mode_of_selling   = $db->escape($_POST['mode_of_selling'][$key]);
                 $unit_of_measure   = $db->escape($_POST['unit_of_measure'][$key]);
 
-
-
-               
                 // $date      = $db->escape($_POST['date'][$key]);
                 $s_date    = make_date();
 
@@ -82,7 +79,7 @@
             <span class="input-group-btn">
               <button type="submit" class="btn btn-primary">Search Items</button>
             </span>
-            <input type="text" id="sug_input" class="form-control" name="title" style="height: 40px;"  placeholder="Search for product name">
+            <input type="text" id="sug_input" class="form-control" name="title" style="height: 40px;"  placeholder="Input Batch Here">
          </div>
          <div id="result" class="list-group"></div>
         </div>

@@ -13,15 +13,6 @@
     </a>
   </li>
 
-   <!-- 
-        <li>
-          <a href="group.php">
-            <i class="pe-7s-user-female"></i>
-            <span>Manage Groups</span>
-          </a>
-        </li> 
-    -->
-
   <li>
     <a href="categorie.php" >
       <i class="pe-7s-keypad"></i>
@@ -35,6 +26,13 @@
       <span>Manage Product</span>
     </a>
   </li>
+  <li>
+    <a href="add_batch.php">
+      <i class="pe-7s-server"></i>
+      <span>Add Batch</span>
+    </a>
+  </li>
+
     <li>
       <a href="add_product.php">
       <i class="pe-7s-network"></i>

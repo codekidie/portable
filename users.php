@@ -27,7 +27,6 @@
   if (isset($_POST['add_privilege'])) {
         
           $s_user_id   = $db->escape($_POST['user_id']);
-          $s_privilege   = $db->escape($_POST['privilege']);
           $s_admin_id   = $db->escape($_POST['admin_id']);
 
           if (isset($_POST['Category'])) {
@@ -149,6 +148,17 @@
             $db->query($sql);
           }
 
+
+
+           if (isset($_POST['Add_Batch'])) {
+            $sql  = "INSERT INTO privilege (";
+            $sql .= " user_id,access,admin_id";
+            $sql .= ") VALUES (";
+            $sql .= "'{$s_user_id}','{$_POST['Add_Batch']}','{$s_admin_id}'";
+            $sql .= ")";
+            $db->query($sql);
+          }
+
             $session->msg('s',"Privilege added. ");
             redirect('users.php', false);
         
@@ -246,6 +256,7 @@
                     <td> Category <br> <input type="checkbox" name="Category" value="Category"></td>
                     <td> Manage Product <br> <input type="checkbox" name="Manage_Product" value="Manage_Product"></td>
                     <td> Add Product <br> <input type="checkbox" name="Add_Product" value="Add_Product"></td>
+                    <td> Add Batch <br> <input type="checkbox" name="Add_Batch" value="Add_Batch"></td>
 
                   </tr>  
                   <tr>
