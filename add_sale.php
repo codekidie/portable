@@ -79,7 +79,7 @@
             <span class="input-group-btn">
               <button type="submit" class="btn btn-primary">Search Items</button>
             </span>
-            <input type="text" id="sug_input" class="form-control" name="title" style="height: 40px;"  placeholder="Input Batch Here">
+            <input type="text" id="sug_input" class="form-control" name="title" style="height: 40px;"  placeholder="Input Item Here">
          </div>
          <div id="result" class="list-group"></div>
         </div>

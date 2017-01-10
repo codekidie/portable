@@ -220,6 +220,7 @@
                               $expire_products     =  getExpiringProductsLogs($admin_id);
                               $minimumstocks       =  getMinimumProductsHistory($admin_id); 
                               $expire_items        =  getExpiringItemLogs($admin_id);
+
                             ?>
                               <div class="panel panel-default">
                                   <div class="panel-heading">
@@ -245,7 +246,7 @@
                                     
                                               <?php foreach ($expire_items as $exs): ?>
                                               <tr>
-                                                   <td>Batch : <?php echo $exs['batch']; ?>  , Product <?php echo $exs['item_name'];  ?> <?php echo $exs['flavor']; ?>, Expiring at <?php echo $exs['expiry_date']; ?></td>     
+                                                   <td>Batch : <?php echo $exs['batch']; ?>  , Product <?php echo $exs['item_name'];  ?> <?php echo $exs['flavor']; ?>, Expiring at <?php echo $exs[5]; ?></td>     
                                               </tr>           
                                             <?php endforeach ?>
                                         </tbody>
