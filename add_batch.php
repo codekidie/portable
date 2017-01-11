@@ -55,7 +55,7 @@
         <div class="panel-heading">
           <strong>
             <span class="pe-7s-cart"></span>
-            <span>Add New Batch</span>
+            <span>Add Quantity</span>
          </strong>
         </div>
         <div class="panel-body">
@@ -100,7 +100,7 @@
                     </div>
                    <div class="col-md-12">
                    <hr>
-                     <button type="submit" name="add_batch" class="btn btn-danger">Add Batch</button>
+                     <button type="submit" name="add_batch" class="btn btn-danger">Add Quantity</button>
             </div>
           </form>
         </div>

@@ -78,3 +78,40 @@
     echo json_encode($html);
   }
  ?>
+
+  <?php
+ // find all product by date
+  if(isset($_POST['p_date']) && strlen($_POST['p_date']))
+  {
+     $sale_date = $_POST['p_date'];
+     $admin_id =  $_SESSION['admin_id'] ;
+
+    if($result = dateSales($sale_date,$admin_id)){
+      // var_dump($results);
+      // die();
+          $html .= "<tr>";
+          $html .= "<th>Product name</th>";
+          $html .= "<th>Flavor</th>";
+          $html .= "<th>Unit of measure</th>";
+          $html .= "<th>Mode of selling</th>";
+          $html .= "<th>Price </th>";
+          $html .= "<th>Quantity </th>";
+
+          $html  .= "</tr>";
+
+      foreach ($result as $results) {
+      
+          $html .= "<tr>";
+          $html .= "<td>".$results['name']."</td>";
+          $html .= "<td>".$results['flavor']."</td>";
+          $html .= "<td>".$results['unit_of_measure']."</td>";
+          $html .= "<td>".$results['mode_of_selling']."</td>";
+          $html .= "<td>".$results['sale_price']."</td>";
+          $html .= "<td>".$results['quantity']."</td>";
+          $html  .= "</tr>";
+      }  
+    }
+
+    echo json_encode($html);
+  }
+ ?>

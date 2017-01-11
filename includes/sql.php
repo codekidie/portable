@@ -409,6 +409,7 @@ function find_sale_by_dates($start_date,$end_date,$admin_id){
   $sql .= " ORDER BY DATE(s.date) DESC";
   return $db->query($sql);
 }
+
 /*--------------------------------------------------------------*/
 /* Function for Generate Daily sales report
 /*--------------------------------------------------------------*/
@@ -426,6 +427,20 @@ function  dailySales($year,$month,$admin_id){
 
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y-%m' ) = '{$year}-{$month}' AND s.date = CURDATE()  AND s.admin_id = '{$admin_id}'";
   $sql .= " GROUP BY DATE_FORMAT( s.date,  '%e' ),s.product_id";
+  return find_by_sql($sql);
+}
+
+
+/*--------------------------------------------------------------*/
+/* Function for Generate date sales report
+/*--------------------------------------------------------------*/
+function  dateSales($date,$admin_id){
+  global $db;
+  $sql  = "SELECT *, s.qty as quantity";
+  $sql .= " FROM sales s";
+  $sql .= " LEFT JOIN items i ON s.product_id = i.id ";
+  $sql .= " LEFT JOIN products p ON i.product_id = p.id ";
+  $sql .= " WHERE s.date = '{$date}'  AND s.admin_id = '{$admin_id}'";
   return find_by_sql($sql);
 }
 /*--------------------------------------------------------------*/

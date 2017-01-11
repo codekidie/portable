@@ -24,30 +24,10 @@
           </strong>
         </div>
         <div class="panel-body">
-          <table class="table table-bordered table-striped" id="tb">
-            <thead>
-              <tr>
-                <th class="text-center" style="width: 50px;">#</th>
-                <th> Product name </th>
-                <th> Flavor </th>
-                <th class="text-center" style="width: 15%;"> Quantity sold</th>
-                <th class="text-center" style="width: 15%;"> Total </th>
-                <th class="text-center" style="width: 15%;"> Date </th>
-             </tr>
-            </thead>
-           <tbody>
-             <?php foreach ($sales as $sale):?>
-             <tr>
-               <td class="text-center"><?php echo count_id();?></td>
-               <td><?php echo remove_junk($sale['name']); ?></td>
-               <td><?php echo remove_junk($sale['flavor']); ?></td>
-               <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
-               <td class="text-center"><?php echo $sale['date']; ?></td>
-             </tr>
-             <?php endforeach;?>
-           </tbody>
-         </table>
+            <input type="date" id="date_data" class="form-control">
+            <table class="table table-bordered table-striped">
+             <tbody id="table-body"></tbody>
+            </table>
         </div>
       </div>
     </div>

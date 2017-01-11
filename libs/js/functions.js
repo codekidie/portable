@@ -1,7 +1,26 @@
 
 
 
-                $('.product_sale').hide();
+$('.product_sale').hide();
+
+$('#date_data').change(function(){
+       var inputDate = this.value;         
+       // var inputDate = new Date(this.value);
+       var formData = {
+           'p_date' : inputDate
+       };
+       
+       $.ajax({
+               type        : 'POST',
+               url         : 'ajax.php',
+               data        : formData,
+               dataType    : 'json',
+               encode      : true
+           }).done(function(data) {
+                console.log(data);
+                $('#table-body').html(data).fadeIn();
+          });
+});
 
 function suggetion() {
 
