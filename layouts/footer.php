@@ -35,6 +35,8 @@
       $('#tb5').DataTable();
       $('#tb6').DataTable();
 
+      $('#tbd').dataTable({bFilter: false, bInfo: false});
+
 
      $(document).on('click', 'button.removebutton', function () {
          alert("Data Removed Success!");

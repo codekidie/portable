@@ -65,7 +65,7 @@
                                   <br style="clear: both;">
                                        <input type="date" id="date_data" class="form-control">
                                         <hr>
-                                      <table class="table table-bordered table-striped" id="tb">
+                                      <table class="table table-bordered table-striped" id="tbd">
                                         <thead>
                                           <tr>
                                             <th class="text-center" style="width: 50px;">#</th>
