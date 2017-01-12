@@ -4,9 +4,9 @@
   // Checkin What level user has permission to view this page
 ?>
 <?php
- $year = date('Y');
+ $month = date('m');
  $admin_id =  $_SESSION['admin_id'] ;
- $sales = monthlySales($year,$admin_id);
+ $sales = monthlySales($month,$admin_id);
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">

@@ -7,7 +7,7 @@
  $year = date('Y');
  $month = date('m');
  $admin_id =  $_SESSION['admin_id'] ;
- $sales = monthlySales($year,$admin_id);
+ $sales = monthlySales($month,$admin_id);
  $dsales = dailySales($year,$month,$admin_id);
 
  $all_qty = find_by_sql("SELECT * FROM items LEFT JOIN products ON products.id = items.product_id WHERE items.admin_id = '{$admin_id}'");
