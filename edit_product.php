@@ -7,9 +7,9 @@
 
 $admin_id =  $_SESSION['admin_id'] ;
 
-$product = find_by_sql("SELECT  products.id, products.name,items.quantity,products.buy_price,products.sale_price,items.expiry_date,items.batch, products.unit_of_measure  FROM  products  LEFT JOIN items ON products.id = items.product_id  WHERE  products.id = '{$_GET['id']}' AND products.admin_id = '{$admin_id}'");
+  $product = find_by_sql("SELECT  products.id, products.name,items.quantity,products.buy_price,products.sale_price,items.expiry_date,items.batch, products.unit_of_measure  FROM  products  LEFT JOIN items ON products.id = items.product_id  WHERE  products.id = '{$_GET['id']}' AND products.admin_id = '{$admin_id}'");
 
-var_dump($product);
+
 
 $all_categories = find_all('categories');
 $all_photo = find_all('media');
@@ -20,18 +20,17 @@ if(!$product){
 ?>
 <?php
  if(isset($_POST['product'])){
-    $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price');
-    validate_fields($req_fields);
 
-   if(empty($errors)){
+
+
        $p_name  = remove_junk($db->escape($_POST['product-title']));
+       $p_id  = remove_junk($db->escape($_POST['product-id']));
        $p_cat   = (int)$_POST['product-categorie'];
        $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
        $p_buy   = remove_junk($db->escape($_POST['buying-price']));
        $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
        $p_expiry_date  = remove_junk($db->escape($_POST['saleing-expiry-date']));
-     $unit_of_measure = remove_junk($db->escape($_POST['unit_of_measure'])); 
-
+       $unit_of_measure = remove_junk($db->escape($_POST['unit_of_measure'])); 
        $p_batch  = remove_junk($db->escape($_POST['batch']));
 
 
@@ -40,10 +39,17 @@ if(!$product){
        } else {
          $media_id = remove_junk($db->escape($_POST['product-photo']));
        }
-       $query   = "UPDATE products SET";
-       $query  .=" name ='{$p_name}', quantity ='{$p_qty}', unit_of_measure ='{$unit_of_measure}', ";
-       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',expiry_date='{$p_expiry_date}' , batch = '{$p_batch}'";
-       $query  .=" WHERE id ='{$product['id']}'";
+       $query1   = "UPDATE products SET";
+       $query1  .=" name ='{$p_name}',  unit_of_measure ='{$unit_of_measure}', ";
+       $query1  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}',expiry_date='{$p_expiry_date}' ";
+       $query1  .=" WHERE id ='{$p_id}'";
+       $result1 = $db->query($query1);
+
+
+       $query   = "UPDATE items SET";
+       $query  .=" batch = '{$p_batch}', ";
+       $query  .=" quantity ='{$p_qty}', expiry_date='{$p_expiry_date}' ";
+       $query  .=" WHERE product_id ='{$p_id}'";
 
        $result = $db->query($query);
                if($result && $db->affected_rows() === 1){
@@ -51,14 +57,9 @@ if(!$product){
                  redirect('product.php', false);
                } else {
                  $session->msg('d',' Sorry failed to updated!');
-                 redirect('edit_product.php?id='.$product['id'], false);
+                 redirect('edit_product.php?id='.$p_id, false);
                }
-
-   } else{
-       $session->msg("d", $errors);
-       redirect('edit_product.php?id='.$product['id'], false);
-   }
-
+               
  }
 
 ?>
@@ -84,6 +85,7 @@ if(!$product){
                   <span class="input-group-addon">
                    <i class="pe-7s-cart"></i>
                   </span>
+                    <input type="hidden" class="form-control" name="product-id" value="<?php echo remove_junk($product[0]['id']);?>">
                   <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product[0]['name']);?>">
                </div>
               </div>

@@ -10,6 +10,8 @@
         <tr>
           <th class="text-center" style="width: 50px;padding:15px;">#</th>
           <th> Product name </th>
+          <th> Flavor </th>
+          <th> Batch </th>
           <th class="text-center" style="width: 50px;padding:15px;"> Quantity sold</th>
           <th class="text-center" style="width: 50px;padding:15px;"> Total </th>
           <th class="text-center" style="width: 50px;padding:15px;"> Date </th>
@@ -22,6 +24,8 @@
                    <tr>
                      <td class="text-center"  style="width: 50px;padding:15px;"><?php echo count_id();?></td>
                      <td  style="width: 50px;padding:15px;"><?php echo remove_junk($sale['name']); ?></td>
+                     <td  style="width: 50px;padding:15px;"><?php echo remove_junk($sale['flavor']); ?></td>
+                     <td  style="width: 50px;padding:15px;"><?php echo remove_junk($sale['batch']); ?></td>
                      <td class="text-center"  style="width: 50px;padding:15px;"><?php echo (int)$sale['qty']; ?></td>
                      <td class="text-center"  style="width: 50px;padding:15px;"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
                      <td class="text-center"  style="width: 50px;padding:15px;"><?php echo $sale['date']; ?></td>

@@ -12,7 +12,7 @@ $user = current_user(); ?>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/> -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+    <link rel="stylesheet" href="libs/css/datepicker3.min.css" />
     <!-- <link rel="stylesheet" href="libs/css/main.css" /> -->
      <!-- Bootstrap core CSS     -->
     <link href="libs/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -30,7 +30,7 @@ $user = current_user(); ?>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="libs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="libs/js/jquery.min.js"></script>
     
     <!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> -->
 
